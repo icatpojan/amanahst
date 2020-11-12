@@ -36,7 +36,6 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'shop_id' => 'integer',
             'image' => 'image|mimes:png,jpeg,jpg' 
         ]);
         if ($validator->fails()) {
@@ -58,7 +57,6 @@ class ProductController extends Controller
             'image' => $filename,
             'price' => $request->price,
             'weight' => $request->weight,
-            'shop_id' => $request->shop_id,
             'status' => $request->status
         ]);
         try {
@@ -100,7 +98,6 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id', 
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'shop_id' => 'integer',
             'image' => 'image|mimes:png,jpeg,jpg'
         ]);
         if ($validator->fails()) {
