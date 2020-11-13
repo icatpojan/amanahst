@@ -8,7 +8,7 @@ use App\Product;
 use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class ProductController extends Controller
 {
     public function index()
@@ -132,5 +132,12 @@ class ProductController extends Controller
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal mengganti data', null, 500);
         }
+    }
+     public function search(Request $request)
+    {
+
+        $search = $request->get('search');
+        $product = DB::table('product')->where('name', 'LIKE', '%' . $search . '%')->paginate();
+        return view('welcomee', compact('blog'));
     }
 }

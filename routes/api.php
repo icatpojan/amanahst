@@ -21,4 +21,5 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::resource('product', 'ProductController')->middleware('jwt.verify');
 
+
 Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
