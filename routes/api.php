@@ -19,7 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
-Route::resource('product', 'ProductController')->middleware('jwt.verify');
 
+// Route::resource('product', 'ProductController')->middleware('jwt.verify');
+// ini buat public
+Route::get('product', 'ProductController@index');
+Route::get('product/{product} ', 'ProductController@show');
+Route::post('product/search', 'ProductController@search');
 
-Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');
+// ini buat customer
+Route::post('product', 'ProductController@store')->middleware('jwt.verify');
+Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
+Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jwt.verify');

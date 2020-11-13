@@ -80,7 +80,7 @@ class ProductController extends Controller
     }
 
 
-    public function edit($id)
+    public function show($id)
     {
         $product = product::find($id);
         if (!$product) {
@@ -133,11 +133,13 @@ class ProductController extends Controller
             return $this->sendResponse('Error', 'Gagal mengganti data', null, 500);
         }
     }
-     public function search(Request $request)
+    public function search(Request $request)
     {
 
         $search = $request->get('search');
-        $product = DB::table('product')->where('name', 'LIKE', '%' . $search . '%')->paginate();
-        return view('welcomee', compact('blog'));
+        $product = DB::table('products')->where('name' , 'LIKE', '%' . $search . '%')->paginate(1 );
+        return response()->json([
+            $product
+        ]);
     }
 }
