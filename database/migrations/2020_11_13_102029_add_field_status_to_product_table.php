@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldStatusToProductsTable extends Migration
+class AddFieldStatusToProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddFieldStatusToProductsTable extends Migration
     public function up()
     {
         //KITA PILIH DATABASE YANG AKAN DITAMBAHKAN FIELD BARU
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('product', function (Blueprint $table) {
             //KEMUDIAN TAMBAHKAN FIELDNYA DENGAN TIPE BOOLEAN DAN DISIMPAN SETELAH WEIGHT
             $table->boolean('status')->default(true)->after('weight');
         });
