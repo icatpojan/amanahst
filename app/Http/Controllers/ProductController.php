@@ -37,7 +37,8 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'image' => 'image|mimes:png,jpeg,jpg'
+            'image' => 'image|mimes:png,jpeg,jpg',
+            'stock' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response($validator->errors());
@@ -58,7 +59,8 @@ class ProductController extends Controller
             'image' => $filename,
             'price' => $request->price,
             'weight' => $request->weight,
-            'status' => $request->status
+            'status' => $request->status,
+            'stock' => $request->stock,
         ]);
         try {
             $product->save();
