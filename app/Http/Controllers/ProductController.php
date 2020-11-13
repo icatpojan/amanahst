@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
 use DB;
+
 class ProductController extends Controller
 {
     public function index()
@@ -36,7 +37,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'image' => 'image|mimes:png,jpeg,jpg' 
+            'image' => 'image|mimes:png,jpeg,jpg'
         ]);
         if ($validator->fails()) {
             return response($validator->errors());
@@ -95,7 +96,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required',
-            'category_id' => 'required|exists:categories,id', 
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
             'image' => 'image|mimes:png,jpeg,jpg'
@@ -104,8 +105,8 @@ class ProductController extends Controller
             return response($validator->errors());
         }
 
-        $product = Product::find($id); 
-        $filename = $product->image; 
+        $product = Product::find($id);
+        $filename = $product->image;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -137,7 +138,11 @@ class ProductController extends Controller
     {
 
         $search = $request->get('search');
-        $product = DB::table('products')->where('name' , 'LIKE', '%' . $search . '%')->paginate(1 );
+        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(1);
+        if (!$product) {
+
+            return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
+        }
         return response()->json([
             $product
         ]);

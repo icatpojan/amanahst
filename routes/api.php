@@ -23,10 +23,17 @@ Route::post('login', 'UserController@login');
 // Route::resource('product', 'ProductController')->middleware('jwt.verify');
 // ini buat public
 Route::get('product', 'ProductController@index');
+// ini buat ngambil semua
 Route::get('product/{product} ', 'ProductController@show');
+//ambil 1 data berdasarkan id
 Route::post('product/search', 'ProductController@search');
+//nyari berdasarkan nama
+
 
 // ini buat customer
 Route::post('product', 'ProductController@store')->middleware('jwt.verify');
+//tambah produk
 Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
+//update produk
 Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jwt.verify');
+//hapus produk
