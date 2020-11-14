@@ -36,4 +36,4 @@ Route::post('product', 'ProductController@store')->middleware('jwt.verify');
 Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
 //update produk
 Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jwt.verify');
-//hapus produk
+//hapus produk  

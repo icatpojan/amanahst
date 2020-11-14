@@ -60,11 +60,11 @@ class ProductController extends Controller
             'price' => $request->price,
             'weight' => $request->weight,
             'status' => $request->status,
-            'stock' => $request->stock,
+            'stock' => $request->stock
         ]);
         try {
             $product->save();
-            $product = Product::all();
+            // $product = Product::all();
 
             return $this->sendResponse('Success', 'berhasil menambah data', $product, 200);
         } catch (\Throwable $th) {
@@ -101,7 +101,8 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'image' => 'image|mimes:png,jpeg,jpg'
+            'image' => 'image|mimes:png,jpeg,jpg',
+            'stock' => 'required|integer'
         ]);
         if ($validator->fails()) {
             return response($validator->errors());
@@ -125,11 +126,12 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'price' => $request->price,
             'weight' => $request->weight,
-            'image' => $filename
+            'image' => $filename,
+            'stock' => $request->stock
         ]);
         try {
             $product->save();
-            $product = Product::all();
+            // $product = Product::all();
 
             return $this->sendResponse('Success', 'berhasil mengganti data', $product, 200);
         } catch (\Throwable $th) {
@@ -140,7 +142,7 @@ class ProductController extends Controller
     {
 
         $search = $request->get('search');
-        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(1);
+        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(10);
         if (!$product) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
