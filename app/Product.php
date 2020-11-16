@@ -19,13 +19,13 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    protected $guarded = [];
+    protected $fillable = ['customer_id','name','description','price','stock','weight','category_id','image','status','slug'];
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = Str::slug($value);
     }
-    public function shop()
+    public function customer()
     {
-        return $this->belongsTo(shop::class);
+        return $this->belongsTo(customer::class);
     }
 }

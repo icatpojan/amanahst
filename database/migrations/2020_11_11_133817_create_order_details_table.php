@@ -15,13 +15,13 @@ class CreateOrderDetailsTable extends Migration
     {
         //AKAN MEMBUAT TBALE order_details
         Schema::create('order_details', function (Blueprint $table) {
-            //DENGAN FIELD DIBAWAH INI
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('order_id'); //FIELD INI AKAN MERUJUK KE TABLE orders
-            $table->unsignedBigInteger('product_id'); //FIELD INI AKAN MERUJUK KE TABLE products
-            $table->integer('price'); //INI SAMA DENGAN CUSTOMER, INFORMASI HARGA SAAT BARANG INI DIPESAN JUGA DIBUAT SALINNANNYA
-            $table->integer('qty');
-            $table->integer('weight'); //JUGA BERLAKU DENGAN BERAT BARANG, UNTUK MENGHINDARI PERUBAHAN DATA PRODUK
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_id');
+            $table->integer('price'); 
+            $table->integer('weight');
+            $table->integer('jumlah');
+            $table->integer('jumlah_harga');
             $table->timestamps();
         });
     }

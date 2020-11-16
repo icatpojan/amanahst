@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
@@ -51,10 +51,12 @@ class ProductController extends Controller
             // $file->storeAs('public/products', $filename);
             $request->image->move(public_path('product'), $filename);
         }
+        $customer_id= Auth::id(); 
         $product = Product::create([
             'name' => $request->name,
             'slug' => $request->name,
             'category_id' => $request->category_id,
+            'customer_id' =>$customer_id,
             'description' => $request->description,
             'image' => $filename,
             'price' => $request->price,
