@@ -82,8 +82,7 @@ class ProductController extends Controller
             return $this->sendResponse('Success', 'Berhasil menghapus data', $product, 200);
         }
         return $this->sendResponse('Error', 'Gagal menghapus data', null, 500);
-    }
-
+    } 
 
     public function show($id)
     {

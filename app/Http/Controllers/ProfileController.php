@@ -12,8 +12,8 @@ class ProfileController extends Controller
     public function index()
     {
     	$user = User::where('id', Auth::user()->id)->first();
-
-    	return view('profile.index', compact('user'));
+		return $this->sendResponse('Succes', 'ini dia profil anda pak eko', $user, 500);
+    	// return view('profile.index', compact('user'));
     }
 
     public function update(Request $request)
@@ -25,7 +25,7 @@ class ProfileController extends Controller
     	$user = User::where('id', Auth::user()->id)->first();
     	$user->name = $request->name;
     	$user->email = $request->email;
-    	$user->nohp = $request->nohp;
+    	$user->nomor_telpon = $request->nomor_telpon;
     	$user->alamat = $request->alamat;
     	if(!empty($request->password))
     	{
@@ -33,8 +33,6 @@ class ProfileController extends Controller
     	}
     	
     	$user->update();
-
-    	Alert::success('User Sukses diupdate', 'Success');
-    	return redirect('profile');
+        return $this->sendResponse('Success', 'profile anda di upgrade pak eko', $user, 500);
     }
 }

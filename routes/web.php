@@ -20,6 +20,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home'); //JADI ROUTING INI SUDAH ADA DARI ARTIKEL SEBELUMNYA TAPI KITA PINDAHKAN KEDALAM GROUPING
     
     Route::resource('category', 'CategoryController')->except(['create', 'show']);
+    Route::resource('produk', 'produkController')->except(['create', 'show']);
 
 });
 

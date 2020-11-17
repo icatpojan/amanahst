@@ -34,10 +34,8 @@ Route::post('product/search', 'ProductController@search');
 
 Route::post('product', 'ProductController@store')->middleware('jwt.verify');
 //tambah produk
-
 Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
 //update produk
-
 Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jwt.verify');
 //hapus produk
 
@@ -50,10 +48,13 @@ Route::get('check-out', 'OrderController@check_out')->middleware('jwt.verify');
 //ini buat ngeliat isi keranjang
 Route::delete('check-out/{id}', 'OrderController@delete')->middleware('jwt.verify');
 //ngehapus isi keranjang
-Route::get('konfirmasi-check-out', 'orderController@konfirmasi')->middleware('jwt.verify');
+Route::get('konfirmasi-check-out', 'OrderController@konfirmasi')->middleware('jwt.verify');
 //konfirmasi pembelian,keluar dari keranjang ke halaman datail
+
+
 Route::get('profile', 'ProfileController@index')->middleware('jwt.verify');
-Route::post('profile', 'ProfileController@update')->middleware('jwt.verify');
+//menampilkan profil user yang sedang login
+Route::patch('profile', 'ProfileController@update')->middleware('jwt.verify');
 
 Route::get('history', 'HistoryController@index')->middleware('jwt.verify');
 Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify');

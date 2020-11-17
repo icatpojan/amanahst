@@ -104,7 +104,7 @@ class OrderController extends Controller
 
         $Order_detail->delete();
 
-        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',null, 200);
+        return $this->sendResponse('Success', 'pesanan anda dihapus',null, 200);
     }
 
     public function konfirmasi()
@@ -112,16 +112,16 @@ class OrderController extends Controller
         $user = User::where('id', Auth::user()->id)->first();
 
         if (empty($user->alamat)) {
-            Alert::error('Identitasi Harap dilengkapi', 'Error');
+            return $this->sendResponse('error', 'isi alamat dulu pak eko',null, 200);
             return redirect('profile');
         }
 
-        if (empty($user->nohp)) {
-            Alert::error('Identitasi Harap dilengkapi', 'Error');
+        if (empty($user->nomor_telpon)) {
+            return $this->sendResponse('error', 'isi identitas dulu pak eko',null, 200);
             return redirect('profile');
         }
 
-        $Order = Order::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         $Order_id = $Order->id;
         $Order->status = 1;
         $Order->update();
@@ -135,7 +135,7 @@ class OrderController extends Controller
 
 
 
-        Alert::success('Order Sukses Check Out Silahkan Lanjutkan Proses Pembayaran', 'Success');
-        return redirect('history/' . $Order_id);
+        // return redirect('history/' . $Order_id);
+        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko',$Order_id, 200);
     }
 }
