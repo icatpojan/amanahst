@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->integer('weight')->default(null);
-            $table->boolean('status')->default(true);
+            $table->integer('status')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
