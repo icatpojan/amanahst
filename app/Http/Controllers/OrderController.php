@@ -55,7 +55,7 @@ class OrderController extends Controller
         if (empty($cek_Order_detail)) {
             $Order_detail = new OrderDetail;
             $Order_detail->product_id = $product->id;
-            $Order_detail->Order_id = $Order_baru->id;
+            $Order_detail->order_id = $Order_baru->id;
             $Order_detail->jumlah = $request->jumlah_pesan;
             $Order_detail->jumlah_harga = $product->price * $request->jumlah_pesan;
             $Order_detail->save();

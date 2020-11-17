@@ -18,8 +18,8 @@ class CreateOrderDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('order_id');
-            $table->integer('price'); 
-            $table->integer('weight');
+            // $table->integer('price'); 
+            // $table->integer('weight');
             $table->integer('jumlah');
             $table->integer('jumlah_harga');
             $table->timestamps();
