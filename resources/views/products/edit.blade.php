@@ -14,7 +14,7 @@
         <div class="animated fadeIn">
           
           	<!-- PASTIKAN MENGIRIMKAN ID PADA ROUTE YANG DIGUNAKAN -->
-            <form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('produk.update', $product->id) }}" method="post" enctype="multipart/form-data" >
                 @csrf
               	<!-- KARENA UPDATE MAKA KITA GUNAKAN DIRECTIVE DIBAWAH INI -->
                 @method('PUT')
@@ -65,6 +65,11 @@
                                     <label for="price">Harga</label>
                                     <input type="number" name="price" class="form-control" value="{{ $product->price }}" required>
                                     <p class="text-danger">{{ $errors->first('price') }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">stok</label>
+                                    <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
+                                    <p class="text-danger">{{ $errors->first('stock') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="weight">Berat</label>

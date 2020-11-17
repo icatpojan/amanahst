@@ -13,8 +13,13 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('transaksi.index') }}">
+                <i class="nav-icon icon-puzzle"></i> transaksi
+            </a>
+        </li>
+        <li class="nav-item">
         <a class="nav-link" href={{ route('produk.index') }}>
-            <i class="nav-icon icon-drop"></i> produk
+            <i class="nav-icon icon-plane"></i> produk
         </a>
     </li>
         <li class="nav-item nav-dropdown">

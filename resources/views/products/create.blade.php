@@ -8,13 +8,13 @@
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Product</li>
+        <li class="breadcrumb-item active">produk</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
           
           	<!-- TAMBAHKAN ENCTYPE="" KETIKA MENGIRIMKAN FILE PADA FORM -->
-            <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" >
+            <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <div class="row">
                     <div class="col-md-8">
@@ -66,8 +66,8 @@
                                     <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="shop">toko</label>
-                                    <input type="number" name="shop" class="form-control" value="{{ old('shop') }}">
+                                    <label for="stock">stock</label>
+                                    <input type="number" name="stock" class="form-control" value="{{ old('stock') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Foto Produk</label>

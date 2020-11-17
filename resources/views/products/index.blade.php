@@ -20,7 +20,7 @@
                                 List Product
                               
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
-                                <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
+                                <a href="{{ route('produk.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
                             </h4>
                         </div>
                         <div class="card-body">
@@ -35,7 +35,7 @@
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
 
                             <!-- BUAT FORM UNTUK PENCARIAN, METHODNYA ADALAH GET -->
-                            <form action="{{ route('product.index') }}" method="get">
+                            <form action="{{ route('produk.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
                                     <!-- KEMUDIAN NAME-NYA ADALAH Q YANG AKAN MENAMPUNG DATA PENCARIAN -->
                                     <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}">
@@ -61,7 +61,7 @@
                                     <tbody>
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
-                                        @forelse ($product as $row)
+                                        @forelse ($Products as $row)
                                         <tr>
                                             <td>
                                                 <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
@@ -80,10 +80,10 @@
                                             <td>{!! $row->status_label !!}</td>
                                             <td>
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
-                                                <form action="{{ route('product.destroy', $row->id) }}" method="post">
+                                                <form action="{{ route('produk.destroy', $row->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('product.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
@@ -96,8 +96,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- MEMBUAT LINK PAGINASI JIKA ADA -->
-                            {!! $product->links() !!}
+                          
                         </div>
                     </div>
                 </div>
