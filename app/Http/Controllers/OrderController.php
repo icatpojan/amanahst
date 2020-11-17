@@ -122,6 +122,9 @@ class OrderController extends Controller
         }
 
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
+        if (!$Order) {
+            return $this->sendResponse('error', 'tidak ada pesanan',null, 200);
+        }
         $Order_id = $Order->id;
         $Order->status = 1;
         $Order->update();
@@ -129,7 +132,7 @@ class OrderController extends Controller
         $Order_details = OrderDetail::where('Order_id', $Order_id)->get();
         foreach ($Order_details as $Order_detail) {
             $product = product::where('id', $Order_detail->product_id)->first();
-            $product->stok = $product->stok - $Order_detail->jumlah;
+            $product->stock = $product->stock - $Order_detail->jumlah;
             $product->update();
         }
 

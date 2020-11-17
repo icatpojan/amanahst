@@ -82,7 +82,7 @@
                                     <label for="image">Foto Produk</label>
                                     <br>
                                   	<!--  TAMPILKAN GAMBAR SAAT INI -->
-                                    <img src="{{ asset('storage/products/' . $product->image) }}" width="100px" height="100px" alt="{{ $product->name }}">
+                                    <img src="{{ asset('product/' . $product->image) }}" width="100px" height="100px" alt="{{ $product->name }}">
                                     <hr>
                                     <input type="file" name="image" class="form-control">
                                     <p><strong>Biarkan kosong jika tidak ingin mengganti gambar</strong></p>

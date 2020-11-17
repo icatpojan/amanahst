@@ -72,9 +72,7 @@
                                             </td>
                                             <td>{{ $row->jumlah_harga }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
-                                            <td>
-                                                {!! $row->status_label !!}
-                                            </td>
+                                            <td>{!!$row->status!!}</td>
                                             <td>
                                                 <form action="{{ route('transaksi.destroy', $row->id) }}" method="post">
                                                     @csrf
