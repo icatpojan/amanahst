@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Order;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
+    public function paymentForm()
+    {
+        return $this->sendResponse('succes', 'silakan isi form pembayaran', null, 200);
+    }
     public function storePayment(Request $request)
     {
         //VALIDASI DATANYA
@@ -14,31 +21,28 @@ class PaymentController extends Controller
             'transfer_to' => 'required|string',
             'transfer_date' => 'required',
             'amount' => 'required|integer',
-            'proof' => 'required|image|mimes:jpg,png,jpeg'
+            'bukti' => 'required|image|mimes:jpg,png,jpeg'
         ]);
 
-        //DEFINE DATABASE TRANSACTION UNTUK MENGHINDARI KESALAHAN SINKRONISASI DATA JIKA TERJADI ERROR DITENGAH PROSES QUERY
         DB::beginTransaction();
         try {
-            //AMBIL DATA ORDER BERDASARKAN INVOICE ID
-            $order = Order::where('invoice', $request->invoice)->first();
-            //JIKA STATUSNYA MASIH 0 DAN ADA FILE BUKTI TRANSFER YANG DI KIRIM
-            if ($order->total != $request->amount) return redirect()->back()->with(['error' => 'Error, nominal yang anda masukan kurang']); //HANYA TAMBAHKAN CODE INI
-            if ($order->status == 0 && $request->hasFile('proof')) {
-                //MAKA UPLOAD FILE GAMBAR TERSEBUT
-                $file = $request->file('proof');
+            $Order = Order::where('customer_id', Auth::user()->id)->where('status', '!=', 1)->get();
+            if ($Order->jumlah_harga != $request->amount) {
+                return $this->sendResponse('Success', 'berhasil menambah data', $product, 200);
+            }
+            if ($Order->status == 1 && $request->hasFile('bukti')) {
+                $file = $request->file('bukti');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('public/payment', $filename);
 
-                //KEMUDIAN SIMPAN INFORMASI PEMBAYARANNYA
                 Payment::create([
                     'order_id' => $order->id,
                     'name' => $request->name,
                     'transfer_to' => $request->transfer_to,
                     'transfer_date' => Carbon::parse($request->transfer_date)->format('Y-m-d'),
                     'amount' => $request->amount,
-                    'proof' => $filename,
-                    'status' => false
+                    'bukti' => $filename,
+                    'status' => null
                 ]);
                 //DAN GANTI STATUS ORDER MENJADI 1
                 $order->update(['status' => 1]);

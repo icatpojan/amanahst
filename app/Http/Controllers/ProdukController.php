@@ -29,7 +29,7 @@ class ProdukController extends Controller
             'name' => 'required|string|max:100',
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'price' => 'required|integer',
+            'price' => 'required|string',
             'weight' => 'required|integer',
             'image' => 'image|mimes:png,jpeg,jpg',
             'stock' => 'required|integer'

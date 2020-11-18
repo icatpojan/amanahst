@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+	public function getStatusLabelAttribute()
+    {
+        if ($this->status == 0) {
+            return '<span class="badge badge-secondary">Draft</span>';
+        }
+        return '<span class="badge badge-success">Aktif</span>';
+    }
     public function user()
 	{
 	      return $this->belongsTo('App\User','user_id', 'id');
