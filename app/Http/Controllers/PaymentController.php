@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Order;
-use Illuminate\Support\Facades\Auth;    
+use Illuminate\Support\Facades\Auth;
 use App\Payment;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
@@ -17,15 +18,16 @@ class PaymentController extends Controller
     }
     public function storePayment(Request $request)
     {
-        //VALIDASI DATANYA
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'transfer_to' => 'required|string',
             'transfer_date' => 'required',
             'amount' => 'required|integer',
             'bukti' => 'required|image|mimes:jpg,png,jpeg'
         ]);
-
+        if ($validator->fails()) {
+            return response($validator->errors());
+        }
         DB::beginTransaction();
         try {
             $Order = Order::where('customer_id', Auth::user()->id)->where('status', '!=', 1)->get();
