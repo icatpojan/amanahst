@@ -17,10 +17,10 @@ class OrderController extends Controller
     public function index($id)
     {
         $product = product::find($id);
-        if (!$product) {
+        // if (!$product) {
 
-            return $this->sendResponse('Error', 'Gagal mencoba memesan', null, 500);
-        }
+        //     return $this->sendResponse('Error', 'Gagal mencoba memesan', null, 500);
+        // }
         return $this->sendResponse('Success', 'anda mencoba memesan', $product, 200);
     }
 
