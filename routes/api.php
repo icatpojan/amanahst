@@ -29,11 +29,13 @@ Route::get('product/{product} ', 'ProductController@show');
 Route::post('product/search', 'ProductController@search');
 //nyari berdasarkan nama
 Route::get('category', 'ProductController@category');
-
+//ngambil category
 // ini buat customer
 
 
 //ini buat penjual
+Route::get('ambilah', 'ProductController@ambilah')->middleware('jwt.verify');
+//ini buat ngambil barang yang dia jual
 Route::post('product', 'ProductController@store')->middleware('jwt.verify');
 //tambah produk
 Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
@@ -62,3 +64,9 @@ Route::get('history', 'HistoryController@index')->middleware('jwt.verify');
 //ngeliat pesanan
 Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify');
 //ngliat detail pesanan
+
+
+Route::get('payment', 'PaymentController@paymentForm')->middleware('jwt.verify');
+//ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
+Route::post('payment', 'PaymentController@storePayment')->middleware('jwt.verify');
+//ini buat nambah ke keranjang

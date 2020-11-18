@@ -73,7 +73,7 @@
                                                 <label>Kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
                                                 <label>Berat: <span class="badge badge-info">{{ $row->weight }} gr</span></label>
                                             </td>
-                                            <td>Rp {{ number_format($row->price) }}</td>
+                                            <td>Rp {{ $row->price }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                             
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->

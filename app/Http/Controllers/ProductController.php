@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
@@ -23,6 +24,17 @@ class ProductController extends Controller
     {
         $product = Product::with(['category'])->orderBy('created_at', 'DESC');
 
+        if (request()->q != '') {
+            $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
+        }
+        $product = $product->paginate(10);
+        return response()->json([
+            $product
+        ]);
+    }
+    public function ambilah()
+    {
+        $product = Product::where('customer_id', Auth::user()->id)->first();
         if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
         }

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    
     public function index($id)
     {
         $product = product::find($id);
@@ -85,18 +86,20 @@ class OrderController extends Controller
         if (!empty($Order)) {
             $Order_details = OrderDetail::where('Order_id', $Order->id)->get();
         }
-
+        if (empty($Order)) {
+            return $this->sendResponse('Success', 'keranjang kosong', null, 200);
+        }
         // return view('pesan.check_out', compact('Order', 'Order_details'));
         // return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order, 200);
-        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order_details, 200);
+        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', $Order_details, 200);
     }
 
     public function delete($id)
     {
         $Order_detail = OrderDetail::where('id', $id)->first();
-     if (!$Order_detail) {
-        return $this->sendResponse('error', 'data tidak ada',null, 200);
-     }
+        if (!$Order_detail) {
+            return $this->sendResponse('error', 'data tidak ada', null, 200);
+        }
         $Order = Order::where('id', $Order_detail->order_id)->first();
         $Order->jumlah_harga = $Order->jumlah_harga - $Order_detail->jumlah_harga;
         $Order->update();
@@ -104,26 +107,25 @@ class OrderController extends Controller
 
         $Order_detail->delete();
 
-        return $this->sendResponse('Success', 'pesanan anda dihapus',null, 200);
+        return $this->sendResponse('Success', 'pesanan anda dihapus', null, 200);
     }
 
     public function konfirmasi()
     {
         $user = User::where('id', Auth::user()->id)->first();
-
         if (empty($user->alamat)) {
-            return $this->sendResponse('error', 'isi alamat dulu pak eko',null, 200);
+            return $this->sendResponse('error', 'isi alamat dulu pak eko', null, 200);
             return redirect('profile');
         }
 
         if (empty($user->nomor_telpon)) {
-            return $this->sendResponse('error', 'isi identitas dulu pak eko',null, 200);
+            return $this->sendResponse('error', 'isi identitas dulu pak eko', null, 200);
             return redirect('profile');
         }
 
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         if (!$Order) {
-            return $this->sendResponse('error', 'tidak ada pesanan',null, 200);
+            return $this->sendResponse('error', 'tidak ada pesanan', null, 200);
         }
         $Order_id = $Order->id;
         $Order->status = 1;
@@ -139,6 +141,6 @@ class OrderController extends Controller
 
 
         // return redirect('history/' . $Order_id);
-        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko',$Order_id, 200);
+        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order_id, 200);
     }
 }
