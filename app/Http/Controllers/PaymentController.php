@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
+use App\Payment;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -28,7 +30,7 @@ class PaymentController extends Controller
         try {
             $Order = Order::where('customer_id', Auth::user()->id)->where('status', '!=', 1)->get();
             if ($Order->jumlah_harga != $request->amount) {
-                return $this->sendResponse('Success', 'berhasil menambah data', $product, 200);
+                return $this->sendResponse('Error', 'duit anda kurang pak eko', null, 200);
             }
             if ($Order->status == 1 && $request->hasFile('bukti')) {
                 $file = $request->file('bukti');
@@ -36,7 +38,7 @@ class PaymentController extends Controller
                 $file->storeAs('public/payment', $filename);
 
                 Payment::create([
-                    'order_id' => $order->id,
+                    'order_id' => $Order->id,
                     'name' => $request->name,
                     'transfer_to' => $request->transfer_to,
                     'transfer_date' => Carbon::parse($request->transfer_date)->format('Y-m-d'),
@@ -44,20 +46,14 @@ class PaymentController extends Controller
                     'bukti' => $filename,
                     'status' => null
                 ]);
-                //DAN GANTI STATUS ORDER MENJADI 1
-                $order->update(['status' => 1]);
-                //JIKA TIDAK ADA ERROR, MAKA COMMIT UNTUK MENANDAKAN BAHWA TRANSAKSI BERHASIL
+                $Order->update(['status' => 2]);
                 DB::commit();
-                //REDIRECT DAN KIRIMKAN PESAN
-                return redirect()->back()->with(['success' => 'Pesanan Dikonfirmasi']);
+                return $this->sendResponse('succes', 'transfer dikonfirmasi', null, 200);
             }
             //REDIRECT DENGAN ERROR MESSAGE
-            return redirect()->back()->with(['error' => 'Error, Upload Bukti Transfer']);
         } catch (\Exception $e) {
-            //JIKA TERJADI ERROR, MAKA ROLLBACK SELURUH PROSES QUERY
+            return $this->sendResponse('Error', 'sudah dikonfirmasi', null, 200);
             DB::rollback();
-            //DAN KIRIMKAN PESAN ERROR
-            return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
 }

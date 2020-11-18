@@ -28,7 +28,7 @@ Route::get('product/{product} ', 'ProductController@show');
 //ambil 1 data berdasarkan id
 Route::post('product/search', 'ProductController@search');
 //nyari berdasarkan nama
-
+Route::get('category', 'ProductController@category');
 
 // ini buat customer
 

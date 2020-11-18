@@ -12,6 +12,13 @@ use DB;
 
 class ProductController extends Controller
 {
+    public function category()
+    {
+        $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
+        $parent = Category::getParent()->orderBy('name', 'ASC')->get();
+        // return $this->sendResponse('Error', 'Gagal menghapus data', null, 500);
+        return $this->sendResponse('succes', 'ini dia data category', $parent, 500);
+    }
     public function index()
     {
         $product = Product::with(['category'])->orderBy('created_at', 'DESC');
