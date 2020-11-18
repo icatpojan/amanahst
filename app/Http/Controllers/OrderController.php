@@ -41,7 +41,7 @@ class OrderController extends Controller
             $Order->customer_id = Auth::user()->id;
             $Order->tanggal = $tanggal;
             $Order->status = 0;
-            $Order->jumlah = 0;
+            $Order->jumlah_harga = 0;
             // $Order->kode = mt_rand(100, 999);
             $Order->save();
         }

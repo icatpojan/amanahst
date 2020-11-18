@@ -32,6 +32,8 @@ Route::post('product/search', 'ProductController@search');
 
 // ini buat customer
 
+
+//ini buat penjual
 Route::post('product', 'ProductController@store')->middleware('jwt.verify');
 //tambah produk
 Route::put('product/{product} ', 'ProductController@update')->middleware('jwt.verify');
@@ -40,6 +42,7 @@ Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jw
 //hapus produk
 
 
+//ini buat pembeli
 Route::get('order/{id}', 'OrderController@index')->middleware('jwt.verify');
 //ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
 Route::post('order/{id}', 'OrderController@order')->middleware('jwt.verify');
@@ -51,10 +54,9 @@ Route::delete('check-out/{id}', 'OrderController@delete')->middleware('jwt.verif
 Route::get('konfirmasi-check-out', 'OrderController@konfirmasi')->middleware('jwt.verify');
 //konfirmasi pembelian,keluar dari keranjang ke halaman datail
 
-
 Route::get('profile', 'ProfileController@index')->middleware('jwt.verify');
 //menampilkan profil user yang sedang login
 Route::patch('profile', 'ProfileController@update')->middleware('jwt.verify');
-
+//mengupdate prife
 Route::get('history', 'HistoryController@index')->middleware('jwt.verify');
 Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify');
