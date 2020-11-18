@@ -14,16 +14,15 @@ class HistoryController extends Controller
     public function index()
     {
     	$Orders = Order::where('customer_id', Auth::user()->id)->where('status', '!=',0)->get();
-
-        // return view('history.index', compact('pesanans'));
         return $this->sendResponse('Success', 'anda telah memesan', $Orders, 500);
     }
 
     public function detail($id)
     {
-    	$pesanan = Order::where('id', $id)->first();
-    	$pesanan_details = OrderDetail::where('pesanan_id', $pesanan->id)->get();
+    	$order = Order::where('id', $id)->first();
+    	$order_details = OrderDetail::where('order_id', $order->id)->get();
 
-     	return view('history.detail', compact('pesanan','pesanan_details'));
+        //  return view('history.detail', compact('order','order_details'));
+         return $this->sendResponse('Success', 'detail pesanan anda pak ekos', $order_details, 500);
     }
 }

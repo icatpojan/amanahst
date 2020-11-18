@@ -59,4 +59,6 @@ Route::get('profile', 'ProfileController@index')->middleware('jwt.verify');
 Route::patch('profile', 'ProfileController@update')->middleware('jwt.verify');
 //mengupdate prife
 Route::get('history', 'HistoryController@index')->middleware('jwt.verify');
+//ngeliat pesanan
 Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify');
+//ngliat detail pesanan
