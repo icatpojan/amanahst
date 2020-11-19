@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>List Product</title>
+<title>List Product</title>
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
                         <div class="card-header">
                             <h4 class="card-title">
                                 List Product
-                              
+                                
                                 <!-- BUAT TOMBOL UNTUK MENGARAHKAN KE HALAMAN ADD PRODUK -->
                                 <a href="{{ route('produk.create') }}" class="btn btn-primary btn-sm float-right">Tambah</a>
                             </h4>
@@ -26,14 +26,14 @@
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
                             @if (session('success'))
-                                <div class="alert alert-success">{{ session('success') }}</div>
+                            <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-
+                            
                             @if (session('error'))
-                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
-
+                            
                             <!-- BUAT FORM UNTUK PENCARIAN, METHODNYA ADALAH GET -->
                             <form action="{{ route('produk.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                             </form>
-                          
+                            
                             <!-- TABLE UNTUK MENAMPILKAN DATA PRODUK -->
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered">
@@ -62,10 +62,11 @@
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
                                         @forelse ($Products as $row)
+                                        <b style="color: white">{{ $row->image }}</b>
+                                        
                                         <tr>
                                             <td>
-                                                <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
-                                                <img src="{{ asset('product/' . $row->image) }}" width="100px" height="100px" alt="{{ $row->name }}">
+                                                <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}">
                                             </td>
                                             <td>
                                                 <strong>{{ $row->name }}</strong><br>

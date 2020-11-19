@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Category;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use GuzzleHttp\Client;
 
 class ProdukController extends Controller
 {
@@ -16,7 +18,6 @@ class ProdukController extends Controller
     {
         $Products = Product::paginate(20);
         return view('products.index', compact('Products'));
-        
     }
     public function create()
     {
@@ -37,13 +38,25 @@ class ProdukController extends Controller
         if ($validator->fails()) {
             return response($validator->errors());
         }
-        $filename = null;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        $image = null;
 
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            // $file->storeAs('public/products', $filename);
-            $request->image->move(public_path('product'), $filename);
+        if ($request->image) {
+            // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
+            // $request->image->move(public_path('img'), $image);
+
+            $img = base64_encode(file_get_contents($request->image));
+            $client = new Client();
+            $res = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $img,
+                    'format' => 'json',
+                ]
+            ]);
+            $array = json_decode($res->getBody()->getContents());
+            // dd($array);
+            $image = $array->image->file->resource->chain->image;
         }
         $customer_id= Auth::id(); 
         $product = Product::create([
@@ -52,25 +65,22 @@ class ProdukController extends Controller
             'category_id' => $request->category_id,
             'customer_id' =>$customer_id,
             'description' => $request->description,
-            'image' => $filename,
+            'image' => $image,
             'price' => $request->price,
             'weight' => $request->weight,
             'status' => $request->status,
             'stock' => $request->stock
         ]);
         return redirect(route('produk.index'))->with(['success' => 'Produk Baru Ditambahkan']);
-    
     }
     public function destroy($id)
     {
         $product = Product::find($id);
         if ($product) {
             $product->delete();
-            File::delete(public_path('product/' . $product->image));
-            return $this->sendResponse('Success', 'Berhasil menghapus data', $product, 200);
         }
         return redirect(route('produk.index'))->with(['success' => 'Produk Sudah Dihapus']);
-    } 
+    }
 
     public function show($id)
     {
