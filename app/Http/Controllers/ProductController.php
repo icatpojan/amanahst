@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use GuzzleHttp\Client;
 
 class ProductController extends Controller
 {
@@ -62,13 +63,25 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response($validator->errors());
         }
-        $filename = null;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        $image = null;
 
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            // $file->storeAs('public/products', $filename);
-            $request->image->move(public_path('product'), $filename);
+        if ($request->image) {
+            // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
+            // $request->image->move(public_path('img'), $image);
+
+            $img = base64_encode(file_get_contents($request->image));
+            $client = new Client();
+            $res = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $img,
+                    'format' => 'json',
+                ]
+            ]);
+            $array = json_decode($res->getBody()->getContents());
+            // dd($array);
+            $image = $array->image->file->resource->chain->image;
         }
         $customer_id= Auth::id(); 
         $product = Product::create([
@@ -77,7 +90,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'customer_id' =>$customer_id,
             'description' => $request->description,
-            'image' => $filename,
+            'image' => $image,
             'price' => $request->price,
             'weight' => $request->weight,
             'status' => $request->status,
@@ -129,14 +142,25 @@ class ProductController extends Controller
         }
 
         $product = Product::find($id);
-        $filename = $product->image;
+        $image = null;
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            // $file->storeAs('public/products', $filename);
-            $request->image->move(public_path('product'), $filename);
-            File::delete(storage_path('product/' . $product->image));
+        if ($request->image) {
+            // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
+            // $request->image->move(public_path('img'), $image);
+
+            $img = base64_encode(file_get_contents($request->image));
+            $client = new Client();
+            $res = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $img,
+                    'format' => 'json',
+                ]
+            ]);
+            $array = json_decode($res->getBody()->getContents());
+            // dd($array);
+            $image = $array->image->file->resource->chain->image;
         }
 
         //KEMUDIAN UPDATE PRODUK TERSEBUT
@@ -146,7 +170,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'price' => $request->price,
             'weight' => $request->weight,
-            'image' => $filename,
+            'image' => $image,
             'stock' => $request->stock
         ]);
         try {
