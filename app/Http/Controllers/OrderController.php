@@ -30,9 +30,9 @@ class OrderController extends Controller
         $tanggal = Carbon::now();
 
         //validasi apakah melebihi stok
-        if ($request->jumlah_pesan > $product->stock) {
-            return $this->sendResponse('error', 'stok terbatas', null, 500);
-        }
+        // if ($request->jumlah_pesan > $product->stock) {
+        //     return $this->sendResponse('error', 'stok terbatas', null, 500);
+        // }
 
         //cek validasi
         $cek_Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
