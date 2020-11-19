@@ -17,10 +17,10 @@ class OrderController extends Controller
     public function index($id)
     {
         $product = product::find($id);
-        // if (!$product) {
+        if (!$product) {
 
-        //     return $this->sendResponse('Error', 'Gagal mencoba memesan', null, 500);
-        // }
+            return $this->sendResponse('Error', 'Gagal mencoba memesan', null, 500);
+        }
         return $this->sendResponse('Success', 'anda mencoba memesan', $product, 200);
     }
 
@@ -52,7 +52,7 @@ class OrderController extends Controller
         $Order_baru = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
 
         //cek Order detail
-        $cek_Order_detail = OrderDetail::where('product_id', $product->id)->where('Order_id', $Order_baru->id)->first();
+        $cek_Order_detail = OrderDetail::where('product_id', $product->id)->where('order_id', $Order_baru->id)->first();
         if (empty($cek_Order_detail)) {
             $Order_detail = new OrderDetail;
             $Order_detail->product_id = $product->id;
@@ -61,7 +61,7 @@ class OrderController extends Controller
             $Order_detail->jumlah_harga = $product->price * $request->jumlah_pesan;
             $Order_detail->save();
         } else {
-            $Order_detail = OrderDetail::where('product_id', $product->id)->where('Order_id', $Order_baru->id)->first();
+            $Order_detail = OrderDetail::where('product_id', $product->id)->where('order_id', $Order_baru->id)->first();
 
             $Order_detail->jumlah = $Order_detail->jumlah + $request->jumlah_pesan;
 
@@ -84,7 +84,7 @@ class OrderController extends Controller
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         $Order_details = [];
         if (!empty($Order)) {
-            $Order_details = OrderDetail::where('Order_id', $Order->id)->get();
+            $Order_details = OrderDetail::where('order_id', $Order->id)->get();
         }
         if (empty($Order)) {
             return $this->sendResponse('Success', 'keranjang kosong', null, 200);
