@@ -59,7 +59,7 @@ Route::get('konfirmasi-check-out', 'OrderController@konfirmasi')->middleware('jw
 Route::get('profile', 'ProfileController@index')->middleware('jwt.verify');
 //menampilkan profil user yang sedang login
 Route::patch('profile', 'ProfileController@update')->middleware('jwt.verify');
-//mengupdate prife
+//mengupdate profile
 Route::get('history', 'HistoryController@index')->middleware('jwt.verify');
 //ngeliat pesanan
 Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify');

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    
+
     public function index($id)
     {
         $product = product::find($id);
@@ -28,7 +28,10 @@ class OrderController extends Controller
     {
         $product = product::where('id', $id)->first();
         $tanggal = Carbon::now();
-
+        //cek dulu ada barang dengan id sekian gakk??
+        if (!$product) {
+            return $this->sendResponse('error', 'barang habis/tidak ada', null, 500);
+        }
         //validasi apakah melebihi stok
         if ($request->jumlah_pesan > $product->stock) {
             return $this->sendResponse('error', 'stok terbatas', null, 500);
@@ -81,17 +84,22 @@ class OrderController extends Controller
 
     public function check_out()
     {
-        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
+        
         $Order_details = [];
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         if (!empty($Order)) {
             $Order_details = OrderDetail::where('order_id', $Order->id)->get();
         }
         if (empty($Order)) {
-            return $this->sendResponse('Success', 'keranjang kosong', null, 200);
+            return $this->sendResponse('error', 'keranjang kosong', null, 500);
         }
         // return view('pesan.check_out', compact('Order', 'Order_details'));
         // return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order, 200);
         return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', $Order_details, 200);
+        // return response()->json([
+        //     $Order_details
+
+        // ]);
     }
 
     public function delete($id)

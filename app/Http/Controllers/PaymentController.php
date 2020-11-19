@@ -34,12 +34,25 @@ class PaymentController extends Controller
         if ($order->jumlah_harga > $request->amount) {
             return response('nominal yang anda massukan kurang');
         }
-        if ($order->status == 0 && $request->hasFile('bukti')) {
-            $file = $request->file('image');
+       $image = null;
 
-            $filename= time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            // $file->storeAs('public/products', $filename);
-            $request->image->move(public_path('product'), $filename);
+        if ($request->image) {
+            // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
+            // $request->image->move(public_path('img'), $image);
+
+            $img = base64_encode(file_get_contents($request->image));
+            $client = new Client();
+            $res = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+                'form_params' => [
+                    'key' => '6d207e02198a847aa98d0a2a901485a5',
+                    'action' => 'upload',
+                    'source' => $img,
+                    'format' => 'json',
+                ]
+            ]);
+            $array = json_decode($res->getBody()->getContents());
+            // dd($array);
+            $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
         Payment::create([
@@ -48,7 +61,7 @@ class PaymentController extends Controller
             'transfer_to' => $request->transfer_to,
             'transfer_date' => Carbon::parse($request->transfer_date)->format('Y-m-d'),
             'amount' => $request->amount,
-            'bukti' => $filename,
+            'bukti' => $image,
             'status' => null
         ]);
         $order->update(['status' => 2]);

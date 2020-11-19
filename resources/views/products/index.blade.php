@@ -50,7 +50,7 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>gambar</th>
                                             <th>Produk</th>
                                             <th>Harga</th>
                                             <th>Created At</th>

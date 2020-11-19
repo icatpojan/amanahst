@@ -23,7 +23,8 @@ class ProfileController extends Controller
         ]);
 
     	$user = User::where('id', Auth::user()->id)->first();
-    	$user->name = $request->name;
+		$user->name = $request->name;
+		$user->image = $request->image;
     	$user->email = $request->email;
     	$user->nomor_telpon = $request->nomor_telpon;
     	$user->alamat = $request->alamat;
