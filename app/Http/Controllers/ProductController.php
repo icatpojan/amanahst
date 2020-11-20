@@ -35,7 +35,7 @@ class ProductController extends Controller
     }
     public function ambilah()
     {
-        $product = Product::where('customer_id', Auth::user()->id)->get();
+        $product = Product::where('customer_id', Auth::id)->first();
         if (empty($product)) {
             return response('anda belum menjual apapun');
         }
