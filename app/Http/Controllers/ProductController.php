@@ -36,10 +36,9 @@ class ProductController extends Controller
     public function ambilah()
     {
         $product = Product::where('customer_id', Auth::user()->id)->first();
-        if (request()->q != '') {
-            $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
+        if (empty($product)) {
+            return response('anda belum menjual apapun');
         }
-        $product = $product->paginate(10);
         return response()->json([
             $product
         ]);
@@ -83,12 +82,12 @@ class ProductController extends Controller
             // dd($array);
             $image = $array->image->file->resource->chain->image;
         }
-        $customer_id= Auth::id(); 
+        $customer_id = Auth::id();
         $product = Product::create([
             'name' => $request->name,
             'slug' => $request->name,
             'category_id' => $request->category_id,
-            'customer_id' =>$customer_id,
+            'customer_id' => $customer_id,
             'description' => $request->description,
             'image' => $image,
             'price' => $request->price,
@@ -114,7 +113,7 @@ class ProductController extends Controller
             return $this->sendResponse('Success', 'Berhasil menghapus data', $product, 200);
         }
         return $this->sendResponse('Error', 'Gagal menghapus data', null, 500);
-    } 
+    }
 
     public function show($id)
     {
