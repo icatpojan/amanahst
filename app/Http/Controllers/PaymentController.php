@@ -8,7 +8,10 @@ use App\Order;
 use Auth;
 use App\Payment;
 use Carbon\Carbon;
+use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Validator;
+use GuzzleHttp\Client;
 
 class PaymentController extends Controller
 {
@@ -31,6 +34,9 @@ class PaymentController extends Controller
         }
         
         $order = Order::where('customer_id', Auth::user()->id)->where('status', '=', 1)->first();
+        if (!$order) {
+            return response('tidak ada tagihan');
+        }
         if ($order->jumlah_harga > $request->amount) {
             return response('nominal yang anda massukan kurang');
         }
@@ -42,7 +48,7 @@ class PaymentController extends Controller
 
             $img = base64_encode(file_get_contents($request->image));
             $client = new Client();
-            $res = $client->request('POST', 'https://freeimage.host/api/1/upload', [
+            $res = $client->Request('POST', 'https://freeimage.host/api/1/upload', [
                 'form_params' => [
                     'key' => '6d207e02198a847aa98d0a2a901485a5',
                     'action' => 'upload',
@@ -51,7 +57,7 @@ class PaymentController extends Controller
                 ]
             ]);
             $array = json_decode($res->getBody()->getContents());
-            // dd($array);
+            
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
@@ -62,9 +68,9 @@ class PaymentController extends Controller
             'transfer_date' => Carbon::parse($request->transfer_date)->format('Y-m-d'),
             'amount' => $request->amount,
             'bukti' => $image,
-            'status' => null
         ]);
-        $order->update(['status' => 2]);
+        $order->status = 2;
+        $order->update();
         try {
             $order->save();
             // $product = Product::all();

@@ -21,7 +21,6 @@ class CreatePaymentsTable extends Migration
             $table->date('transfer_date');
             $table->integer('amount');
             $table->string('bukti')->nullable();
-            $table->string('status')->default(null);
             $table->timestamps();
         });
     }
