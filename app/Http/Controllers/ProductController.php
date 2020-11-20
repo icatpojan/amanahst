@@ -39,6 +39,7 @@ class ProductController extends Controller
         if (empty($product)) {
             return response('anda belum menjual apapun');
         }
+        $product = $product->paginate(10);
         return response()->json([
             $product
         ]);
