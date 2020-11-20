@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 
 class ProductController extends Controller
 {
+    
     public function category()
     {
         $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
@@ -33,6 +34,23 @@ class ProductController extends Controller
             $product
         ]);
     }
+    public function search(Request $request)
+    {
+
+        $search = $request->get('search');
+        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(10);
+        if (!$product) {
+
+            return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
+        }
+        return response()->json([
+            $product
+        ]);
+    }
+
+    //controller penjual
+
+    //ini buat ngambil barang yang dijual berdasarkan id customer yang tertera dalam barang
     public function ambilah()
     {
         $product = Product::where('customer_id', Auth::user()->id)->get();
@@ -102,9 +120,9 @@ class ProductController extends Controller
             $product->save();
             // $product = Product::all();
 
-            return $this->sendResponse('Success', 'berhasil menambah data', $product, 200);
+            return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $product, 200);
         } catch (\Throwable $th) {
-            return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
+            return $this->sendResponse('Error', 'Gagal menjual data pemerintah', null, 500);
         }
     }
     public function destroy($id)
@@ -183,18 +201,5 @@ class ProductController extends Controller
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal mengganti data', null, 500);
         }
-    }
-    public function search(Request $request)
-    {
-
-        $search = $request->get('search');
-        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(10);
-        if (!$product) {
-
-            return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
-        }
-        return response()->json([
-            $product
-        ]);
     }
 }

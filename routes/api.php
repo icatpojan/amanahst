@@ -71,3 +71,5 @@ Route::get('payment', 'PaymentController@paymentForm')->middleware('jwt.verify')
 //ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
 Route::post('payment', 'PaymentController@storePayment')->middleware('jwt.verify');
 //ini buat nambah ke keranjang
+
+Route::get('gasorder', 'PaymentController@storePayment')->middleware('jwt.verify');

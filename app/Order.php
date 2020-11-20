@@ -27,6 +27,11 @@ class Order extends Model
 	public function pesanan_detail() 
 	{
 	     return $this->hasMany('App\PesananDetail','pesanan_id', 'id');
-	}
+    }
+    public function product()
+    {
+        return $this->belongsTo('App\Product','product_id', 'id');
+    }
+    
 
 }

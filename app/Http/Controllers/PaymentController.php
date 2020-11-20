@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Order;
+use App\OrderDetail;
 use Auth;
 use App\Payment;
 use Carbon\Carbon;
@@ -79,5 +80,24 @@ class PaymentController extends Controller
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
+    }
+    public function gasorder()
+    {
+        
+        $Order_details = [];
+        $Order = OrderDetail::where('product_id', Auth::user()->id)->where('status', 0)->first();
+        if (!empty($Order)) {
+            $Order_details = OrderDetail::where('order_id', $Order->id)->get();
+        }
+        if (empty($Order)) {
+            return $this->sendResponse('error', 'keranjang kosong', null, 500);
+        }
+        // return view('pesan.check_out', compact('Order', 'Order_details'));
+        // return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order, 200);
+        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', $Order_details, 200);
+        // return response()->json([
+        //     $Order_details
+
+        // ]);
     }
 }

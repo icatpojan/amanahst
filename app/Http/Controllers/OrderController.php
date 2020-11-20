@@ -88,7 +88,7 @@ class OrderController extends Controller
         $Order_details = [];
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         if (!empty($Order)) {
-            $Order_details = OrderDetail::where('order_id', $Order->id)->get();
+            $Order_details = OrderDetail::where('order_id', $Order->id)->with(['product'])->get();
         }
         if (empty($Order)) {
             return $this->sendResponse('error', 'keranjang kosong', null, 500);
