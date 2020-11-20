@@ -35,13 +35,15 @@ class ProductController extends Controller
     }
     public function ambilah()
     {
-        $product = Product::where('customer_id', Auth::id)->first();
+        $product = Product::where('customer_id', Auth::user()->id)->get();
         if (empty($product)) {
-            return response('anda belum menjual apapun');
+            return response()->json([
+                'anda belum menjual apapun'
+            ]);
         }
-        $product = $product->paginate(10);
+        // $product = $product->paginate(10);
         return response()->json([
-            $product
+            'produk' => $product
         ]);
     }
     public function create()
