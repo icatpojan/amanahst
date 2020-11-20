@@ -48,8 +48,8 @@ class ProfileController extends Controller
 			$image = $array->image->file->resource->chain->image;
 		}
 		$user = User::where('id', Auth::user()->id)->first();
-		$user->name = $request->name;
-		$user->email = $request->email;
+		// $user->name = $request->name;
+		// $user->email = $request->email;
 		$user->image = $image;
 		$user->nomor_telpon = $request->nomor_telpon;
 		$user->alamat = $request->alamat;
