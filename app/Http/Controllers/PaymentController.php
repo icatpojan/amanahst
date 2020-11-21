@@ -118,7 +118,7 @@ class PaymentController extends Controller
         $Order_detail = OrderDetailResource::collection(OrderDetail::all());
         //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
         $id = Auth::user()->id;
-        $Order_detail = (json_decode(json_encode($Order_detail)));
+        $Order_detail = collect(json_decode(json_encode($Order_detail)));
         $Order_details = $Order_detail->where('customer_id', $id)->where('status', 1);
         // $Order_detail = $Order_detail->values()->all();
         if ($Order_details->isEmpty()) {
