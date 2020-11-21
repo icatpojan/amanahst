@@ -147,8 +147,9 @@ class OrderController extends Controller
         $Order->tujuan = $request->tujuan;
         $Order->status = 1;
         $Order->update();
-        $Order_id = $Order->id;
         
+        
+        $Order_id = $Order->id;
         $Order_details = OrderDetail::where('Order_id', $Order_id)->get();
         foreach ($Order_details as $Order_detail) {
             $product = product::where('id', $Order_detail->product_id)->first();
