@@ -20,7 +20,7 @@ class OrderDetailResource extends JsonResource
             // 'order_id',
             'jumlah_pesan' => $this->jumlah,
             'jumlah_harga' => $this->jumlah_harga,
-            'name' => $this->product->name,
+            // 'name' => $this->product->name,
             'customer_id' => $this->product->customer_id,
             'status' => $this->order->status,
         ];
