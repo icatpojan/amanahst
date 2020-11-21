@@ -15,7 +15,6 @@ class OrderDetailResource extends JsonResource
      */
     public function toArray($request)
     {
-        dd($this->Product);
         return [
 
             'id' => $this->id,
