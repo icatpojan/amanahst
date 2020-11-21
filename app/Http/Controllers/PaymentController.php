@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Resources\OrderDetailResource;
 use Illuminate\Http\Request;
 use DB;
 use App\Order;
@@ -95,7 +96,7 @@ class PaymentController extends Controller
             $order->save();
             // $product = Product::all();
 
-            return $this->sendResponse('Success', 'konfirmasi transferberhasil', $product, 200);
+            return $this->sendResponse('Success', 'konfirmasi transferberhasil', $order, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
@@ -108,10 +109,33 @@ class PaymentController extends Controller
         // $order= Order::where('status' , 1)->first();
         // $product =Product::where('customer_id', Auth::user()->id)->get();
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
-        $Order = OrderDetail::with(['product']->where('customer_id', Auth::user()->id))->where('Customer_id', )->get();
+        // $Order = OrderDetail::with(['product']->where('customer_id', Auth::user()->id))->where('Customer_id', )->get();
 
         
         // $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
+      
+      
+      
+      
+      
+      
+      $Order_detail= OrderDetailResource::collection(OrderDetail::all())->where('customer_id', Auth::user()->id);
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
         return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_detail, 200);
         
     }

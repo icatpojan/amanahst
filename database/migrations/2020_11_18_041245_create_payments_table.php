@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->string('name');
             $table->string('transfer_to');
-            $table->date('transfer_date');
+            $table->stringS('transfer_date');
             $table->integer('amount');
             $table->string('bukti')->nullable();
             $table->timestamps();
