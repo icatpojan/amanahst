@@ -17,7 +17,14 @@ use GuzzleHttp\Client;
 class PaymentController extends Controller
 {
     public function paymentForm()
-    {
+    { $Order_details = [];
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->first();
+        if (!empty($Order)) {
+            $Order_details = OrderDetail::where('order_id', $Order->id)->with(['product'])->get();
+        }
+        if (empty($Order)) {
+            return $this->sendResponse('error', 'keranjang kosong', null, 500);
+        }
         return $this->sendResponse('succes', 'silakan isi form pembayaran', null, 200);
     }
 
