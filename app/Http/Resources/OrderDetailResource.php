@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Product;
 
 class OrderDetailResource extends JsonResource
 {
@@ -15,14 +16,15 @@ class OrderDetailResource extends JsonResource
     public function toArray($request)
     {
         return [
+
             'id' => $this->id,
             // 'product_id',
             // 'order_id',
             'jumlah_pesan' => $this->jumlah,
             'jumlah_harga' => $this->jumlah_harga,
-            'name' => $this->Product->name,
-            'customer_id' => $this->Product->customer_id,
-            'status' => $this->Order->status,
+            // 'name' => $this->Product->name,
+            // 'customer_id' => $this->Product->customer_id,
+            // 'status' => $this->Order->status,
         ];
         // return parent::toArray($request);
     }

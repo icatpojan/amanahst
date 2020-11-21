@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 class PaymentController extends Controller
 {
     public function paymentForm()
-    { 
-      
-        
+    {
+
+
         $Order_details = [];
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->first();
         if (!empty($Order)) {
@@ -111,21 +111,22 @@ class PaymentController extends Controller
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
         // $Order = OrderDetail::with(['product']->where('customer_id', Auth::user()->id))->where('Customer_id', )->get();
 
-        
+
         // $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
-      
-    
-        $Order_detail= OrderDetailResource::collection(OrderDetail::all());
-    //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
+
+
+        $Order_detail = OrderDetailResource::collection(OrderDetail::all());
+        //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
         $id = Auth::user()->id;
         $Order_detail = collect(json_decode(json_encode($Order_detail), true));
-        $Order_detail = $Order_detail->where('customer_id', $id);
+        $Order_detail = $Order_detail->where('customer_id', $id)->where('status', 1);
 
         // $Order_detail = $Order_detail->values()->all();
-      
-      
-      
+        if (empty($Order_detail)) {
+            return $this->sendResponse('error', 'gak ada apa apa', null, 400);
+        }
+
+
         return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_detail, 200);
-        
     }
 }
