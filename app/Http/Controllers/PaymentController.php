@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use DB;
 use App\Order;
 use App\OrderDetail;
 use Auth;
 use App\Payment;
+use App\Product;
 use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class PaymentController extends Controller
 {
@@ -40,10 +43,10 @@ class PaymentController extends Controller
     public function storePayment(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'transfer_to' => 'required|string',
-            'transfer_date' => 'required',
-            'amount' => 'required|integer',
+            'name' => 'string',
+            'transfer_to' => 'string',
+            'transfer_date' => 'date',
+            'amount' => 'integer',
             'bukti' => 'required|image|mimes:jpg,png,jpeg'
         ]);
         if ($validator->fails()) {
@@ -102,11 +105,14 @@ class PaymentController extends Controller
 
         $Order_details = [];
         //all dan with tidak bisa digabungkan ferguso
+        // $order= Order::where('status' , 1)->first();
+        // $product =Product::where('customer_id', Auth::user()->id)->get();
+        // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
+        $Order = OrderDetail::with(['product']->where('customer_id', Auth::user()->id))->where('Customer_id', )->get();
+
         
-        
-        $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->get();
-        $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
-        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order, 200);
+        // $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
+        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_detail, 200);
         
     }
 }
