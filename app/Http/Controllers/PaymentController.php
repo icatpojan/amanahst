@@ -55,7 +55,7 @@ class PaymentController extends Controller
 
         $order = Order::where('customer_id', Auth::user()->id)->where('status', '=', 1)->first();
         if (!$order) {
-            return response('tidak ada tagihan');
+            return $this->sendResponse('error', 'tidak ada tagihan', null, 500);
         }
         if ($order->jumlah_harga > $request->amount) {
             return $this->sendResponse('error', 'nominal kurang', null, 500);
