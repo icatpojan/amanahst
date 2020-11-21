@@ -22,9 +22,9 @@ class OrderDetailResource extends JsonResource
             // 'order_id',
             'jumlah_pesan' => $this->jumlah,
             'jumlah_harga' => $this->jumlah_harga,
-            // 'name' => $this->Product->name,
-            // 'customer_id' => $this->Product->customer_id,
-            // 'status' => $this->Order->status,
+            'name' => $this->Product->name,
+            'customer_id' => $this->Product->customer_id,
+            'status' => $this->Order->status,
         ];
         // return parent::toArray($request);
     }

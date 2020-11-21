@@ -119,14 +119,14 @@ class PaymentController extends Controller
         //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
         $id = Auth::user()->id;
         $Order_detail = collect(json_decode(json_encode($Order_detail), true));
-        $Order_detail = $Order_detail->where('customer_id', $id)->where('status', 1);
+        $Order_details = $Order_detail->where('customer_id', $id)->where('status', 2);
 
         // $Order_detail = $Order_detail->values()->all();
-        if (empty($Order_detail)) {
+        if (!($Order_details)) {
             return $this->sendResponse('error', 'gak ada apa apa', null, 400);
         }
 
 
-        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_detail, 200);
+        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_details, 200);
     }
 }
