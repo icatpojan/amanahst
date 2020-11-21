@@ -18,7 +18,7 @@ class PaymentController extends Controller
 {
     public function paymentForm()
     { $Order_details = [];
-        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->with(['product'])->get();
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->with(['product'])->first();
         if (!empty($Order)) {
             $Order_details = OrderDetail::where('order_id', $Order->id)->with(['product'])->get();
         }
@@ -93,6 +93,8 @@ class PaymentController extends Controller
 
         $Order_details = [];
         //all dan with tidak bisa digabungkan ferguso
+        
+        
         $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->get();
         $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
         return $this->sendResponse('success', 'ini dia daftar pesanan', $Order, 200);
