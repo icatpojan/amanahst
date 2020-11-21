@@ -125,19 +125,6 @@ class PaymentController extends Controller
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
         return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_detail, 200);
         
     }
