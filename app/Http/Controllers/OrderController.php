@@ -144,11 +144,11 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response($validator->errors());
         }
-        $Order_id = $Order->id;
         $Order->tujuan = $request->tujuan;
         $Order->status = 1;
         $Order->update();
-
+        $Order_id = $Order->id;
+        
         $Order_details = OrderDetail::where('Order_id', $Order_id)->get();
         foreach ($Order_details as $Order_detail) {
             $product = product::where('id', $Order_detail->product_id)->first();
@@ -156,6 +156,6 @@ class OrderController extends Controller
             $product->update();
         }
         // return redirect('history/' . $Order_id);
-        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order_id, 200);
+        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order, 200);
     }
 }
