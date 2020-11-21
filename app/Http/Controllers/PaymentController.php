@@ -25,7 +25,7 @@ class PaymentController extends Controller
         if (empty($Order)) {
             return $this->sendResponse('error', 'keranjang kosong', null, 500);
         }
-        return $this->sendResponse('succes', 'silakan isi form pembayaran', null, 200);
+        return $this->sendResponse('succes', 'silakan isi form pembayaran', $Order, 200);
     }
 
     public function storePayment(Request $request)
