@@ -150,7 +150,7 @@ class OrderController extends Controller
         
 
         // $Order_id = $Order->id;
-        $Order_details = OrderDetail::where('Order_id', $Order->id)->get();
+        $Order_details = OrderDetail::where('order_id', $Order->id)->get();
         foreach ($Order_details as $Order_detail) {
             $product = product::where('id', $Order_detail->product_id)->first();
             $product->stock = $product->stock - $Order_detail->jumlah;
