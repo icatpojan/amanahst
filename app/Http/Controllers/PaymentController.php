@@ -96,7 +96,7 @@ class PaymentController extends Controller
             $order->save();
             // $product = Product::all();
 
-            return $this->sendResponse('Success', 'konfirmasi transferberhasil', $order, 200);
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
@@ -114,12 +114,14 @@ class PaymentController extends Controller
         
         // $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
       
-      
-      
-      
-      
-      
-      $Order_detail= OrderDetailResource::collection(OrderDetail::all())->where('customer_id', Auth::user()->id);
+    
+        $Order_detail= OrderDetailResource::collection(OrderDetail::all());
+    //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
+        $id = Auth::user()->id;
+        $Order_detail = collect(json_decode(json_encode($Order_detail), true));
+        $Order_detail = $Order_detail->where('customer_id', $id);
+
+        // $Order_detail = $Order_detail->values()->all();
       
       
       
