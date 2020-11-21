@@ -103,22 +103,31 @@ class PaymentController extends Controller
     }
     public function gasOrder()
     {
-
+        $id = Auth::user()->id;
         $Order_details = [];
         //all dan with tidak bisa digabungkan ferguso
         // $order= Order::where('status' , 1)->first();
         // $product =Product::where('customer_id', Auth::user()->id)->get();
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
-        // $Order = OrderDetail::with(['product']->where('customer_id', Auth::user()->id))->where('Customer_id', )->get();
+        // $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->where('Customer_id', )->get();
+        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status'])->whereHas('product', function($q) use ($id) {
+            return $q->where('customer_id', $id);
+        })
+        ->get();
+        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 1);
+        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_details, 200);
 
-
-        // $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
+        // $Order_details = Order::where('customer_id', Auth::user()->id)
+        //                 ->
+        // ->get();
 
 
         $Order_detail = OrderDetailResource::collection(OrderDetail::all());
         //   $Order_details= $Order_detail->where('customer_id', Auth::user()->id)->first();
-        $id = Auth::user()->id;
-        $Order_detail = collect(json_decode(json_encode($Order_detail)));
+        // $id = Auth::user()->id;
+        // $Order_detail = collect(json_decode(json_encode($Order_detail)));
+
+        var_dump($Order_detail); die;
         $Order_details = $Order_detail->where('customer_id', $id)->where('status', 1);
         // $Order_detail = $Order_detail->values()->all();
         if ($Order_details->isEmpty()) {
