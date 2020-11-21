@@ -17,15 +17,24 @@ use GuzzleHttp\Client;
 class PaymentController extends Controller
 {
     public function paymentForm()
-    { $Order_details = [];
-        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->with(['product'])->first();
+    { 
+      
+        
+        $Order_details = [];
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->first();
         if (!empty($Order)) {
             $Order_details = OrderDetail::where('order_id', $Order->id)->with(['product'])->get();
         }
         if (empty($Order)) {
             return $this->sendResponse('error', 'keranjang kosong', null, 500);
         }
-        return $this->sendResponse('succes', 'silakan isi form pembayaran', $Order, 200);
+        // return view('pesan.check_out', compact('Order', 'Order_details'));
+        // return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order, 200);
+        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', $Order_details, 200);
+        // return response()->json([
+        //     $Order_details
+
+        // ]);
     }
 
     public function storePayment(Request $request)
