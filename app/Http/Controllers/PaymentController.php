@@ -58,7 +58,7 @@ class PaymentController extends Controller
             return response('tidak ada tagihan');
         }
         if ($order->jumlah_harga > $request->amount) {
-            return response('nominal yang anda massukan kurang');
+            return $this->sendResponse('error', 'nominal kurang', null, 500);
         }
         $image = null;
 
