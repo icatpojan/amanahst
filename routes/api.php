@@ -53,7 +53,7 @@ Route::get('check-out', 'OrderController@check_out')->middleware('jwt.verify');
 //ini buat ngeliat isi keranjang
 Route::delete('check-out/{id}', 'OrderController@delete')->middleware('jwt.verify');
 //ngehapus isi keranjang satu barang doang menurut order
-Route::get('konfirmasi-check-out', 'OrderController@konfirmasi')->middleware('jwt.verify');
+Route::post('konfirmasi-check-out', 'OrderController@konfirmasi')->middleware('jwt.verify');
 //konfirmasi pembelian,keluar dari keranjang ke halaman datail
 
 Route::get('profile', 'ProfileController@index')->middleware('jwt.verify');
@@ -72,4 +72,5 @@ Route::get('payment', 'PaymentController@paymentForm')->middleware('jwt.verify')
 Route::post('payment', 'PaymentController@storePayment')->middleware('jwt.verify');
 //ini buat nambah ke keranjang
 
-Route::get('gasorder', 'PaymentController@storePayment')->middleware('jwt.verify');
+Route::get('gasorder', 'PaymentController@gasOrder')->middleware('jwt.verify');
+//ini buat konfirmasi dari penjual barang

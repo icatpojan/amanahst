@@ -33,7 +33,7 @@ class PaymentController extends Controller
         if ($validator->fails()) {
             return response($validator->errors());
         }
-        
+
         $order = Order::where('customer_id', Auth::user()->id)->where('status', '=', 1)->first();
         if (!$order) {
             return response('tidak ada tagihan');
@@ -41,7 +41,7 @@ class PaymentController extends Controller
         if ($order->jumlah_harga > $request->amount) {
             return response('nominal yang anda massukan kurang');
         }
-       $image = null;
+        $image = null;
 
         if ($request->image) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
@@ -58,7 +58,7 @@ class PaymentController extends Controller
                 ]
             ]);
             $array = json_decode($res->getBody()->getContents());
-            
+
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
@@ -81,23 +81,14 @@ class PaymentController extends Controller
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
     }
-    public function gasorder()
+    public function gasOrder()
     {
-        
-        $Order_details = [];
-        $Order = OrderDetail::where('product_id', Auth::user()->id)->where('status', 0)->first();
-        if (!empty($Order)) {
-            $Order_details = OrderDetail::where('order_id', $Order->id)->get();
-        }
-        if (empty($Order)) {
-            return $this->sendResponse('error', 'keranjang kosong', null, 500);
-        }
-        // return view('pesan.check_out', compact('Order', 'Order_details'));
-        // return $this->sendResponse('Success', 'ini dia pesanan anda pak eko',$Order, 200);
-        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', $Order_details, 200);
-        // return response()->json([
-        //     $Order_details
 
-        // ]);
+        $Order_details = [];
+        //all dan with tidak bisa digabungkan ferguso
+        $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->get();
+        $Order_detail = Order::where('customer_id', Auth::user()->id)->get();
+        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order, 200);
+        
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User; //IMPORT MODEL APP/USER.PHP
+use App\User; 
+//jangan lupa impor sebelom seeder
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,10 +13,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //SIMPAN DATA KE TABLE users MELALUI MODEL USER
-        //DENGAN DATA YANG ADA DIDALAM ARRAY DIBAWAH
-        //BCRYPT DIGUNAKAN UNTUK MEN-ENKRIPSI SEBUAH STRING
-        //KARENA PASSWORD HARUS DISIMPAN DALAM KEADAAN TER-ENKRIPSI
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',

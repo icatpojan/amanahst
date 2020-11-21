@@ -10,6 +10,8 @@ use Auth;
 use Alert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class OrderController extends Controller
 {
@@ -119,24 +121,31 @@ class OrderController extends Controller
     }
     
 
-    public function konfirmasi()
+    public function konfirmasi(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        if (empty($user->alamat)) {
-            return $this->sendResponse('error', 'isi alamat dulu pak eko', null, 200);
-            return redirect('profile');
-        }
+        // if (empty($user->alamat)) {
+        //     return $this->sendResponse('error', 'isi alamat dulu pak eko', null, 200);
+        //     return redirect('profile');
+        // }
 
-        if (empty($user->nomor_telpon)) {
-            return $this->sendResponse('error', 'isi identitas dulu pak eko', null, 200);
-            return redirect('profile');
-        }
-
+        // if (empty($user->nomor_telpon)) {
+        //     return $this->sendResponse('error', 'isi identitas dulu pak eko', null, 200);
+        //     return redirect('profile');
+        // }
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
+       
         if (!$Order) {
             return $this->sendResponse('error', 'tidak ada pesanan', null, 200);
         }
+        $validator = Validator::make($request->all(), [
+            'tujuan' => 'required|string|max:100',
+        ]);
+        if ($validator->fails()) {
+            return response($validator->errors());
+        }
         $Order_id = $Order->id;
+        $Order->tujuan = $request->tujuan;
         $Order->status = 1;
         $Order->update();
 
@@ -146,9 +155,6 @@ class OrderController extends Controller
             $product->stock = $product->stock - $Order_detail->jumlah;
             $product->update();
         }
-
-
-
         // return redirect('history/' . $Order_id);
         return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order_id, 200);
     }
