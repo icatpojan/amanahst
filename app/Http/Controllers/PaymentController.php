@@ -18,7 +18,7 @@ class PaymentController extends Controller
 {
     public function paymentForm()
     { $Order_details = [];
-        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->first();
+        $Order = Order::where('customer_id', Auth::user()->id)->where('status', 1)->with(['product'])->get();
         if (!empty($Order)) {
             $Order_details = OrderDetail::where('order_id', $Order->id)->with(['product'])->get();
         }
