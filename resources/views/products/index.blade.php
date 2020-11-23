@@ -74,7 +74,7 @@
                                                 <label>Kategori: <span class="badge badge-info">{{ $row->category->name }}</span></label><br>
                                                 <label>Berat: <span class="badge badge-info">{{ $row->weight }} gr</span></label>
                                             </td>
-                                            <td>{{ number_format($row->total) }}</td>
+                                            <td>{{ number_format($row->price) }}</td>
                                             <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                             
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
@@ -84,8 +84,8 @@
                                                 <form action="{{ route('produk.destroy', $row->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>
+                                                    <button class="btn btn-outline-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>

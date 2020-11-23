@@ -67,7 +67,6 @@
                                             <td><strong>{{ $row->id }}</strong></td>
                                             <td>
                                                 <strong>{{ $row->customer_id }}</strong><br>
-                                                <label><strong>Telp:</strong> {{ $row->nomor_telpon }}</label><br>
                                             </td>
                                             </td>
                                             <td>{{ $row->jumlah_harga }}</td>
@@ -79,7 +78,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     {{-- <a href="{{ route('transaksi.view', $row->invoice) }}" class="btn btn-warning btn-sm">Lihat</a> --}}
-                                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                                    <button class="btn btn-outline-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
 

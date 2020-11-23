@@ -9,17 +9,22 @@
         <li class="nav-title">MANAJEMEN PRODUK</li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('category.index') }}">
-                <i class="nav-icon icon-drop"></i> Kategori
+                <i class="nav-icon icon-target"></i> Kategori
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('transaksi.index') }}">
-                <i class="nav-icon icon-puzzle"></i> transaksi
+                <i class="nav-icon icon-cursor"></i> transaksi
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('pembeli.index') }}">
+                <i class="nav-icon icon-user"></i> Customer
             </a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href={{ route('produk.index') }}>
-            <i class="nav-icon icon-plane"></i> produk
+            <i class="nav-icon icon-basket"></i> produk
         </a>
     </li>
         <li class="nav-item nav-dropdown">

@@ -17,6 +17,7 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use PhpParser\Node\Expr\Empty_;
 
 class PaymentController extends Controller
 {
@@ -113,6 +114,7 @@ class PaymentController extends Controller
         $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status,customer_id'])->whereHas('product', function($q) use ($id) {
             return $q->where('customer_id', $id);
         })
+        
         ->get();
         $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
         return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
@@ -136,5 +138,23 @@ class PaymentController extends Controller
 
 
         return $this->sendResponse('success', 'ini dia daftar pemesan anda', $Order_details, 200);
+    }
+    public function show($id)
+    {
+        $payment = Payment::find($id);
+        if (empty($payment)) {
+
+            return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
+        }
+        return $this->sendResponse('Success', 'Berhasil mengambil data pembayaran pak eko', $payment, 200);
+    }
+    public function send($id)
+    {
+        $order_detail = Payment::find($id);
+        if (empty($payment)) {
+
+            return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
+        }
+        return $this->sendResponse('Success', 'Berhasil mengambil data pembayaran pak eko', $payment, 200);
     }
 }

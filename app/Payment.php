@@ -16,4 +16,8 @@ class Payment extends Model
         }
         return '<span class="badge badge-success">Diterima</span>';
     }
+    public function order()
+    {
+        return $this->hasOne('App\Order','order_id', 'id');
+    }
 }
