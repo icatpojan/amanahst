@@ -76,5 +76,5 @@ Route::get('gasorder', 'PaymentController@gasOrder')->middleware('jwt.verify');
 //ini buat ngambil data orderan yang ngorder barang kita
 Route::get('payment/{id}', 'PaymentController@show')->middleware('jwt.verify');
 //ini buat ngambil bukti pembayaran berdasarkan id order
-Route::get('send/{id}', 'PaymentController@show')->middleware('jwt.verify');
+Route::post('send/{id}', 'PaymentController@show')->middleware('jwt.verify');
 //buat konfirmasi penjual kalo barang udah di kirim

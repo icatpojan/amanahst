@@ -151,7 +151,7 @@ class PaymentController extends Controller
     public function send($id)
     {
         $order_detail = OrderDetail::find($id);
-        $order_detail->status = 2;
+        $order_detail->status = 3;
         $order_detail->update();
         if (empty($payment)) {
 
