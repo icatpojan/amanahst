@@ -151,10 +151,6 @@ class PaymentController extends Controller
     public function send($id)
     {
         $order_detail = OrderDetail::find($id);
-        if ($order_detail->status = 1) {
-
-            return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
-        }
         $order_detail->status = 3;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
