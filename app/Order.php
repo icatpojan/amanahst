@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-	public function getStatusLabelAttribute()
+    public function getStatusLabelAttribute()
     {
         if ($this->status == 0) {
             return '<span class="badge badge-secondary">Baru</span>';
@@ -20,18 +20,17 @@ class Order extends Model
         return '<span class="badge badge-success">Selesai</span>';
     }
     public function user()
-	{
-	      return $this->belongsTo('App\User','user_id', 'id');
-	}
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 
-	public function pesanan_detail() 
-	{
-	     return $this->hasMany('App\PesananDetail','pesanan_id', 'id');
+    public function pesanan_detail()
+    {
+        return $this->hasMany('App\PesananDetail', 'pesanan_id', 'id');
     }
     public function product()
     {
-        return $this->belongsTo('App\Product','product_id', 'id');
+        return $this->belongsTo('App\Product', 'product_id', 'id');
     }
-    
-
 }
+    

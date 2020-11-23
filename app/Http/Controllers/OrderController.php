@@ -86,7 +86,7 @@ class OrderController extends Controller
 
     public function check_out()
     {
-        
+
         $Order_details = [];
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
         if (!empty($Order)) {
@@ -119,7 +119,7 @@ class OrderController extends Controller
 
         return $this->sendResponse('Success', 'pesanan anda dihapus', null, 200);
     }
-    
+
 
     public function konfirmasi(Request $request)
     {
@@ -134,7 +134,7 @@ class OrderController extends Controller
         //     return redirect('profile');
         // }
         $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
-       
+
         if (!$Order) {
             return $this->sendResponse('error', 'tidak ada pesanan', null, 200);
         }
@@ -147,7 +147,7 @@ class OrderController extends Controller
         $Order->tujuan = $request->tujuan;
         $Order->status = 1;
         $Order->update();
-        
+
 
         // $Order_id = $Order->id;
         $Order_details = OrderDetail::where('order_id', $Order->id)->get();

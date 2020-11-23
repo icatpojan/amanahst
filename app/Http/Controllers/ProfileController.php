@@ -49,7 +49,7 @@ class ProfileController extends Controller
 		}
 		$user = User::where('id', Auth::user()->id)->first();
 		// $user->name = $request->name;
-		// $user->email = $request->email;
+		// $us	mail = $request->email;
 		$user->image = $image;
 		$user->nomor_telpon = $request->nomor_telpon;
 		$user->alamat = $request->alamat;
