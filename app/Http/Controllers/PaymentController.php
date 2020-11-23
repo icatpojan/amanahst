@@ -157,6 +157,6 @@ class PaymentController extends Controller
 
             return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
         }
-        return $this->sendResponse('Success', 'Berhasil mengambil data pembayaran pak eko', $payment, 200);
+        return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
     }
 }
