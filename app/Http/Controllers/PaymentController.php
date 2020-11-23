@@ -110,12 +110,12 @@ class PaymentController extends Controller
         // $product =Product::where('customer_id', Auth::user()->id)->get();
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
         // $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->where('Customer_id', )->get();
-        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status'])->whereHas('product', function($q) use ($id) {
+        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status,customer_id'])->whereHas('product', function($q) use ($id) {
             return $q->where('customer_id', $id);
         })
         ->get();
-        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 1 );
-        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_details, 200);
+        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
+        return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
 
         // $Order_details = Order::where('customer_id', Auth::user()->id)
         //                 ->
@@ -135,6 +135,6 @@ class PaymentController extends Controller
         }
 
 
-        return $this->sendResponse('success', 'ini dia daftar pesanan', $Order_details, 200);
+        return $this->sendResponse('success', 'ini dia daftar pemesan anda', $Order_details, 200);
     }
 }
