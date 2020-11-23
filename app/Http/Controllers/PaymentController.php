@@ -150,7 +150,9 @@ class PaymentController extends Controller
     }
     public function send($id)
     {
-        $order_detail = Payment::find($id);
+        $order_detail = OrderDetail::find($id);
+        $order_detail->status = 2;
+        $order_detail->update();
         if (empty($payment)) {
 
             return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
