@@ -21,6 +21,14 @@ use PhpParser\Node\Expr\Empty_;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $order_detail = OrderDetail::all();
+        $order = Order::all();
+        if ($order_detail->status = 1) {
+            
+        }
+    }
     public function paymentForm()
     {
 
@@ -141,7 +149,7 @@ class PaymentController extends Controller
     }
     public function show($id)
     {
-        $payment = Payment::find($id);
+        $payment = Payment::where('order_id', $id);
         if (empty($payment)) {
 
             return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
@@ -151,7 +159,7 @@ class PaymentController extends Controller
     public function send($id)
     {
         $order_detail = OrderDetail::find($id);
-        $order_detail->status = 3;
+        $order_detail->status = 2;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
     }
