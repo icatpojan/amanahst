@@ -14,7 +14,7 @@ class HistoryController extends Controller
 {
     public function index()
     {
-        $Orders = Order::where('customer_id', Auth::user()->id)->where('status', '=', 2)->get();
+        $Orders = Order::where('customer_id', Auth::user()->id)->get();
         return $this->sendResponse('Success', 'anda telah memesan', $Orders, 500);
     }
 
