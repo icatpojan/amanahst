@@ -12,12 +12,9 @@ use Auth;
 use App\Payment;
 use App\Product;
 use Carbon\Carbon;
-use GuzzleHttp\Client as GuzzleHttpClient;
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
-use PhpParser\Node\Expr\Empty_;
+
 
 class PaymentController extends Controller
 {
@@ -26,7 +23,6 @@ class PaymentController extends Controller
         $order_detail = OrderDetail::all();
         $order = Order::all();
         if ($order_detail->status = 1) {
-            
         }
     }
     public function paymentForm()
@@ -91,7 +87,7 @@ class PaymentController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
-        Payment::create([
+        $payment = Payment::create([
             'order_id' => $order->id,
             'name' => $request->name,
             'transfer_to' => $request->transfer_to,
@@ -103,9 +99,9 @@ class PaymentController extends Controller
         $order->update();
         try {
             $order->save();
-            // $product = Product::all();
 
-            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order, 200);
+
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
@@ -119,11 +115,11 @@ class PaymentController extends Controller
         // $product =Product::where('customer_id', Auth::user()->id)->get();
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
         // $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->where('Customer_id', )->get();
-        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status,customer_id'])->whereHas('product', function($q) use ($id) {
+        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id);
         })
-        
-        ->get();
+
+            ->get();
         $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
         return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
 
@@ -137,7 +133,8 @@ class PaymentController extends Controller
         // $id = Auth::user()->id;
         // $Order_detail = collect(json_decode(json_encode($Order_detail)));
 
-        var_dump($Order_detail); die;
+        var_dump($Order_detail);
+        die;
         $Order_details = $Order_detail->where('customer_id', $id)->where('status', 1);
         // $Order_detail = $Order_detail->values()->all();
         if ($Order_details->isEmpty()) {
@@ -163,5 +160,4 @@ class PaymentController extends Controller
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
     }
-
 }

@@ -70,7 +70,7 @@ Route::get('history/{id}', 'HistoryController@detail')->middleware('jwt.verify')
 Route::get('payment', 'PaymentController@paymentForm')->middleware('jwt.verify');
 //ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
 Route::post('payment', 'PaymentController@storePayment')->middleware('jwt.verify');
-//ini buat nambah ke keranjang
+//ini buat bayar
 
 Route::get('gasorder', 'PaymentController@gasOrder')->middleware('jwt.verify');
 //ini buat ngambil data orderan yang ngorder barang kita
