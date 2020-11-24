@@ -149,8 +149,8 @@ class PaymentController extends Controller
     }
     public function show($id)
     {
-        $payment = Payment::where('order_id', $id);
-        if (empty($payment)) {
+        $payment = Payment::where('order_id', $id)->get();
+        if ($payment->isEmpty()) {
 
             return $this->sendResponse('Error', 'belom dibayar pak eko', null, 500);
         }
