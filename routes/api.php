@@ -80,5 +80,5 @@ Route::post('send/{id}', 'PaymentController@send')->middleware('jwt.verify');
 //buat konfirmasi penjual kalo barang udah di kirim
 Route::get('klien', 'HistoryController@klien')->middleware('jwt.verify');
 //ini buat ngambil data orderan yang ngorder barang kita
-Route::post('accept/{id}', 'HitoryController@accept')->middleware('jwt.verify');
+Route::post('accept/{id}', 'HistoryController@accept')->middleware('jwt.verify');
 //ini buat pembeli kalo udah nerima barang
