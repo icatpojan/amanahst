@@ -66,7 +66,7 @@ class PaymentController extends Controller
         if ($order->jumlah_harga > $request->amount) {
             return $this->sendResponse('error', 'nominal kurang', null, 500);
         }
-        $image = null;
+        
 
         if ($request->image) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
@@ -86,7 +86,6 @@ class PaymentController extends Controller
 
             $image = $array->image->file->resource->chain->image;
         }
-        $customer_id = Auth::id();
         $payment = Payment::create([
             'order_id' => $order->id,
             'name' => $request->name,
@@ -101,7 +100,7 @@ class PaymentController extends Controller
             $order->save();
 
 
-            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order , 200);
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil',compact('payment','order') , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }

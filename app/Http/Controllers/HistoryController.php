@@ -43,5 +43,6 @@ class HistoryController extends Controller
         $order_detail->status = 3;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda terima', null, 200);
+        
     }
 }
