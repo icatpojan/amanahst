@@ -67,12 +67,12 @@ class PaymentController extends Controller
             return $this->sendResponse('error', 'nominal kurang', null, 500);
         }
         
-
+        $image = null;
         if ($request->bukti) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
             // $request->image->move(public_path('img'), $image);
 
-            $img = base64_encode(file_get_contents($request->bukti));
+            $img = base64_encode(file_get_contents($request->image));
             $client = new Client();
             $res = $client->Request('POST', 'https://freeimage.host/api/1/upload', [
                 'form_params' => [
@@ -84,7 +84,7 @@ class PaymentController extends Controller
             ]);
             $array = json_decode($res->getBody()->getContents());
 
-            $image = $array->image->file->resource->chain->image;
+            $image = $array->image->file->resource->chain->bukti;
         }
         $payment = Payment::create([
             'order_id' => $order->id,
@@ -98,9 +98,8 @@ class PaymentController extends Controller
         $order->update();
         try {
             $order->save();
-
-
-            return $this->sendResponse('Success', 'konfirmasi transfer berhasil',compact('payment','order') , 200);
+            $payment->save();
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil',compact('payment','order')  , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
