@@ -72,7 +72,7 @@ class PaymentController extends Controller
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
             // $request->image->move(public_path('img'), $image);
 
-            $img = base64_encode(file_get_contents($request->image));
+            $img = base64_encode(file_get_contents($request->bukti));
             $client = new Client();
             $res = $client->Request('POST', 'https://freeimage.host/api/1/upload', [
                 'form_params' => [
