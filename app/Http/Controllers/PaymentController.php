@@ -68,7 +68,7 @@ class PaymentController extends Controller
         }
         
 
-        if ($request->image) {
+        if ($request->bukti) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
             // $request->image->move(public_path('img'), $image);
 
