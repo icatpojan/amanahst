@@ -112,7 +112,7 @@ class PaymentController extends Controller
         // $product =Product::where('customer_id', Auth::user()->id)->get();
         // $Order_detail= OrderDetail::where('product_id', $product->id)->where('order_id', $order->id)->first();
         // $Order = OrderDetail::with(['product'])->where('customer_id', Auth::user()->id)->where('Customer_id', )->get();
-        $Order = OrderDetail::with(['product:id,name,customer_id', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id);
         })
 
