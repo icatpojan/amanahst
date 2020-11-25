@@ -98,7 +98,7 @@ class PaymentController extends Controller
         $order->update();
         try {
             $order->save();
-            return $this->sendResponse('Success', 'konfirmasi transfer berhasil',compact('payment','order')  , 200);
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
