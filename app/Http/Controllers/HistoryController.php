@@ -21,7 +21,7 @@ class HistoryController extends Controller
     public function detail($id)
     {
         $order = Order::where('id', $id)->first();
-        $order_details = OrderDetail::where('order_id', $order->id)->get();
+        $order_details = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->where('order_id', $order->id)->get();
 
         //  return view('history.detail', compact('order','order_details'));
         return $this->sendResponse('Success', 'detail pesanan anda pak ekos', $order_details, 500);
@@ -43,6 +43,5 @@ class HistoryController extends Controller
         $order_detail->status = 3;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda terima', null, 200);
-        
     }
 }
