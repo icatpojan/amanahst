@@ -82,3 +82,11 @@ Route::get('klien', 'HistoryController@klien')->middleware('jwt.verify');
 //ini buat ngambil data orderan yang ngorder barang kita
 Route::post('accept/{id}', 'HistoryController@accept')->middleware('jwt.verify');
 //ini buat pembeli kalo udah nerima barang
+
+
+
+// message
+Route::get('/message/{id}', 'MessageController@getMessage')->name('message')->middleware('jwt.verify');
+// buat nge get pesan
+Route::post('message', 'MessageController@sendMessage')->middleware('jwt.verify');
+// buat ngirim pesan

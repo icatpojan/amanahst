@@ -11,21 +11,7 @@ use Pusher\Pusher;
 
 class MessageController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         // select all users except logged in user
@@ -37,28 +23,36 @@ class MessageController extends Controller
         where users.id != " . Auth::id() . " 
         group by users.id, users.name, users.avatar, users.email");
 
-        return view('home', ['users' => $users]);
+        // return view('home', ['users' => $users]);
+        return response()->json([
+            $users
+        ]);
     }
 
     public function getMessage($user_id)
     {
         $my_id = Auth::id();
 
-        // Make read all unread message
+        // update status terbaca dari user yang mengirim pesan
         Message::where(['from' => $user_id, 'to' => $my_id])->update(['is_read' => 1]);
 
-        // Get all message from selected user
+        // ambil pesanya dari user yang di select
         $messages = Message::where(function ($query) use ($user_id, $my_id) {
             $query->where('from', $user_id)->where('to', $my_id);
         })->oRwhere(function ($query) use ($user_id, $my_id) {
             $query->where('from', $my_id)->where('to', $user_id);
         })->get();
 
-        return view('messages.index', ['messages' => $messages]);
+        // return view('messages.index', ['messages' => $messages]);
+        return response()->json([
+            $messages
+        ]);
     }
 
     public function sendMessage(Request $request)
     {
+        //fromnya dari id yang lagi login
+        // to nya sesuai dengan request
         $from = Auth::id();
         $to = $request->receiver_id;
         $message = $request->message;
@@ -67,7 +61,8 @@ class MessageController extends Controller
         $data->from = $from;
         $data->to = $to;
         $data->message = $message;
-        $data->is_read = 0; // message will be unread when sending message
+        $data->is_read = 0; 
+        // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
 
         // pusher
@@ -83,7 +78,8 @@ class MessageController extends Controller
             $options
         );
 
-        $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+        $data = ['from' => $from, 'to' => $to]; 
+        // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 }

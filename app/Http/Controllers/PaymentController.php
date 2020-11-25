@@ -122,7 +122,7 @@ class PaymentController extends Controller
 
         // $Order_details = Order::where('customer_id', Auth::user()->id)
         //                 ->
-        // ->get();
+        // ->get();Order
 
 
         $Order_detail = OrderDetailResource::collection(OrderDetail::all());
@@ -152,6 +152,7 @@ class PaymentController extends Controller
     }
     public function send($id)
     {
+        
         $order_detail = OrderDetail::find($id);
         $order_detail->status = 2;
         $order_detail->update();
