@@ -94,6 +94,7 @@ class PaymentController extends Controller
             'amount' => $request->amount,
             'bukti' => $image,
         ]);
+        
         $order->status = 2;
         $order->update();
         try {
