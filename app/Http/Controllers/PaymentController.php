@@ -84,7 +84,7 @@ class PaymentController extends Controller
             ]);
             $array = json_decode($res->getBody()->getContents());
 
-            $image = $array->image->file->resource->chain->bukti;
+            $image = $array->image->file->resource->chain->image;
         }
         $payment = Payment::create([
             'order_id' => $order->id,
@@ -98,7 +98,6 @@ class PaymentController extends Controller
         $order->update();
         try {
             $order->save();
-            $payment->save();
             return $this->sendResponse('Success', 'konfirmasi transfer berhasil',compact('payment','order')  , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
