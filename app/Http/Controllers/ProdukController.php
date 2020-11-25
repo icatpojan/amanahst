@@ -38,7 +38,6 @@ class ProdukController extends Controller
         if ($validator->fails()) {
             return response($validator->errors());
         }
-        $image = null;
 
         if ($request->image) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();

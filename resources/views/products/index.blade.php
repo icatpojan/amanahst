@@ -62,7 +62,7 @@
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
                                         @forelse ($Products as $row)
-                                        <b style="color: black">{{ $row->image }}</b>
+                                        <b style="color: white">{{ $row->image }}</b>
                                         
                                         <tr>
                                             <td>

@@ -71,7 +71,7 @@
                                                     <td><strong>{{ $row->name }}</strong><br>
                                                     <td>{{ $row->nomor_telpon }}</td>
                                                     <td>{{ $row->alamat }}</td>
-                                                    <td>{{ $row->image }}</td>
+                                                    <td>   <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}"></td>
                                                     <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                                     <td>
                                                         <form action="{{ route('transaksi.destroy', $row->id) }}" method="post">
