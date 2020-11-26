@@ -147,10 +147,10 @@ class PaymentController extends Controller
     }
     public function send($id)
     {
-        $payment = Payment::where('order_id', $id)->get();
+        // $payment = Payment::where('order_id', $id)->get();
         $order_detail = OrderDetail::find($id);
-        $payment->status = 2;
-        $payment->update();
+        // $payment->status = 2;
+        // $payment->update();
         $order_detail->status = 2;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
