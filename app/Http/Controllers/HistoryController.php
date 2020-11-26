@@ -24,7 +24,7 @@ class HistoryController extends Controller
         $order_details = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->where('order_id', $order->id)->get();
 
         //  return view('history.detail', compact('order','order_details'));
-        return $this->sendResponse('Success', 'detail pesanan anda pak ekos', $order_details, 500);
+        return $this->sendResponse('Success', 'detail pesanan anda pak ekos', $order_details, 200);
     }
     public function klien()
     {
