@@ -17,6 +17,12 @@ class UserController extends Controller
         $Order_details = [];
         return view('pembeli.index', compact('User'));
     }
+    public function indexes()
+    {
+        $User = User::all();
+        $Order_details = [];
+        return $this->sendResponse('succes', 'ini dia data category', $User, 500);
+    }
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
