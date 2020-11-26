@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldSocialiteToUsersTable extends Migration
+class AddSocialiteToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,6 @@ class AddFieldSocialiteToUsersTable extends Migration
             $table->string('socialite_id')->nullable()->after('id');
             $table->string('socialite_name')->nullable()->after('socialite_id');
             $table->string('photo')->nullable()->after('socialite_name');
-            $table->string('password')->nullable()->change();
         });
     }
 

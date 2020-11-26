@@ -19,8 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
-
+Route::get('redirect/{driver}', 'UserController@redirectToProvider');
+Route::get('{driver}/callback', 'UserController@handleProviderCallback');
 // Route::resource('product', 'ProductController')->middleware('jwt.verify');
+
 // ini buat public
 Route::get('product', 'ProductController@index');
 // ini buat ngambil semua

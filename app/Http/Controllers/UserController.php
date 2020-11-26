@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Socialite;
 
 class UserController extends Controller
 {
+
+
     public function index()
     {
         $User = User::all();
@@ -80,5 +82,31 @@ class UserController extends Controller
         }
 
         return response()->json(compact('user'));
+    }
+
+    public function redirectToProvider($driver)
+    {
+        return Socialite::driver($driver)->redirect();
+    }
+    public function handleProviderCallback($driver)
+    {
+        try {
+            $user = Socialite::driver($driver)->user();
+
+            $create = User::firstOrCreate([
+                'email' => $user->getEmail()
+            ], [
+                'socialite_name' => $driver,
+                'socialite_id' => $user->getId(),
+                'name' => $user->getName(),
+                'photo' => $user->getAvatar(),
+                'email_verified_at' => now()
+            ]);
+
+            auth()->login($create, true);
+            return redirect($this->redirectPath());
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
     }
 }
