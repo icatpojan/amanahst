@@ -24,9 +24,9 @@ class Product extends Model
     {
         $this->attributes['slug'] = Str::slug($value);
     }
-    public function customer()
+    public function user()
     {
-        return $this->belongsTo(customer::class);
+        return $this->belongsTo('App\User','customer_id', 'id');
     }
     public function order()
     {
