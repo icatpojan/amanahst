@@ -18,13 +18,7 @@ use GuzzleHttp\Client;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
-        $order_detail = OrderDetail::all();
-        $order = Order::all();
-        if ($order_detail->status = 1) {
-        }
-    }
+    
     public function paymentForm()
     {
 
