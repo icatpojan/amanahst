@@ -18,7 +18,13 @@ use GuzzleHttp\Client;
 
 class PaymentController extends Controller
 {
-    
+    public function __construct()
+    {
+        $order_detail = OrderDetail::all();
+        $order = Order::all();
+        if ($order_detail->status = 1) {
+        }
+    }
     public function paymentForm()
     {
 
@@ -60,7 +66,7 @@ class PaymentController extends Controller
         if ($order->jumlah_harga > $request->amount) {
             return $this->sendResponse('error', 'nominal kurang', null, 500);
         }
-
+        
         $image = null;
         if ($request->bukti) {
             // $image = $request->image->getClientOriginalName() . '-' . time() . '.' . $request->image->extension();
@@ -88,12 +94,12 @@ class PaymentController extends Controller
             'amount' => $request->amount,
             'bukti' => $image,
         ]);
-
+        
         $order->status = 2;
         $order->update();
         try {
             $order->save();
-            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order, 200);
+            return $this->sendResponse('Success', 'konfirmasi transfer berhasil', $order , 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menambah data', null, 500);
         }
@@ -147,10 +153,8 @@ class PaymentController extends Controller
     }
     public function send($id)
     {
+        
         $order_detail = OrderDetail::find($id);
-        // $payment = Payment::where('order_id', $id)->get();
-        // $payment->status = 2;
-        // $payment->update();
         $order_detail->status = 2;
         $order_detail->update();
         return $this->sendResponse('Success', 'barang sudah anda kirim', null, 200);
