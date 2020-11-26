@@ -31,6 +31,7 @@ Route::post('product/search', 'ProductController@search');
 Route::get('category', 'ProductController@category');
 //ngambil category
 // ini buat customer
+Route::get('user', 'UserController@indexes');
 
 
 //ini buat penjual

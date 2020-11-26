@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Message;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Pusher\Pusher;
+use Auth;
 
 class MessageController extends Controller
 {
