@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $User = User::all();
         $Order_details = [];
-        return $this->sendResponse('succes', 'ini dia data category', $User, 500);
+        return $this->sendResponse('succes', 'ini dia data user', $User, 500);
     }
     public function login(Request $request)
     {
