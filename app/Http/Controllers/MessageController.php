@@ -20,7 +20,7 @@ class MessageController extends Controller
 
         // count how many message are unread from the selected user
         $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON users.id = messages.from AND is_read = 0 AND messages.to = " . Auth::id() . "WHERE users.id != " . Auth::id() . " GROUP BY users.id, users.name, users.avatar, users.email");
-            // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
+        // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
 
         // return view('home', ['users' => $users]);
         return response()->json([
@@ -61,9 +61,12 @@ class MessageController extends Controller
         $data->from = $from;
         $data->to = $to;
         $data->message = $message;
-        $data->is_read = 0; 
+        $data->is_read = 0;
         // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
+        return response()->json([
+            $data
+        ]);
 
         // pusher
         $options = array(
@@ -78,11 +81,8 @@ class MessageController extends Controller
             $options
         );
 
-        $data = ['from' => $from, 'to' => $to]; 
+        $data = ['from' => $from, 'to' => $to];
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
-        return response()->json([
-            $data
-        ]);
     }
 }
