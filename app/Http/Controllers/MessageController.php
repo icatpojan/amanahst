@@ -23,9 +23,11 @@ class MessageController extends Controller
         from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
         where users.id != " . Auth::id() . " 
         group by users.id, users.name, users.avatar, users.email");
+            // $Message = Message::with(['user:id,name,image'])->where('from', 'Auth::user()->id' || 'to', 'Auth::user()->id')->get();
 
         // return view('home', ['users' => $users]);
         return response()->json([
+            // $Message
             $users
         ]);
     }
