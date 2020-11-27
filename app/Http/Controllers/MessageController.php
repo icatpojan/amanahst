@@ -47,7 +47,7 @@ class MessageController extends Controller
         //     ]);
         // }
         // return view('home', ['users' => $users]);
-        return $this->sendResponse('Success', 'ini dia pesanan anda pak eko', compact( 'Message','pesan'), 200);
+        return $this->sendResponse('Success', 'orang yang ngechat kamu', compact( 'Message','pesan'), 200);
         
         // return response()->json([
         //     $Message
