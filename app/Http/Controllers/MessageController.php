@@ -20,7 +20,7 @@ class MessageController extends Controller
 
         // count how many message are unread from the selected user
 
-        
+
         // $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread 
         // from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
         // where users.id != " . Auth::id() . " 
@@ -28,8 +28,8 @@ class MessageController extends Controller
 
 
 
-        // $my_id = Auth::user()->id;
-        // $user = User::all();
+        $my_id = Auth::user()->id;
+        $user = User::all();
         // $contact = User::whereHas('message', function ($query) use ($my_id, $user) {
         //     $query->where('from', $my_id)->where('to', $user);
         // })->get();
