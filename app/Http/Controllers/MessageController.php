@@ -30,8 +30,6 @@ class MessageController extends Controller
         $user = User::all();
         $contact = User::whereHas('message', function ($query) use ($my_id, $user) {
             $query->where('from', $my_id)->where('to', $user);
-        })->orWhere('message', function ($query) use ($my_id, $user) {
-            $query->where('from', $user)->where('to', $my_id);
         })->get();
         // dd($my_id);
         // $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE messages.from = " . $my_id . " AND messages.to = " . $my_id . " GROUP BY users.id, users.name, users.email");
