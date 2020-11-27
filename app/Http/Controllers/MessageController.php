@@ -19,6 +19,8 @@ class MessageController extends Controller
         // $users = User::where('id', '!=', Auth::id())->get();
 
         // count how many message are unread from the selected user
+
+        
         // $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread 
         // from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
         // where users.id != " . Auth::id() . " 
@@ -32,17 +34,22 @@ class MessageController extends Controller
         //     $query->where('from', $my_id)->where('to', $user);
         // })->get();
         // dd($my_id);
-        // $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE messages.from = " . $my_id . " AND messages.to = " . $my_id . " GROUP BY users.id, users.name, users.email");
-        $Message = Message::with(['user:id,name,image', 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
-        if (empty($Message)) {
-            return response()->json([
-                'anjim'
-            ]);
-        }
+
+
+        $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE messages.from = " . $my_id . " AND messages.to = " . $my_id . " GROUP BY users.id, users.name, users.email");
+        
+        
+        // $Message = Message::with(['user:id,name,image', 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
+        // if (empty($Message)) {
+        //     return response()->json([
+        //         'anjim'
+        //     ]);
+        // }
         // return view('home', ['users' => $users]);
         return response()->json([
-            $Message
+            // $Message
             // $contact
+            $users
         ]);
     }
 
