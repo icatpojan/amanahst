@@ -44,7 +44,7 @@ class MessageController extends Controller
         // return view('home', ['users' => $users]);
         return response()->json([
             // $Message
-            $users
+            $contact
         ]);
     }
 
