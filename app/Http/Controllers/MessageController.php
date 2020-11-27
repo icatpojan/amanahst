@@ -36,10 +36,10 @@ class MessageController extends Controller
         // dd($my_id);
 
 
-        $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
+        // $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
 
 
-        // $Message = Message::with(['user:id,name,image', 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
+        $Message = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
         // if (empty($Message)) {
         //     return response()->json([
         //         'anjim'
@@ -47,9 +47,9 @@ class MessageController extends Controller
         // }
         // return view('home', ['users' => $users]);
         return response()->json([
-            // $Message
+            $Message
             // $contact
-            $users
+            // $users
         ]);
     }
 
