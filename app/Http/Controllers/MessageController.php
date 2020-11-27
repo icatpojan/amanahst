@@ -81,5 +81,8 @@ class MessageController extends Controller
         $data = ['from' => $from, 'to' => $to]; 
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
+        return response()->json([
+            $data
+        ]);
     }
 }
