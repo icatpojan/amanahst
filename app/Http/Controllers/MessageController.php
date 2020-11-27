@@ -40,7 +40,7 @@ class MessageController extends Controller
             return response()->json([
                 'anjim'
             ]);
-        // }
+        }
         // return view('home', ['users' => $users]);
         return response()->json([
             // $Message
