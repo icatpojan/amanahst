@@ -19,5 +19,4 @@ class Customer extends Authenticatable
     {
          return $this->hasMany('App\Order','customer_id', 'id');
     }
-    
 }
