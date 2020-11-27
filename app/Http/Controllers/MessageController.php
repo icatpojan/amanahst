@@ -19,18 +19,18 @@ class MessageController extends Controller
         // $users = User::where('id', '!=', Auth::id())->get();
 
         // count how many message are unread from the selected user
-        // $my_id= Auth::user()->id;
-        // $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . "WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.avatar, users.email");
-        $Message = Message::with(['user:id,name,image' , 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
-if ($Message->isEmpty()) {
-    return response()->json([
-   'anjim'
-        ]);
-}
+        $my_id= Auth::user()->id;
+        $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.avatar, users.email");
+        // $Message = Message::with(['user:id,name,image', 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
+        // if ($Message->isEmpty()) {
+        //     return response()->json([
+        //         'anjim'
+        //     ]);
+        // }
         // return view('home', ['users' => $users]);
         return response()->json([
-            $Message
-            // $users
+            // $Message
+            $users
         ]);
     }
 
@@ -69,20 +69,20 @@ if ($Message->isEmpty()) {
         $data->is_read = 0;
         // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
-        
+
         // pusher
         $options = array(
             'cluster' => 'ap2',
             'useTLS' => true
         );
-        
+
         $pusher = new Pusher(
             env('PUSHER_APP_KEY'),
             env('PUSHER_APP_SECRET'),
             env('PUSHER_APP_ID'),
             $options
         );
-        
+
         $data = ['from' => $from, 'to' => $to];
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
