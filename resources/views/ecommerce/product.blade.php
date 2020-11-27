@@ -39,9 +39,7 @@
                             <option value="4">Show 16</option>
                         </select>
                     </div>
-                    <div class="right_page ml-auto">
-                        {{ $products->links() }}
-                    </div>
+                
                 </div>
                 <div class="latest_product_inner row">
 
@@ -111,9 +109,7 @@
         </div>
 
         <!-- GENERATE PAGINATION PRODUK -->
-        <div class="row">
-            {{ $products->links() }}
-        </div>
+       
     </div>
 </section>
 <!--================End Category Product Area =================-->

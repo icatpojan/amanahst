@@ -53,10 +53,12 @@ Route::group(['prefix' => 'member', 'namespace' => 'Ecommerce'], function () {
 Route::get('/product/ref/{user}/{product}', 'Ecommerce\FrontController@referalProduct')->name('front.afiliasi');
 
 Route::resource('product', 'ProductController')->except(['show']); //BAGIAN INI KITA TAMBAHKAN EXCETP KARENA METHOD SHOW TIDAK DIGUNAKAN
-Route::get('/product/bulk', 'ProductController@massUploadForm')->name('product.bulk'); //TAMBAHKAN ROUTE INI
+Route::get('/produk/bulk', 'ProdukController@massUploadForm')->name('product.bulk'); //TAMBAHKAN ROUTE INI
 Route::post('/product/bulk', 'ProductController@massUpload')->name('product.saveBulk');
+
 Route::get('/', 'Ecommerce\FrontController@index')->name('front.index');
 Route::get('/product', 'Ecommerce\FrontController@product')->name('front.product');
+
 Route::get('/category/{slug}', 'Ecommerce\FrontController@categoryProduct')->name('front.category');
 Route::get('/product/{slug}', 'Ecommerce\FrontController@show')->name('front.show_product');
 Route::post('cart', 'Ecommerce\CartController@addToCart')->name('front.cart');

@@ -25,6 +25,7 @@
                         </div>
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
+                            <a href="{{ route('produck.bulk') }}" class="btn btn-danger btn-sm">Mass Upload</a>
                             @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                             @endif

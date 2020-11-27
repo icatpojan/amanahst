@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::get('redirect/{driver}', 'UserController@redirectToProvider');
+// buat ngehandle redirect ke platform yang di tuju
 Route::get('{driver}/callback', 'UserController@handleProviderCallback');
+//mengambil email, id dan foto dari akun google
 // Route::resource('product', 'ProductController')->middleware('jwt.verify');
 
 // ini buat public
@@ -89,6 +91,8 @@ Route::post('accept/{id}', 'HistoryController@accept')->middleware('jwt.verify')
 
 
 // message
+Route::get('/allmessage', 'MessageController@index')->name('home');
+//ambil semua pesan
 Route::get('/message/{id}', 'MessageController@getMessage')->name('message')->middleware('jwt.verify');
 // buat nge get pesan
 Route::post('message', 'MessageController@sendMessage')->middleware('jwt.verify');
