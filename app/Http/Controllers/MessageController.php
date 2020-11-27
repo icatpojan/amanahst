@@ -28,7 +28,7 @@ class MessageController extends Controller
 
         $my_id = Auth::user()->id;
         // dd($my_id);
-        $users = DB::select("select users.id, users.name, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND  is_read = 0 AND messages.to = " . $my_id . " WHERE messages.from = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
+        $users = DB::select("select users.id, users.name, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE messages.from = " . $my_id . " GROUP BY users.id, users.name, users.email");
         // $Message = Message::with(['user:id,name,image', 'pesan:id,name,image'])->where('from', Auth::user()->id)->where('to', Auth::user()->id)->get();
         // if ($Message->isEmpty()) {
         //     return response()->json([
