@@ -19,7 +19,7 @@ class MessageController extends Controller
         // $users = User::where('id', '!=', Auth::id())->get();
 
         // count how many message are unread from the selected user
-        $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON users.id = messages.from AND is_read = 0 AND messages.to = " . Auth::id() . "WHERE users.id != " . Auth::id() . " GROUP BY users.id, users.name, users.avatar, users.email");
+        $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . Auth::id() . " = messages.from AND is_read = 0 AND messages.to = " . Auth::id() . "WHERE users.id != " . Auth::id() . " GROUP BY users.id, users.name, users.avatar, users.email");
         // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
 
         // return view('home', ['users' => $users]);
@@ -64,23 +64,20 @@ class MessageController extends Controller
         $data->is_read = 0;
         // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
-        return response()->json([
-            $data
-        ]);
-
+        
         // pusher
         $options = array(
             'cluster' => 'ap2',
             'useTLS' => true
         );
-
+        
         $pusher = new Pusher(
             env('PUSHER_APP_KEY'),
             env('PUSHER_APP_SECRET'),
             env('PUSHER_APP_ID'),
             $options
         );
-
+        
         $data = ['from' => $from, 'to' => $to];
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
