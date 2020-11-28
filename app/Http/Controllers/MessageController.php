@@ -28,7 +28,7 @@ class MessageController extends Controller
 
 
 
-        $my_id = Auth::user()->id;
+        // $my_id = Auth::user()->id;
         // $user = User::all();
         // $contact = User::whereHas('message', function ($query) use ($my_id, $user) {
         //     $query->where('from', $my_id)->where('to', $user);
@@ -40,15 +40,15 @@ class MessageController extends Controller
 
         // $Message = Message::all();
         $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
-        $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
+        $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->first();
         // if (empty($Message)) {
         //     return response()->json([
         //         'anjim'
         //     ]);
         // }
         // return view('home', ['users' => $users]);
-        return $this->sendResponse('Success', 'orang yang ngechat kamu', compact( 'Message','pesan'), 200);
-        
+        return $this->sendResponse('Success', 'orang yang ngechat kamu', compact('Message', 'pesan'), 200);
+
         // return response()->json([
         //     $Message
         //     // $contact

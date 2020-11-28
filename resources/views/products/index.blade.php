@@ -25,7 +25,6 @@
                         </div>
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
-                            <a href="{{ route('produck.bulk') }}" class="btn btn-danger btn-sm">Mass Upload</a>
                             @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
@@ -85,8 +84,8 @@
                                                 <form action="{{ route('produk.destroy', $row->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-outline-warning btn-sm">Edit</a>
-                                                    <button class="btn btn-outline-danger btn-sm">Hapus</button>
+                                                    <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                    <button class="btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>

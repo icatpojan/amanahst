@@ -1,9 +1,9 @@
 <ul class="nav navbar-nav center_nav pull-right">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('front.index') }}">Home</a>
+        <a class="nav-link" href=#>Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('front.product') }}">Produk</a>
+        <a class="nav-link" href=#>Produk</a>
     </li>
     {{-- <li class="nav-item submenu dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -14,6 +14,6 @@
         </ul>
     </li> --}}
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href=#>Contact</a>
     </li>
 </ul>

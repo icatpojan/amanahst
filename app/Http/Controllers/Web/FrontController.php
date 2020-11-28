@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Ecommerce;
+namespace App\Http\Controllers\Web;
 
 use App\Customer;
 use App\Http\Controllers\Controller;

@@ -48,20 +48,10 @@
 					<p>kontak Kami: 0856 0026 7104</p>
 				</div>
 				<div class="float-right">
-					<!-- ni buat masuk ke halaman admin
 						<ul class="right_side">
-						<li><a href="login">Login/Register</a></li>
+						<li><a href="#">Login/Register</a></li>
 						<li><a href="#">My Account</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
-					</ul> -->
-					<ul class="right_side">
-						{{-- @if (auth()->guard('customer')->check())
-						<li><a href="{{ route('customer.logout') }}">Logout</a></li>
-						@else
-						<li><a href="{{ route('customer.login') }}">Login</a></li>
-						@endif --}}
-						<li><a href="{{ route('customer.dashboard') }}">My Account</a></li>
-						<li><a href="contact.html">Contact Us</a></li>
+						<li><a href=#>Contact Us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -107,7 +97,7 @@
 									</li>
 									<hr>
 									<li class="nav-item">
-										<a href="{{ route('front.list_cart') }}" class="icons">
+										<a href=# class="icons">
 											<i class="lnr lnr lnr-cart"></i>
 										</a>
 									</li>

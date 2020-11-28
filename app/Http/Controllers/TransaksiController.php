@@ -20,7 +20,6 @@ class TransaksiController extends Controller
 
         $Order = Order::all();
         $Order_details = [];
-
         return view('transaksi.index', compact('Order'));
     }
 

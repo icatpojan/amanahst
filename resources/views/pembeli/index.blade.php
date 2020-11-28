@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">
-                                    Daftar Pesanan
+                                    Daftar User
                                 </h4>
                             </div>
                             <div class="card-body">
@@ -28,7 +28,7 @@
                                 @if (session('error'))
                                     <div class="alert alert-danger">{{ session('error') }}</div>
                                 @endif
-
+                                <a href="{{ route('register') }}" class="btn btn-primary btn-sm float-right">Tambah Admin</a>
                                 <!-- FORM UNTUK FILTER DAN PENCARIAN -->
                                 <form action="{{ route('transaksi.index') }}" method="get">
                                     <div class="input-group mb-3 col-md-6 float-right">
@@ -60,6 +60,7 @@
                                                 <th>alamat</th>
                                                 <th>foto</th>
                                                 <th>Tanggal</th>
+                                                <th>kode</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -73,6 +74,7 @@
                                                     <td>{{ $row->alamat }}</td>
                                                     <td>   <img src="{{ $row->image }}" width="100px" height="100px" alt="{{ $row->name }}"></td>
                                                     <td>{{ $row->created_at->format('d-m-Y') }}</td>
+                                                    <td>{{ $row->kode }}</td>
                                                     <td>
                                                         <form action="{{ route('transaksi.destroy', $row->id) }}" method="post">
                                                             @csrf
@@ -81,7 +83,7 @@
                                                                 href="{{ route('transaksi.view', $row->invoice) }}"
                                                                 class="btn btn-warning btn-sm">Lihat</a>
                                                             --}}
-                                                            <button class="btn btn-outline-danger btn-sm">black list</button>
+                                                            <button class="btn btn-danger btn-sm">black list</button>
                                                         </form>
                                                     </td>
 

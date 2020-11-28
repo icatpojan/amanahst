@@ -20,13 +20,8 @@
                                         <i class="icon-user"></i>
                                     </span>
                                 </div>
-                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" 
-                                    type="text" 
-                                    name="email"
-                                    placeholder="Email Address" 
-                                    value="{{ old('email') }}" 
-                                    autofocus 
-                                    required>
+                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="text"
+                                    name="email" placeholder="Email Address" value="{{ old('email') }}" autofocus required>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -34,19 +29,25 @@
                                         <i class="icon-lock"></i>
                                     </span>
                                 </div>
-                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" 
-                                    type="password" 
-                                    name="password"
-                                    placeholder="Password" 
-                                    required>
+                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="password"
+                                    name="password" placeholder="Password" required>
+                            </div>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="password"
+                                    name="kode" placeholder="password admin" required>
                             </div>
                             <div class="row">
                                 @if (session('error'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ session('error') }}
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('error') }}
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
 
                                 <div class="col-6">
@@ -61,7 +62,7 @@
                 </div>
                 <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
                     <div class="card-body text-center">
-                        
+
                     </div>
                 </div>
             </div>
