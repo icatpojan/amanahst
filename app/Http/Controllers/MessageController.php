@@ -36,7 +36,7 @@ class MessageController extends Controller
         // dd($my_id);
 
 
-        $users = DB::select("SELECT DiSTINCT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
+        $users = DB::select("SELECT DISTINCT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users INNER  JOIN  messages ON users.id = messages.from AND is_read = 0 AND messages.to = users.id WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
 
         // $Message = Message::all();
         // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
