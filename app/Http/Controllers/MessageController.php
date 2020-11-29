@@ -28,7 +28,7 @@ class MessageController extends Controller
 
 
 
-        // $my_id = Auth::user()->id;
+        $my_id = Auth::user()->id;
         // $user = User::all();
         // $contact = User::whereHas('message', function ($query) use ($my_id, $user) {
         //     $query->where('from', $my_id)->where('to', $user);
@@ -36,24 +36,24 @@ class MessageController extends Controller
         // dd($my_id);
 
 
-        // $users = DB::select("SELECT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
+        $users = DB::select("SELECT  users.id, users.name, users.image, users.email, count(is_read) as unread FROM users LEFT  JOIN  messages ON " . $my_id ." = messages.from AND is_read = 0 AND messages.to = " . $my_id . " WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email");
 
         // $Message = Message::all();
-        $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
-        $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
+        // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
+        // $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
         // if (empty($Message)) {
         //     return response()->json([
         //         'anjim'
         //     ]);
         // }
         // return view('home', ['users' => $users]);
-        return $this->sendResponse('Success', 'orang yang ngechat kamu', compact('Message', 'pesan'), 200);
+        // return $this->sendResponse('Success', 'orang yang ngechat kamu', compact('Message', 'pesan'), 200);
 
-        // return response()->json([
-        //     $Message
-        //     // $contact
-        //     // $users
-        // ]);
+        return response()->json([
+            // $Message
+            // $contact
+            $users
+        ]);
     }
 
     public function getMessage($user_id)
