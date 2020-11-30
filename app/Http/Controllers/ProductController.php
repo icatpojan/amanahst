@@ -143,7 +143,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = product::find($id);
+        $product = product::find($id)->with(['user']);
         if (!$product) {
 
             return $this->sendResponse('Error', 'Gagal mengambil data', null, 500);
