@@ -140,7 +140,7 @@ class ProdukController extends Controller
     {
 
         $search = $request->get('search');
-        $product = Product::where('name', 'like', "%{$search}%")->get();
+        $product = Product::where('name', 'LIKE', "%{$search}%")->get();
         if (!$product) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
