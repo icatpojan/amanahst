@@ -28,7 +28,6 @@ class MessageController extends Controller
 
 
 
-        $my_id = Auth::user()->id;
         // $user = User::all();
         // $contact = User::whereHas('message', function ($query) use ($my_id, $user) {
         //     $query->where('from', $my_id)->where('to', $user);
@@ -48,28 +47,30 @@ class MessageController extends Controller
         // }
         // return view('home', ['users' => $users]);
         // return $this->sendResponse('Success', 'orang yang ngechat kamu', compact('Message', 'pesan'), 200);
+        
+        $my_id = Auth::user()->id;
 
-$from =User::select('users.id','users.name','users.image')->distinct()
-->join('messages','users.id','=','messages.to')
-->where('users.id', '!=', $my_id)
-->where('messages.from', '=', $my_id)->get()->toArray();
+        $from = User::select('users.id', 'users.name', 'users.image')->distinct()
+            ->join('messages', 'users.id', '=', 'messages.to')
+            ->where('users.id', '!=', $my_id)
+            ->where('messages.from', '=', $my_id)->get()->toArray();
 
-$to =User::select('users.id','users.name','users.image')->distinct()
-->join('messages','users.id','=','messages.from')
-->where('users.id', '!=', $my_id)
-->where('messages.to', '=', $my_id)->get()->toArray();
+        $to = User::select('users.id', 'users.name', 'users.image')->distinct()
+            ->join('messages', 'users.id', '=', 'messages.from')
+            ->where('users.id', '!=', $my_id)
+            ->where('messages.to', '=', $my_id)->get()->toArray();
 
-$data= array_unique(array_merge($from ,$to),SORT_REGULAR);
-$users = array_values($data);
+        $data = array_unique(array_merge($from, $to), SORT_REGULAR);
+        $users = array_values($data);
 
-return $this->sendResponse('Success', 'kontak dong', $users, 200);
- 
+        return $this->sendResponse('Success', 'kontak dong', $users, 200);
 
-        // return response()->json([
-        //     // $Message
-        //     // $contact
-        //     $users
-        // ]);
+
+        return response()->json([
+            // $Message
+            // $contact
+            $users
+        ]);
     }
 
     public function getMessage($user_id)
