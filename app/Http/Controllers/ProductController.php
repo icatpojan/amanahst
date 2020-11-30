@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 // use Illuminate\Support\Facades\Auth;
 use Auth;
 use App\Category;
+use App\komentar;
 use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Str;
@@ -24,7 +25,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $product = Product::with(['category', 'user:id,name,alamat,image'])->orderBy('created_at', 'DESC');
+        $product = Product::with(['category', 'user:id,name,alamat,image'])->where('stock'> 0)->orderBy('created_at', 'DESC');
 
         if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
@@ -143,12 +144,13 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = product::with(['user'])->find($id);
+        $product = Product::with(['user'])->find($id);
+        $komentar = komentar::with(['user'])->where('product_id', $id);
         if (!$product) {
 
             return $this->sendResponse('Error', 'Gagal mengambil data', null, 500);
         }
-        return $this->sendResponse('Success', 'Berhasil mengambil data', $product, 200);
+        return $this->sendResponse('Success', 'Berhasil mengambil data',compact('product','komentar'), 200);
     }
     public function update(Request $request, $id)
     {

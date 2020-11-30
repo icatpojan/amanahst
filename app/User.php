@@ -53,4 +53,8 @@ class User extends Authenticatable implements JWTSubject
     {
          return $this->hasMany('App\Message', 'to', 'id');
     }
+    public function komentar() 
+    {
+         return $this->hasMany('App\Komentar', 'to', 'id');
+    }
 }

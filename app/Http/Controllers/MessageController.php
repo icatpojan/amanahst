@@ -47,7 +47,7 @@ class MessageController extends Controller
         // }
         // return view('home', ['users' => $users]);
         // return $this->sendResponse('Success', 'orang yang ngechat kamu', compact('Message', 'pesan'), 200);
-        
+
         $my_id = Auth::user()->id;
 
         $from = User::select('users.id', 'users.name', 'users.image')->distinct()
@@ -65,12 +65,11 @@ class MessageController extends Controller
 
         return $this->sendResponse('Success', 'kontak dong', $users, 200);
 
-
-        return response()->json([
-            // $Message
-            // $contact
-            $users
-        ]);
+        // return response()->json([
+        //     // $Message
+        //     // $contact
+        //     $users
+        // ]);
     }
 
     public function getMessage($user_id)

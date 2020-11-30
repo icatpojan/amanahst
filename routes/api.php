@@ -54,6 +54,8 @@ Route::delete('product/{product} ', 'ProductController@destroy')->middleware('jw
 //ini buat pembeli
 Route::get('order/{id}', 'OrderController@index')->middleware('jwt.verify');
 //ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
+Route::get('komentar/{id}', 'KomentarController@komentar')->middleware('jwt.verify');
+//ini masuk kehalaman detail produk cuman didalemnya ada frm input jumlah pesanan
 Route::post('order/{id}', 'OrderController@order')->middleware('jwt.verify');
 //ini buat nambah ke keranjang
 Route::get('check-out', 'OrderController@check_out')->middleware('jwt.verify');

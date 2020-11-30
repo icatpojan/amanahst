@@ -32,6 +32,10 @@ class Product extends Model
     {
         return $this->hasMany(Order::class);
     }
+    public function komentar()
+    {
+        return $this->hasMany(komentar::class);
+    }
     public function orderdetail()
     {
         return $this->hasMany(OrderDetail::class);

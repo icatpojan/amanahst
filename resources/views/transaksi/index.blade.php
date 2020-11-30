@@ -21,6 +21,15 @@
                                 </h4>
                             </div>
                             <div class="card-body">
+                                <form action="#" method="get">
+                                    <div class="input-group mb-3 col-md-4 float-right">
+                                        <input type="text" id="created_at" name="date" class="form-control">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="submit">Filter</button>
+                                        </div>
+                                        <a target="_blank" class="btn btn-primary ml-2" id="exportpdf">Export PDF</a>
+                                    </div>
+                                </form>
                                 @if (session('success'))
                                     <div class="alert alert-success">{{ session('success') }}</div>
                                 @endif
@@ -85,9 +94,7 @@
                                                         <form action="{{ route('transaksi.destroy', $row->id) }}" method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a
-                                                                href="#"
-                                                                class="btn btn-warning mb-1">Lihat</a>
+                                                            <a href="#" class="btn btn-warning mb-1">Lihat</a>
                                                             <button class="btn btn-danger btn-sm">Hapus</button>
                                                         </form>
                                                     </td>
