@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
 
         $search = $request->get('search');
-        $product = Product::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%'])->orWhereRaw('LOWER(description) LIKE ?', ['%' . strtolower($search) . '%'])->get();
+        $product = Product::with(['user'])->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%'])->orWhereRaw('LOWER(description) LIKE ?', ['%' . strtolower($search) . '%'])->get();
         if (($product)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
