@@ -15,6 +15,32 @@ class MessageController extends Controller
 
     public function index()
     {
+        $field = ['id', 'name', 'email'];
+        $id = auth()->user()->id;
+        if ($query === 'all') {
+            $users = Message::with(['userFrom', 'userTo'])
+                ->where('messages.to_id', $id)
+                ->orWhere('messages.from_id', $id)
+                ->latest();
+            $keys = [];
+            foreach ($users->get() as $key => $user) {
+                if ($user->userFrom->id == $id) {
+                    $keys[$key] = $user->userTo->id;
+                } else {
+                    $keys[$key] = $user->userFrom->id;
+                }
+            }
+            $keys = array_unique($keys);
+            $ids = implode(',', $keys);
+            $users = User::whereIn('id', $keys);
+            if (!empty($key)) {
+                $users = $users->orderByRaw(DB::raw("FIELD(id, $ids)"));
+            }
+        } else {
+            $users = User::where('name', 'like', "%{$query}%")->where('id', '!=', $id);
+        }
+        $users = UserResource::collection($users->get($field));
+        return response()->json($users);
         // select all users except logged in user
         // $users = User::where('id', '!=', Auth::id())->get();
 
@@ -39,8 +65,8 @@ class MessageController extends Controller
         $users = DB::select("SELECT DISTINCT users.id, users.name, users.image, users.email, count(is_read) as unread FROM users INNER  JOIN  messages ON users.id = messages.from OR is_read = 0 OR messages.to = users.id WHERE users.id != " . $my_id . " GROUP BY users.id, users.name, users.email ORDER BY name");
 
         // $Message = Message::all();
-        // $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
-        // $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
+        $Message = Message::with(['user:id,name,image'])->where('from', Auth::user()->id)->get();
+        $pesan = Message::with(['user:id,name,image'])->where('to', Auth::user()->id)->get();
         // if (empty($Message)) {
         //     return response()->json([
         //         'anjim'

@@ -139,7 +139,7 @@ class ProdukController extends Controller
     {
 
         $search = $request->get('search');
-        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(10);
+        $product = Product::find()->where('name', 'LIKE', '%' . $search . '%')->get();
         if (!$product) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
