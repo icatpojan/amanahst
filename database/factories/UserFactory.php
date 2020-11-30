@@ -39,5 +39,5 @@ $factory->define(Message::class, function (Faker $faker) {
         'to' => $to,
         'message' => $faker->sentence,
         'is_read' => $is_read
-    ];
+    ];  
 });
