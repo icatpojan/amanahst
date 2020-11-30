@@ -24,7 +24,7 @@ class ProfileController extends Controller
 	public function update(Request $request)
 	{
 		$this->validate($request, [
-			'password'  => 'confirmed',
+			'password'  => 'required|confirmed',
 		]);
 		// $user = User::find($id);
 		$image = null;
