@@ -43,8 +43,8 @@ class ProductController extends Controller
     {
 
         $search = $request->get('search');
-        $product = DB::table('products')->where('name', 'LIKE', '%' . $search . '%')->paginate(10);
-        if (!$product) {
+        $product = Product::where('name', 'LIKE', '%' . $search . '%')->orWhere('description', 'LIKE', '%' . $search . '%')->get();
+        if (($product)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
         }
@@ -59,7 +59,7 @@ class ProductController extends Controller
     public function ambilah()
     {
         $product = Product::where('customer_id', Auth::user()->id)->get();
-        if (empty($product)) {
+        if (($product)->isEmpty()) {
             return response()->json([
                 'anda belum menjual apapun'
             ]);
