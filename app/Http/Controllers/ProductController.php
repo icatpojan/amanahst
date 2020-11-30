@@ -34,6 +34,11 @@ class ProductController extends Controller
             $product
         ]);
     }
+    public function kategori($id)
+    {
+        $product = Product::where('category_id', $id)->orderBy('name', 'DESC')->get();
+        return $this->sendResponse('Success', 'INI DATA BERDASARKAN KATEGORI', $product, 200);
+    }
     public function search(Request $request)
     {
 

@@ -28,6 +28,8 @@ Route::get('{driver}/callback', 'UserController@handleProviderCallback');
 // ini buat public
 Route::get('product', 'ProductController@index');
 // ini buat ngambil semua
+Route::get('kategori/{product}', 'ProductController@kategori');
+//ini buat ambil data berdasar kategori
 Route::get('product/{product} ', 'ProductController@show');
 //ambil 1 data berdasarkan id
 Route::post('product/search', 'ProductController@search');

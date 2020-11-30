@@ -13,10 +13,9 @@ class CategoryController extends Controller
         $parent = Category::getParent()->orderBy('name', 'ASC')->get();
         return view('categories.index', compact('category', 'parent'));
     }
-
     public function store(Request $request)
     {
-        
+
         $this->validate($request, [
             'name' => 'required|string|max:50|unique:categories'
         ]);
