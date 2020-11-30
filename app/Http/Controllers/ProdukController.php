@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use DB;
 use GuzzleHttp\Client;
 use App\Jobs\ProductJob;
+
 class ProdukController extends Controller
 {
     public function index()
@@ -139,7 +140,7 @@ class ProdukController extends Controller
     {
 
         $search = $request->get('search');
-        $product = Product::find()->where('name', 'LIKE', '%' . $search . '%')->get();
+        $product = Product::where('name', 'like', "%{$search}%")->get();
         if (!$product) {
 
             return $this->sendResponse('Error', 'tidak ada data yang namanya kayak gitu', null, 500);
