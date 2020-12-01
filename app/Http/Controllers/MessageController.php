@@ -108,7 +108,7 @@ class MessageController extends Controller
         $data->is_read = 0;
         // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
-        return $this->sendResponse('Success', 'kontak dong', $data, 200);
+        // return $this->sendResponse('Success', 'kontak dong', $data, 200);
         
         // pusher
         $options = array(
