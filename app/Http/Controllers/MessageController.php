@@ -108,6 +108,7 @@ class MessageController extends Controller
         $data->is_read = 0;
         // statusnya bakalan jadi 1 kalo diget ama penerima pesan
         $data->save();
+        return $this->sendResponse('Success', 'kontak dong', $data, 200);
         
         // pusher
         $options = array(
@@ -122,10 +123,9 @@ class MessageController extends Controller
             $options
         );
         
-        $datapus = ['from' => $from, 'to' => $to];
+        $data = ['from' => $from, 'to' => $to];
         // tersending saat dipencet enter
-        $pusher->trigger('my-channel', 'my-event', $datapus);
-        return $this->sendResponse('Success', 'kontak dong', $data, 200);
+        $pusher->trigger('my-channel', 'my-event', $data);
 
     }
 }
