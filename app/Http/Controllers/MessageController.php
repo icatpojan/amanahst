@@ -87,9 +87,10 @@ class MessageController extends Controller
         })->get();
 
         // return view('messages.index', ['messages' => $messages]);
-        return response()->json([
-            $messages
-        ]);
+        return $this->sendResponse('Success', 'kontak dong', $messages, 200);
+        // return response()->json([
+        //     $messages
+        // ]);
     }
 
     public function sendMessage(Request $request ,$id)
