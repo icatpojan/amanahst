@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('document', 'DoctController@index');
 
 Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::get('register', 'Auth\DaftarController@index');
