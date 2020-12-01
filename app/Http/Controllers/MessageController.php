@@ -124,5 +124,7 @@ class MessageController extends Controller
         $data = ['from' => $from, 'to' => $to];
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
+        return $this->sendResponse('Success', 'kontak dong', $data, 200);
+
     }
 }
