@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $User = User::all();
         $Order_details = [];
-        return view('pembeli.index', compact('User'));
+           return view('pembeli.index', compact('User'));
     }
     public function indexes()
     {

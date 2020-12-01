@@ -117,9 +117,9 @@ class MessageController extends Controller
         );
 
         $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
+            env('1101351'),
+            env('3ea2f259e48881e80ede'),
+            env('349bff20028d3d4d5756'),
             $options
         );
 
