@@ -92,12 +92,12 @@ class MessageController extends Controller
         ]);
     }
 
-    public function sendMessage(Request $request)
+    public function sendMessage(Request $request ,$id)
     {
         //fromnya dari id yang lagi login
         // to nya sesuai dengan request
         $from = Auth::id();
-        $to = $request->receiver_id;
+        $to = $id;
         $message = $request->message;
 
         $data = new Message();

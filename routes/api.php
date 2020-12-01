@@ -99,5 +99,5 @@ Route::get('allmessage', 'MessageController@index')->name('home')->middleware('j
 //ambil semua pesan
 Route::get('/message/{id}', 'MessageController@getMessage')->name('message')->middleware('jwt.verify');
 // buat nge get pesan
-Route::post('message', 'MessageController@sendMessage')->middleware('jwt.verify');
+Route::post('message/{id}', 'MessageController@sendMessage')->middleware('jwt.verify');
 // buat ngirim pesan
