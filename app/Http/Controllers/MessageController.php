@@ -112,14 +112,14 @@ class MessageController extends Controller
 
         // pusher
         $options = array(
-            'cluster' => 'ap2',
+            'cluster' => 'ap1',
             'useTLS' => true
         );
 
         $pusher = new Pusher(
-            env('1101351'),
-            env('3ea2f259e48881e80ede'),
-            env('349bff20028d3d4d5756'),
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
             $options
         );
 
