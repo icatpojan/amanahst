@@ -22,7 +22,7 @@ class DaftarController extends Controller
             'name' => 'required|string|max:100',
             'email' => 'required',
             'password' => 'required',
-            'kode' => 'required|string',
+            'kode' => 'required',
         ]);
         if ($validator->fails()) {
             return response($validator->errors());
@@ -31,7 +31,7 @@ class DaftarController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'kode' => $request->kode
+            'kode' => $request->kode,
         ]);
         return redirect(route('pembeli.index'))->with(['success' => 'admin Baru Ditambahkan']);
     }

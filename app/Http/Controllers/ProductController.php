@@ -136,7 +136,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($product) {
             $product->delete();
-            File::delete(public_path('product/' . $product->image));
+            // File::delete(public_path('product/' . $product->image));
             return $this->sendResponse('Success', 'Berhasil menghapus data', $product, 200);
         }
         return $this->sendResponse('Error', 'Gagal menghapus data', null, 500);

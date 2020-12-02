@@ -7,7 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class KomentarKontroller extends Controller
+class KomentarController extends Controller
 {
     public function komentar(Request $request, $id)
     {
