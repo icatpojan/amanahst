@@ -8,6 +8,7 @@ use App\komentar;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Shop;
+use App\User;
 use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
@@ -64,6 +65,10 @@ class ShopController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
+        $user = User::where('id',$customer_id)->get();
+        $user->update([
+            'role' => 2,
+        ]);
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
