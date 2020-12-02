@@ -127,5 +127,6 @@ class MessageController extends Controller
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
         
+        
     }
 }
