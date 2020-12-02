@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 
 class ProductController extends Controller
 {
-    
+
     public function category()
     {
         $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
     public function kategori($id)
     {
-        $product = Product::where('category_id', $id)->orderBy('name', 'DESC')->get();
+        $product = Product::where('category_id', $id)->with(['user:id,name,alamat,image'])->orderBy('name', 'DESC')->get();
         return $this->sendResponse('Success', 'INI DATA BERDASARKAN KATEGORI', $product, 200);
     }
     public function search(Request $request)
@@ -150,7 +150,7 @@ class ProductController extends Controller
 
             return $this->sendResponse('Error', 'Gagal mengambil data', null, 500);
         }
-        return $this->sendResponse('Success', 'Berhasil mengambil data',compact('product','komentar'), 200);
+        return $this->sendResponse('Success', 'Berhasil mengambil data', compact('product', 'komentar'), 200);
     }
     public function update(Request $request, $id)
     {

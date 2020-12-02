@@ -15,4 +15,14 @@ class Message extends Model
     {
         return $this->belongsTo('App\User','to', 'id');
     }
+
+    public function broadcastOn()
+    {
+        return ['my-channel'];
+    }
+  
+    public function broadcastAs()
+    {
+        return 'my-event';
+    }
 }

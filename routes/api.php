@@ -101,3 +101,18 @@ Route::get('/message/{id}', 'MessageController@getMessage')->middleware('jwt.ver
 // buat nge get pesan
 Route::post('message/{id}', 'MessageController@sendMessage')->middleware('jwt.verify');
 // buat ngirim pesan
+
+//toko
+// public
+Route::post('shop/search', 'ShopController@search');
+//nyari toko berdasarkan nama
+Route::get('shop', 'shopController@index');
+// ini buat ngambil semua
+Route::get('shop/{id} ', 'ShopController@show');
+//ambil 1 data berdasarkan id
+
+//yg udah login
+Route::post('shop', 'ShopController@store')->middleware('jwt.verify');
+//buat toko
+Route::put('shop/{id} ', 'ShopController@update')->middleware('jwt.verify');
+//update produk

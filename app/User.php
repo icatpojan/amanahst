@@ -57,4 +57,8 @@ class User extends Authenticatable implements JWTSubject
     {
          return $this->hasMany('App\Komentar', 'to', 'id');
     }
+    public function shop()
+    {
+        return $this->hasOne(customer::class);
+    }
 }

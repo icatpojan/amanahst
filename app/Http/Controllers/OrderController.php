@@ -7,7 +7,6 @@ use App\Order;
 use App\User;
 use App\OrderDetail;
 use Auth;
-use Alert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
