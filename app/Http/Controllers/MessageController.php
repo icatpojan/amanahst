@@ -62,7 +62,6 @@ class MessageController extends Controller
 
         $data = array_unique(array_merge($from, $to), SORT_REGULAR);
         $users = array_values($data);
-
         return $this->sendResponse('Success', 'kontak dong', $users, 200);
 
         // return response()->json([

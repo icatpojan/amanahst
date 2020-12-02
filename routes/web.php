@@ -24,6 +24,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::get('register', 'Auth\DaftarController@index');
     Route::post('register', 'Auth\DaftarController@register')->name('register');
     Route::get('/home', 'HomeController@index')->name('home');     
+    Route::get('adminis', 'HomeController@dash')->name('dash');
     Route::resource('category', 'CategoryController')->except(['create', 'show']);
     Route::resource('produk', 'ProdukController');
     Route::resource('transaksi', 'TransaksiController');

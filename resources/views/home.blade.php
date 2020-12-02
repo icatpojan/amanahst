@@ -28,7 +28,7 @@
                                     <div class="callout callout-info">
                                         <small class="text-muted">Omset Harian</small>
                                         <br>
-                                        <strong class="h4">Rp 0</strong>
+                                        <strong class="h4">{{ number_format($order ?? ''[0]->pending) }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
