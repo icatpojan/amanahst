@@ -116,11 +116,11 @@ class MessageController extends Controller
         );
         
         $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
+            '714107c06ab063eee783',
+            '297099b10e2c437776cb',
+            '1116353',
             $options
-        );
+          );
         
         // tersending saat dipencet enter
         $pusher->trigger('my-channel', 'my-event', $data);
