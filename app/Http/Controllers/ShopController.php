@@ -65,10 +65,8 @@ class ShopController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
-        $user = User::create()->where('id', $customer_id)([
-            'role' => 2,
-        ]);
-
+        $user = User::where('id',$customer_id)->get();
+        $user->role = 2;
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
