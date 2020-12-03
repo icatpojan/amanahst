@@ -25,6 +25,7 @@ class ShopController extends Controller
     public function shop()
     {
         $id = Auth::id();
+        dd($id);
         $shop = Shop::where('customer_id', $id)->get();
         if (($shop)->isEmpty()) {
 
