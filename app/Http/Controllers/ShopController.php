@@ -64,7 +64,7 @@ class ShopController extends Controller
             // dd($array);
             $image = $array->image->file->resource->chain->image;
         }
-        $customer_id = Auth::user()->id;
+        $customer_id = Auth::id();
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
