@@ -9,6 +9,6 @@ class Shop extends Model
     protected $fillable = ['name', 'description', 'image','alamat'];
     public function user()
     {
-        return $this->hasOne(user::class);
+        return $this->hasOne('App\User', 'customer_id', 'id');
     }
 }
