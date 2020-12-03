@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
 use App\Payment;
 use App\Product;
 use App\User;
@@ -28,8 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         $User = User::all()->count();
-        $Order = Order::all()->count();
-        $Payment = Payment::all()->count();
+        $Order = OrderDetail::all()->count();
+        $Payment = Payment::all()->sum('amount');
         $Product = Product::all()->count();
         
         return view('home', compact('User', 'Order', 'Payment', 'Product'));

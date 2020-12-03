@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="callout callout-info">
-                                        <small class="text-muted">jumlah transaksi</small>
+                                        <small class="text-muted">jumlah uang masuk</small>
                                         <br>
                                         <strong class="h4">{{ number_format($Payment) }}</strong>
                                     </div>
