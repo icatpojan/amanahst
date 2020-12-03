@@ -76,7 +76,7 @@ class ShopController extends Controller
         ]);
         try {
             $shop->save();
-            $user->save();
+            // $user->save();
             // $product = Product::all();
 
             return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $shop, 200);
