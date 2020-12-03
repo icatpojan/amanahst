@@ -65,10 +65,10 @@ class ShopController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
-        $user = User::where('id',$customer_id)->get();
-        $user->create([
+        $user = User::create()->where('id', $customer_id)([
             'role' => 2,
         ]);
+
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
@@ -78,6 +78,7 @@ class ShopController extends Controller
         ]);
         try {
             $shop->save();
+            $user->save();
             // $product = Product::all();
 
             return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $shop, 200);
