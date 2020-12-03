@@ -29,16 +29,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $Customer = Auth::user()->name;
         $User = User::all()->count();
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
 
-        return view('home', compact('User', 'Order', 'Payment', 'Product'));
+        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer'));
     }
     public function dash()
     {
-        $Customer = Auth::id();
+        $Customer = Auth::user()->name;
         $User = User::all()->count();
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');

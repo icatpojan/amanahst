@@ -18,7 +18,7 @@
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
-                       <h1>SELAMAT DATANG PAK EKO</h1>
+                       <h1>SELAMAT DATANG PAK {{ ($Customer) }}</h1>
                        <p>semuanya berjalan normal walau hati sedang kacau dan kesepian</p>
                         <div class="card">
                             <div class="card-header">
@@ -72,7 +72,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">transaksi hari ini</h5>
                                     <div class="callout callout-success">
-                                        <small class="text-muted">Total Produk</small>
+                                        <small class="text-muted">id yang masuk</small>
                                         <br>
                                         <strong class="h4">{{ ($Customer) }}</strong>
                                     </div>
