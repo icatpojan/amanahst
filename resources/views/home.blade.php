@@ -62,7 +62,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">rata rata jumlah transaksi</h5>
                                     <div class="callout callout-success">
-                                        <small class="text-muted">Total Produk</small>
+                                        <small class="text-muted">dalam rupiah</small>
                                         <br>
                                         <strong class="h4">{{ number_format($Transaksi) }}</strong>
                                     </div>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="card mb-5">
                                 <div class="card-body">
-                                    <h5 class="card-title">transaksi hari ini</h5>
+                                    <h5 class="card-title">identifikasi</h5>
                                     <div class="callout callout-success">
                                         <small class="text-muted">id yang masuk</small>
                                         <br>
@@ -84,7 +84,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>
                                         <br>
-                                        <strong class="h4">{{ number_format($Product) }}</strong>
+                                        <strong class="h4">{{ number_format($Produk) }}</strong>
                                     </div>
                                 </div>
                             </div>
