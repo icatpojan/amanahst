@@ -27,7 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $User = User::all()->count();
+        $Order = Order::all()->count();
+        $Payment = Payment::all()->count();
+        $Product = Product::all()->count();
+        
+        return view('home', compact('User', 'Order', 'Payment', 'Product'));
     }
     public function dash()
     {
@@ -35,6 +40,7 @@ class HomeController extends Controller
         $Order = Order::all()->count();
         $Payment = Payment::all()->count();
         $Product = Product::all()->count();
+        
         return view('home', compact('User', 'Order', 'Payment', 'Product'));
     }
 }
