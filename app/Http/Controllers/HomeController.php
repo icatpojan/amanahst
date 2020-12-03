@@ -38,8 +38,8 @@ class HomeController extends Controller
     public function dash()
     {
         $User = User::all()->count();
-        $Order = Order::all()->count();
-        $Payment = Payment::all()->count();
+        $Order = OrderDetail::all()->count();
+        $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
         
         return view('home', compact('User', 'Order', 'Payment', 'Product'));
