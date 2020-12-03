@@ -24,7 +24,7 @@ class ShopController extends Controller
     }
     public function shop()
     {
-        $shop = Shop::where('customer_id', Auth::id())->get();
+        $shop = Shop::where('customer_id', Auth::id())->first();
         return $this->sendResponse('Success', 'toko anda disini', $shop, 200);
     }
     public function search(Request $request)
