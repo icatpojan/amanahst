@@ -65,4 +65,27 @@ class TransaksiController extends Controller
         // return redirect('history/' . $Order_id);
         return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order_id, 200);
     }
+    public function delete($id)
+    {
+        $Order_detail = OrderDetail::where('id', $id)->first();
+        if (!$Order_detail) {
+            return $this->sendResponse('error', 'data tidak ada', null, 200);
+        }
+        $Order = Order::where('id', $Order_detail->order_id)->first();
+        $Order->jumlah_harga = $Order->jumlah_harga - $Order_detail->jumlah_harga;
+        $Order->update();
+
+
+        $Order_detail->delete();
+
+        return view('transaksi.view');;
+    }
+    public function show($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $order_details = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->where('order_id', $order->id)->get();
+
+        //  return view('history.detail', compact('order','order_details'));
+        return view('transaksi.view', compact('Order'));;
+    }
 }
