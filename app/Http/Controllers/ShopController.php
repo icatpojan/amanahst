@@ -66,7 +66,7 @@ class ShopController extends Controller
         }
         $customer_id = Auth::id();
         $user = User::where('id',$customer_id)->get();
-        $user->update([
+        $user->create([
             'role' => 2,
         ]);
         $shop = Shop::create([
