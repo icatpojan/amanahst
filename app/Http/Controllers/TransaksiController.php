@@ -29,11 +29,6 @@ class TransaksiController extends Controller
         if (!$Order) {
             return $this->sendResponse('error', 'data tidak ada', null, 200);
         }
-        $Order = Order::where('id', $Order->order_id)->first();
-        $Order->jumlah_harga = $Order->jumlah_harga - $Order->jumlah_harga;
-        $Order->update();
-
-
         $Order->delete();
 
         return view('transaksi.index', compact('Order'));;
