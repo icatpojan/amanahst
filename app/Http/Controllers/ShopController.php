@@ -64,9 +64,7 @@ class ShopController extends Controller
             // dd($array);
             $image = $array->image->file->resource->chain->image;
         }
-        $customer_id = Auth::id();
-        $user = User::where('id', $customer_id)->get();
-        
+        $customer_id = Auth::user()->id;
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
@@ -77,8 +75,6 @@ class ShopController extends Controller
             ]);
         try {
             $shop->save();
-            // $product = Product::all();
-
             return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $shop, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menjual data pemerintah', null, 500);
