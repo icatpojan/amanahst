@@ -24,7 +24,7 @@ class ShopController extends Controller
     }
     public function shop()
     {
-        $shop = Shop::where('customer_id', Auth::id())->get();
+        $shop = Shop::where('customer_id', Auth::user()->id)->get();
         if (($shop)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada toko yang namanya kayak gitu', null, 500);
