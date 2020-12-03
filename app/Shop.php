@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-    protected $fillable = ['name', 'description', 'image','alamat'];
+    protected $fillable = ['name', 'description', 'image','alamat','customer_id'];
     public function user()
     {
         return $this->hasOne('App\User', 'customer_id', 'id');

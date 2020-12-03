@@ -67,7 +67,7 @@ class ShopController extends Controller
         $customer_id = Auth::id();
         $shop = Shop::create([
             'name' => $request->name,
-            'customer_id' => $request->customer_id,
+            'customer_id' => $customer_id,
             'description' => $request->description,
             'image' => $image,
             'alamat' => $request->alamat,
