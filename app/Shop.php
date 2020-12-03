@@ -9,6 +9,6 @@ class Shop extends Model
     protected $fillable = ['name', 'description', 'image','alamat','customer_id'];
     public function user()
     {
-        return $this->hasOne('App\User', 'customer_id', 'id');
+        return $this->belongsTo('App\User', 'customer_id', 'id');
     }
 }
