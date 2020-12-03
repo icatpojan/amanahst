@@ -108,8 +108,6 @@ Route::post('shop/search', 'ShopController@search');
 //nyari toko berdasarkan nama
 Route::get('shop', 'ShopController@index');
 // ini buat ngambil semua
-Route::get('myshop', 'ShopController@shop')->middleware('jwt.verify');
-// ini buat ambil data toko kita
 Route::get('shop/{id} ', 'ShopController@show');
 //ambil 1 data berdasarkan id
 
@@ -118,3 +116,5 @@ Route::post('shop', 'ShopController@store')->middleware('jwt.verify');
 //buat toko
 Route::put('shop/{id} ', 'ShopController@update')->middleware('jwt.verify');
 //update produk
+Route::get('myshop', 'ShopController@shop')->middleware('jwt.verify');
+// ini buat ambil data toko kita

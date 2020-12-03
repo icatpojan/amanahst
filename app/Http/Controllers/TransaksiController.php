@@ -36,7 +36,7 @@ class TransaksiController extends Controller
 
         $Order_detail->delete();
 
-        return $this->sendResponse('Success', 'pesanan anda dihapus', null, 200);
+        return view('transaksi.index', compact('Order'));;
     }
 
     public function konfirmasi()
