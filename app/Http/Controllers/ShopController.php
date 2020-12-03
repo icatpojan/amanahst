@@ -73,6 +73,7 @@ class ShopController extends Controller
             'alamat' => $request->alamat,
             'role' => 2
             ]);
+            dd($shop);
         try {
             $shop->save();
             return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $shop, 200);
