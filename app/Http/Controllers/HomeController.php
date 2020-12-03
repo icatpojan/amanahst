@@ -29,22 +29,24 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $Transaksi = Payment::avg('amount');
         $Customer = Auth::user()->name;
         $User = User::all()->count();
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
 
-        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer'));
+        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi'));
     }
     public function dash()
     {
+        $Transaksi = Payment::avg('amount');
         $Customer = Auth::user()->name;
         $User = User::all()->count();
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
 
-        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer'));
+        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi'));
     }
 }

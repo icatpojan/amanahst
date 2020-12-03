@@ -64,7 +64,7 @@
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>
                                         <br>
-                                        <strong class="h4">{{ number_format($Product) }}</strong>
+                                        <strong class="h4">{{ number_format($Transaksi) }}</strong>
                                     </div>
                                 </div>
                             </div>
