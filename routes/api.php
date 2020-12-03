@@ -106,9 +106,9 @@ Route::post('message/{id}', 'MessageController@sendMessage')->middleware('jwt.ve
 // public
 Route::post('shop/search', 'ShopController@search');
 //nyari toko berdasarkan nama
-Route::get('shop', 'shopController@index');
+Route::get('shop', 'ShopController@index');
 // ini buat ngambil semua
-Route::get('myshop', 'shopController@shop');
+Route::get('myshop', 'ShopController@shop');
 // ini buat ambil data toko kita
 Route::get('shop/{id} ', 'ShopController@show');
 //ambil 1 data berdasarkan id
