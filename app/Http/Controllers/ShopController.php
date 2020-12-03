@@ -91,7 +91,7 @@ class ShopController extends Controller
             // $user->save();
             // $product = Product::all();
 
-            return $this->sendResponse('Success', 'berhasil menjual barang ilegal', $shop, 200);
+            return $this->sendResponse('Success', 'berhasil membuat toko ilegal', $shop, 200);
         } catch (\Throwable $th) {
             return $this->sendResponse('Error', 'Gagal menjual data pemerintah', null, 500);
         }
