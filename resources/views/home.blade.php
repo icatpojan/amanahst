@@ -18,12 +18,8 @@
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h1 class="display-4">SELAMATA DATANG BOS</h1>
-                                <p class="lead">semua berjalan dengan normal walau hati sedang kacau dan kesepian</p>
-                            </div>
-                        </div>
+                       <h1>SELAMAT DATANG PAK EKO</h1>
+                       <p>semuanya berjalan normal walau hati sedang kacau dan kesepian</p>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">perkembangan</h4>
@@ -57,6 +53,38 @@
                                             <br>
                                             <strong class="h4">{{ number_format($Product) }}</strong>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-deck">
+                            <div class="card mb-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">rata rata jumlah transaksi</h5>
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Total Produk</small>
+                                        <br>
+                                        <strong class="h4">{{ number_format($Product) }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">transaksi hari ini</h5>
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Total Produk</small>
+                                        <br>
+                                        <strong class="h4">{{ ($Customer) }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">produk habis</h5>
+                                    <div class="callout callout-success">
+                                        <small class="text-muted">Total Produk</small>
+                                        <br>
+                                        <strong class="h4">{{ number_format($Product) }}</strong>
                                     </div>
                                 </div>
                             </div>

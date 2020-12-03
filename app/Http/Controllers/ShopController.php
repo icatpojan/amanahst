@@ -22,6 +22,11 @@ class ShopController extends Controller
         $shop = Shop::all();
         return $this->sendResponse('Success', 'semua toko ada disini', $shop, 200);
     }
+    public function shop()
+    {
+        $shop = Shop::where('customer_id', Auth::id())->get();
+        return $this->sendResponse('Success', 'toko anda disini', $shop, 200);
+    }
     public function search(Request $request)
     {
 
@@ -66,6 +71,7 @@ class ShopController extends Controller
         }
         $customer_id = Auth::id();
         $user = User::where('id',$customer_id)->first();
+        //ingat kalo update harus pake first
         $user->role = 2;
         $user->update();
         $shop = Shop::create([

@@ -108,6 +108,8 @@ Route::post('shop/search', 'ShopController@search');
 //nyari toko berdasarkan nama
 Route::get('shop', 'shopController@index');
 // ini buat ngambil semua
+Route::get('myshop', 'shopController@index');
+// ini buat ambil data toko kita
 Route::get('shop/{id} ', 'ShopController@show');
 //ambil 1 data berdasarkan id
 

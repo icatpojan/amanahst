@@ -8,6 +8,7 @@ use App\Payment;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -32,16 +33,17 @@ class HomeController extends Controller
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
-        
+
         return view('home', compact('User', 'Order', 'Payment', 'Product'));
     }
     public function dash()
     {
+        $Customer = Auth::id();
         $User = User::all()->count();
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
-        
-        return view('home', compact('User', 'Order', 'Payment', 'Product'));
+
+        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer'));
     }
 }
