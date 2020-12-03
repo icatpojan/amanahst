@@ -26,30 +26,30 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="callout callout-info">
-                                        <small class="text-muted">Omset Harian</small>
+                                        <small class="text-muted">jumlah transaksi</small>
                                         <br>
-                                        <strong class="h4">{{ number_format($order ?? ''[0]->pending) }}</strong>
+                                        <strong class="h4">{{ number_format($Payment) }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-danger">
-                                        <small class="text-muted">Pelanggan Baru (H-7)</small>
+                                        <small class="text-muted">Jumlah member</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">{{ number_format($User) }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-primary">
                                         <small class="text-muted">Perlu Dikirim</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">{{ number_format($Order) }}</strong>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>
                                         <br>
-                                        <strong class="h4">0</strong>
+                                        <strong class="h4">{{ number_format($Product) }}</strong>
                                     </div>
                                 </div>
                             </div>
