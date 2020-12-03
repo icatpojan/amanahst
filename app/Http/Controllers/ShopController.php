@@ -24,7 +24,8 @@ class ShopController extends Controller
     }
     public function shop()
     {
-        $shop = Shop::where('customer_id', Auth::id())->first();
+        $id = Auth::User()->id;
+        $shop = Shop::where('customer_id', $id)->get();
         if (($shop)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada toko yang namanya kayak gitu', null, 500);
@@ -74,7 +75,7 @@ class ShopController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
-        $user = User::where('id',$customer_id)->first();
+        $user = User::where('id', $customer_id)->first();
         //ingat kalo update harus pake first
         $user->role = 2;
         $user->update();
@@ -84,9 +85,9 @@ class ShopController extends Controller
             'description' => $request->description,
             'image' => $image,
             'alamat' => $request->alamat
-            ]);
-            try {
-                $shop->save();
+        ]);
+        try {
+            $shop->save();
             // $user->save();
             // $product = Product::all();
 

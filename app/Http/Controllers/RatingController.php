@@ -13,7 +13,7 @@ class RatingController extends Controller
      */
     public function index($id)
     {
-        $Rating = Rating::where('product_id' , $id)
+        $Rating = Rating::where('product_id' , $id);
     }
 
     /**
