@@ -25,16 +25,16 @@ class TransaksiController extends Controller
 
     public function destroy($id)
     {
-        $Order_detail = OrderDetail::where('id', $id)->first();
-        if (!$Order_detail) {
+        $Order = Order::where('id', $id)->first();
+        if (!$Order) {
             return $this->sendResponse('error', 'data tidak ada', null, 200);
         }
-        $Order = Order::where('id', $Order_detail->order_id)->first();
-        $Order->jumlah_harga = $Order->jumlah_harga - $Order_detail->jumlah_harga;
+        $Order = Order::where('id', $Order->order_id)->first();
+        $Order->jumlah_harga = $Order->jumlah_harga - $Order->jumlah_harga;
         $Order->update();
 
 
-        $Order_detail->delete();
+        $Order->delete();
 
         return view('transaksi.index', compact('Order'));;
     }
