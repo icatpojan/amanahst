@@ -31,7 +31,7 @@ class TransaksiController extends Controller
         }
         $Order->delete();
 
-        return view('transaksi.index', compact('Order'));;
+        return view('transaksi.index');
     }
 
     public function konfirmasi()
