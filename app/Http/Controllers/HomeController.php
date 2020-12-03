@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         $User = User::all()->count();
         $Order = Order::all()->count();
-        $Payment = Payment::all()->count();
+        $Payment = Payment::
         $Product = Product::all()->count();
         
         return view('home', compact('User', 'Order', 'Payment', 'Product'));
