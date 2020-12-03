@@ -65,9 +65,8 @@ class ShopController extends Controller
             $image = $array->image->file->resource->chain->image;
         }
         $customer_id = Auth::id();
-        $user = User::where('id',$customer_id)->get();
+        $user = User::where('id', $customer_id)->get();
         $user->role = 2;
-        $user->update();
         $shop = Shop::create([
             'name' => $request->name,
             'customer_id' => $customer_id,
@@ -77,6 +76,7 @@ class ShopController extends Controller
         ]);
         try {
             $shop->save();
+            $user->update();
             // $user->save();
             // $product = Product::all();
 
