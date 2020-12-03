@@ -91,10 +91,10 @@
                                                     <td>
                                                         {!! $row->status_label !!} <br></td>
                                                     <td>
-                                                        <form action="{{ route('transaksi.destroy', $row->id) }}" method="post">
+                                                        <form action="{{ route('transaksi.destroy', $row->id) }}" method="delete">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="#" class="btn btn-warning mb-1">Lihat</a>
+                                                            <a href="{{ route('transaksi.destroy', $row->id) }}" class="btn btn-warning mb-1">Lihat</a>
                                                             <button class="btn btn-danger btn-sm">Hapus</button>
                                                         </form>
                                                     </td>
