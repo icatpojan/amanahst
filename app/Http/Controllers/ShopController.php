@@ -84,7 +84,8 @@ class ShopController extends Controller
             'customer_id' => $customer_id,
             'description' => $request->description,
             'image' => $image,
-            'alamat' => $request->alamat
+            'alamat' => $request->alamat,
+            'id' => $customer_id
         ]);
         try {
             $shop->save();

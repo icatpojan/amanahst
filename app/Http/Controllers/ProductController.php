@@ -7,6 +7,7 @@ use App\Category;
 use App\komentar;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Shop;
 use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Facades\Validator;
@@ -25,8 +26,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $product = Product::with(['category', 'user:id,name,alamat,image'])->where('stock', '>', 0)->orderBy('created_at', 'DESC');
-
+        $product = Product::with(['category','shop', 'user:id,name,alamat,image'])->where('stock', '>', 0)->orderBy('created_at', 'DESC');
         if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
         }
@@ -115,6 +115,7 @@ class ProductController extends Controller
             'slug' => $request->name,
             'category_id' => $request->category_id,
             'customer_id' => $customer_id,
+            'shop_id' => $customer_id,
             'description' => $request->description,
             'image' => $image,
             'price' => $request->price,
@@ -144,7 +145,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['user'])->find($id);
+        $product = Product::with(['user','shop'])->find($id);
+        $shop = Shop::where('customer_id',);
         $komentar = komentar::with(['user'])->where('product_id', $id);
         if (!$product) {
 
