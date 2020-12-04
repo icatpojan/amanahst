@@ -91,9 +91,9 @@
                                                     <td>
                                                         {!! $row->status_label !!} <br></td>
                                                     <td>
-                                                        <form action="{{ route('transaksi.destroy', $row->id) }}"
-                                                            method="delete">
-                                                            <input type="submit" class="btn btn-danger" value="Hapus">
+                                                        <form action="{{ route('transaksi.show', $row->id) }}"
+                                                            method="get">
+                                                            <input type="submit" class="btn btn-danger" value="lihat">
                                                         </form>
                                                     </td>
 
