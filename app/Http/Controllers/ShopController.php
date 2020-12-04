@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Category;
 use App\komentar;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Shop;
@@ -14,6 +15,7 @@ use File;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use GuzzleHttp\Client;
+use Tymon\JWTAuth\Contracts\Providers\Auth as ProvidersAuth;
 
 class ShopController extends Controller
 {
@@ -26,11 +28,12 @@ class ShopController extends Controller
     {
         $id = Auth::user()->id;
         $shop = Shop::where('customer_id', $id)->get();
+        $pemasukan = OrderDetail::where(['product.customer_id' , $id])->where('status' , 3)->get()->jumlah_harga;
         if (($shop)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada toko yang namanya kayak gitu', null, 500);
         }
-        return $this->sendResponse('Success', 'toko anda disini', $shop, 200);
+        return $this->sendResponse('Success', 'toko anda disini', compact('pemasukan','shop'), 200);
     }
     public function search(Request $request)
     {
@@ -157,4 +160,11 @@ class ShopController extends Controller
             return $this->sendResponse('Error', 'Gagal mengganti data', null, 500);
         }
     }
+
+    // public function pemasukan()
+    // {
+    //     $user = Auth::id();
+    //     $pemasukan = OrderDetail::where(['product.customer_id' , $user])->where('status' , 3)->get()->jumlah_harga;
+    //     return $this->sendResponse('success', 'ini dia pemasukan toko anda', $pemasukan, 200);
+    // }
 }
