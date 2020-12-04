@@ -20,12 +20,12 @@
                                 Detail pesanan
 
                                 <!-- TOMBOL UNTUK MENERIMA PEMBAYARAN -->
-                                <div class="float-right">
+                                {{-- <div class="float-right">
                                     <!-- TOMBOL INI HANYA TAMPIL JIKA STATUSNYA 1 DARI ORDER DAN 0 DARI PEMBAYARAN -->
                                     @if ($order->status == 1 && $order->payment->status == 0)
                                     <a href="{{ route('orders.approve_payment', $order->invoice) }}" class="btn btn-primary btn-sm">Terima Pembayaran</a>
                                     @endif
-                                </div>
+                                </div> --}}
                             </h4>
                         </div>
                         <div class="card-body">
