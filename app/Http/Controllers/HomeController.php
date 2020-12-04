@@ -46,7 +46,7 @@ class HomeController extends Controller
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
-        $Produk = Product::where('stock', '=<', '0')->count();
+        $Produk = Product::where('stock', '<=', '0')->count();
         return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi','Produk'));
     }
 }
