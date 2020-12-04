@@ -6,6 +6,7 @@ use App\Order;
 use App\OrderDetail;
 use App\Payment;
 use App\Product;
+use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,7 +37,8 @@ class HomeController extends Controller
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
         $Produk = Product::where('stock', '<=', 0)->count();
-        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi','Produk'));
+        $Shop = Shop::all()->count();
+        return view('home', compact('Shop','User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi','Produk'));
     }
     public function dash()
     {
@@ -46,7 +48,7 @@ class HomeController extends Controller
         $Order = OrderDetail::all()->count();
         $Payment = Payment::sum('amount');
         $Product = Product::all()->count();
-        $Produk = Product::where('stock', '<=', '0')->count();
-        return view('home', compact('User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi','Produk'));
+        $Shop = Shop::all()->count();
+        return view('home', compact('Shop','User', 'Order', 'Payment', 'Product', 'Customer', 'Transaksi','Produk'));
     }
 }

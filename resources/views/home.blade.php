@@ -70,11 +70,11 @@
                             </div>
                             <div class="card mb-5">
                                 <div class="card-body">
-                                    <h5 class="card-title">identifikasi</h5>
+                                    <h5 class="card-title">Toko terdaftar</h5>
                                     <div class="callout callout-success">
-                                        <small class="text-muted">id yang masuk</small>
+                                        <small class="text-muted">jumlah toko</small>
                                         <br>
-                                        <strong class="h4">{{ ($Customer) }}</strong>
+                                        <strong class="h4">{{ ($Shop) }}</strong>
                                     </div>
                                 </div>
                             </div>
