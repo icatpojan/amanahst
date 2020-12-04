@@ -85,7 +85,6 @@ class TransaksiController extends Controller
         $order = Order::where('id', $id)->first();
         $order_details = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->where('order_id', $order->id)->get();
 
-        //  return view('history.detail', compact('order','order_details'));
-        return view('transaksi.view', compact('Order'));;
+        return view('transaksi.view', compact('order_details'));;
     }
 }
