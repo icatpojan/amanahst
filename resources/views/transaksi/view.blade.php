@@ -22,8 +22,8 @@
                                 <!-- TOMBOL UNTUK MENERIMA PEMBAYARAN -->
                                 {{-- <div class="float-right">
                                     <!-- TOMBOL INI HANYA TAMPIL JIKA STATUSNYA 1 DARI ORDER DAN 0 DARI PEMBAYARAN -->
-                                    @if ($order->status == 1 && $order->payment->status == 0)
-                                    <a href="{{ route('orders.approve_payment', $order->invoice) }}" class="btn btn-primary btn-sm">Terima Pembayaran</a>
+                                    @if ($order_details->status == 1 && $order_details->payment->status == 0)
+                                    <a href="{{ route('orders.approve_payment', $order_details->invoice) }}" class="btn btn-primary btn-sm">Terima Pembayaran</a>
                                     @endif
                                 </div> --}}
                             </h4>
@@ -37,67 +37,58 @@
                                     <table class="table table-bordered">
                                         <tr>
                                             <th width="30%">Nama Pelanggan</th>
-                                            <td>{{ $order->customer_name }}</td>
+                                            <td>{{ $order_details->product_id }}</td>
                                         </tr>
                                         <tr>
                                             <th>Telp</th>
-                                            <td>{{ $order->customer_phone }}</td>
+                                            <td>{{ $order_details->order_id }}</td>
                                         </tr>
                                         <tr>
                                             <th>Alamat</th>
-                                            <td>{{ $order->customer_address }} {{ $order->customer->district->name }} - {{  $order->customer->district->city->name}}, {{ $order->customer->district->city->province->name }}</td>
+                                            <td>{{ $order_details->jumlah }}</td>
                                         </tr>
                                         <tr>
                                             <th>Order Status</th>
-                                            <td>{!! $order->status_label !!}</td>
+                                            <td>{!! $order_details->status_label !!}</td>
                                         </tr>
                                         <!-- FORM INPUT RESI HANYA AKAN TAMPIL JIKA STATUS LEBIH BESAR 1 -->
-                                        @if ($order->status > 1)
+                                        @if ($order_details->status > 1)
                                         <tr>
                                             <th>Nomor Resi</th>
                                             <td>
-                                                @if ($order->status == 2)
-                                                <form action="{{ route('orders.shipping') }}" method="post">
-                                                    @csrf
-                                                    <div class="input-group">
-                                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                                        <input type="text" name="tracking_number" placeholder="Masukkan Nomor Resi" class="form-control" required>
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-secondary" type="submit">Kirim</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                @if ($order_details->status == 2)
+                                              
                                                 @else
-                                                {{ $order->tracking_number }}
+                                                {{ $order_details->jumlah_harga }}
                                                 @endif
                                             </td>
                                         </tr>
                                         @endif
                                     </table>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <h4>Detail Pembayaran</h4>
-                                    @if ($order->status != 0)
+                                    @if ($order_details->status != 0)
                                     <table class="table table-bordered">
                                         <tr>
                                             <th width="30%">Nama Pengirim</th>
-                                            <td>{{ $order->payment->name }}</td>
+                                            <td>{{ $order_details->payment->name }}</td>
                                         </tr>
                                         <tr>
                                             <th>Bank Tujuan</th>
-                                            <td>{{ $order->payment->transfer_to }}</td>
+                                            <td>{{ $order_details->payment->transfer_to }}</td>
                                         </tr>
                                         <tr>
                                             <th>Tanggal Transfer</th>
-                                            <td>{{ $order->payment->transfer_date }}</td>
+                                            <td>{{ $order_details->payment->transfer_date }}</td>
                                         </tr>
                                         <tr>
                                             <th>Bukti Pembayaran</th>
-                                            <td><a target="_blank" href="{{ asset('storage/payment/' . $order->payment->proof) }}">Lihat</a></td>
+                                            <td><a target="_blank" href="{{ asset('storage/payment/' . $order_details->payment->proof) }}">Lihat</a></td>
                                         </tr>
                                         <tr>
                                             <th>Status</th>
-                                            <td>{!! $order->payment->status_label !!}</td>
+                                            <td>{!! $order_details->payment->status_label !!}</td>
                                         </tr>
                                     </table>
                                     @else
@@ -114,7 +105,7 @@
                                             <th>Berat</th>
                                             <th>Subtotal</th>
                                         </tr>
-                                        @foreach ($order->details as $row)
+                                        @foreach ($order_details->details as $row)
                                         <tr>
                                             <td>{{ $row->product->name }}</td>
                                             <td>{{ $row->qty }}</td>
@@ -122,7 +113,7 @@
                                             <td>{{ $row->weight }} gr</td>
                                             <td>Rp {{ $row->qty * $row->price }}</td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </table>
                                 </div>
                             </div>
