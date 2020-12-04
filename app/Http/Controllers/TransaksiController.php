@@ -18,7 +18,7 @@ class TransaksiController extends Controller
     {
         // $Order = Order::where('customer_id', Auth::user()->id)->where('status', 0)->first();
 
-        $Order = Order::all();
+        $Order = Order::paginate(15);
         $Order_details = [];
         return view('transaksi.index', compact('Order'));
     }
