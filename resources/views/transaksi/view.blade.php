@@ -34,7 +34,7 @@
                                 <!-- BLOCK UNTUK MENAMPILKAN DATA PELANGGAN -->
                                 <div class="col-md-6">
                                     <h4>Detail Pelanggan</h4>
-                                    <table class="table table-bordered">
+                                    {{-- <table class="table table-bordered">
                                         <tr>
                                             <th width="30%">Nama Pelanggan</th>
                                             <td>{{ $order_details->product_id }}</td>
@@ -50,9 +50,9 @@
                                         <tr>
                                             <th>Order Status</th>
                                             <td>{!! $order_details->status_label !!}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <!-- FORM INPUT RESI HANYA AKAN TAMPIL JIKA STATUS LEBIH BESAR 1 -->
-                                        @if ($order_details->status > 1)
+                                        {{-- @if ($order_details->status > 1)
                                         <tr>
                                             <th>Nomor Resi</th>
                                             <td>
@@ -65,7 +65,7 @@
                                         </tr>
                                         @endif
                                     </table>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="col-md-6">
                                     <h4>Detail Pembayaran</h4>
                                     @if ($order_details->status != 0)
