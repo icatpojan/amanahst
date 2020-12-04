@@ -92,10 +92,7 @@
                                                         {!! $row->status_label !!} <br></td>
                                                     <td>
                                                         <form action="{{ route('transaksi.destroy', $row->id) }}" method="delete">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <a href="{{ route('transaksi.destroy', $row->id) }}" class="btn btn-warning mb-1">Lihat</a>
-                                                            <button class="btn btn-danger btn-sm">Hapus</button>
+                                             <input type="submit" class="btn btn-danger" value="Hapus">         
                                                         </form>
                                                     </td>
 
