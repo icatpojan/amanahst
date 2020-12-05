@@ -26,7 +26,7 @@ class AddCustomerIdToKomentarTable extends Migration
     public function down()
     {
         Schema::table('komentar', function (Blueprint $table) {
-            //
+            $table->dropColumn('customer_id');
         });
     }
 }

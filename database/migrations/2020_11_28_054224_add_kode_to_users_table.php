@@ -25,7 +25,7 @@ class AddKodeToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_kode', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('kode');
         });
     }
