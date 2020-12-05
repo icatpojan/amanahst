@@ -19,11 +19,11 @@
                                 <h4 class="card-title">
                                     Detail pesanan
                                 </h4>
-                                <table>
+                                <table class="table table-hover table-bordered">
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>ini</th>
+                                        <th>itu</th>
+                                        <th>ono</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
                                         <tr>
