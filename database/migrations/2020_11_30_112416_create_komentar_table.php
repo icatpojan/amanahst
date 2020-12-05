@@ -19,10 +19,7 @@ class CreateKomentarTable extends Migration
             $table->string('komentar');
             $table->timestamps();
             $table->unsignedBigInteger('customer_id');
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
-        });
+            });
     }
 
     /**

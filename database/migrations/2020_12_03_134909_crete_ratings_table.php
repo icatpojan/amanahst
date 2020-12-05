@@ -18,6 +18,8 @@ class CreteRatingsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('score');
             $table->timestamps();
+
+            
         });
     }
 

@@ -24,7 +24,7 @@ class CreatePaymentsTable extends Migration
             $table->string('status')->nullable();
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+           
         });
     }
 

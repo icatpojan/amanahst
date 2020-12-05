@@ -29,9 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->timestamps();
 
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
+           
         });
     }
 

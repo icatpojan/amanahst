@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration
             $table->string('tujuan')->nullable();
             $table->timestamps();
 
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
+           
         });
     }
 
