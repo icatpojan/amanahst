@@ -19,6 +19,9 @@
                             <h4 class="card-title">
                                 Detail pesanan
                             </h4>
+                            @forelse ($Order_details as $row)
+                            {{$row->product_id}}
+                            @endforelse
                         </div>
                     </div>
                 </div>
