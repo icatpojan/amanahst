@@ -28,11 +28,20 @@ class ShopController extends Controller
     {
         $id = Auth::user()->id;
         $shop = Shop::where('customer_id', $id)->get();
+        $product = null;
+        $order = null;
+        $Product = Product::where('shop_id' , Auth::id())->count();
+        $Order_details = [];
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+            return $q->where('customer_id', $id)->where('status' , 3);
+        })->get();
+        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2)->sum('jumlah_harga');
+        
         if (($shop)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada toko yang namanya kayak gitu', null, 500);
         }
-        return $this->sendResponse('Success', 'toko anda disini', $shop, 200);
+        return $this->sendResponse('Success', 'toko anda disini', compact('shop','Product','Order_details'), 200);
     }
     public function search(Request $request)
     {
