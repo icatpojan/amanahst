@@ -19,9 +19,34 @@
                             <h4 class="card-title">
                                 Detail pesanan
                             </h4>
-                            @forelse ($Order_details as $row)
-                            {{$row->product_id}}
-                            @endforelse
+                            @forelse ($order_detais as $row)
+                            <tr>
+                                <b style="color: white">{{ $row->product_id }}</b>
+                                <td><strong>{{ $row->product_id }}</strong><br>
+                                <td>
+                                    <strong><img src="{{ $row->user->image }}" width="100px" height="100px"
+                                            alt="{{ $row->name }}">
+                                    </strong><br>
+                                <td><strong>{{ $row->user->email }}</strong><br>
+                                <td><strong>{{ $row->user->alamat }}</strong><br>
+                                <td>{{ $row->jumlah_harga }}</td>
+                                <td>{{ $row->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    {!! $row->status_label !!} <br></td>
+                                <td>
+                                    <form action="{{ route('transaksi.show', $row->id) }}"
+                                        method="get">
+                                        <input type="submit" class="btn btn-danger" value="lihat">
+                                    </form>
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Tidak ada data</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                         </div>
                     </div>
                 </div>
