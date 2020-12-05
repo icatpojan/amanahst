@@ -19,12 +19,20 @@
                                 <h4 class="card-title">
                                     Detail pesanan
                                 </h4>
-
-                                @foreach ($order_details as $order_detail)
-                                    {{ $order_detail->order_id }}
-                                    {{ $order_detail->jumlah }}
-                                    {{ $order_detail->jumlah_harga }}
-                                @endforeach
+                                <table>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    @foreach ($order_details as $order_detail)
+                                        <tr>
+                                            <td>{{ $order_detail->order_id }}</td>
+                                            <td>{{ $order_detail->jumlah }}</td>
+                                            <td>{{ $order_detail->jumlah_harga }}</td>
+                                        </tr>
+                                    @endforeach</td>
+                                </table>
                             </div>
                         </div>
                     </div>
