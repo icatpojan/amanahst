@@ -21,12 +21,14 @@
                                 </h4>
                                 <table class="table table-hover table-bordered">
                                     <tr>
+                                        <th>barang</th>
                                         <th>ini</th>
                                         <th>itu</th>
                                         <th>ono</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
                                         <tr>
+                                            <td>{{ $order_detail->product->name }}</td>
                                             <td>{{ $order_detail->order_id }}</td>
                                             <td>{{ $order_detail->jumlah }}</td>
                                             <td>{{ $order_detail->jumlah_harga }}</td>

@@ -93,7 +93,7 @@
                                                     <td>
                                                         <form action="{{ route('transaksi.show', $row->id) }}"
                                                             method="get">
-                                                            <input type="submit" class="btn btn-danger" value="lihat">
+                                                            <input type="submit" class="btn btn-warning" value="lihat">
                                                         </form>
                                                     </td>
 
