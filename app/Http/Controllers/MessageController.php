@@ -126,4 +126,15 @@ class MessageController extends Controller
         
         
     }
+    public function destroy($id)
+    {
+        $Message = Message::find($id);
+        if ($Message) {
+            $Message->delete();
+            // File::delete(public_path('product/' . $product->image));
+            return $this->sendResponse('Success', 'Berhasil menghapus pesan', $Message, 200);
+        }
+        return $this->sendResponse('Error', 'Gagal menghapus pesan', null, 500);
+    }
+
 }

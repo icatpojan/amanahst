@@ -101,6 +101,8 @@ Route::get('/message/{id}', 'MessageController@getMessage')->middleware('jwt.ver
 // buat nge get pesan
 Route::post('message/{id}', 'MessageController@sendMessage')->middleware('jwt.verify');
 // buat ngirim pesan
+Route::delete('message/{id} ', 'messageController@destroy')->middleware('jwt.verify');
+//hapus pesan
 
 //toko
 // public
