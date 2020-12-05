@@ -27,6 +27,9 @@
                                         <th>ono</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
+                                    @php
+                                    dd($order_detail->product)
+                                    @endphp
                                         <tr>
                                             <td>{{ $order_detail->product->name }}</td>
                                             <td>{{ $order_detail->order_id }}</td>
