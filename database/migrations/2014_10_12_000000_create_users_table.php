@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('nomor_telpon')->nullable();
             $table->string('alamat')->nullable();
             $table->string('image')->nullable();
+            $table->string('kode')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
