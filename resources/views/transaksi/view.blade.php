@@ -19,11 +19,9 @@
                             <h4 class="card-title">
                                 Detail pesanan
                             </h4>
-<?php
-foreach ($order_details$value) {
- echo $value->producy_id   
-}
-?>
+                            @foreach ($order_details as $order_detail)
+                                {{ $order_detail->product_id }}
+                            @endforeach
                         </div>
                     </div>
                 </div>
