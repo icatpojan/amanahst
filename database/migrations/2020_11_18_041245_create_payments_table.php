@@ -21,7 +21,10 @@ class CreatePaymentsTable extends Migration
             $table->string('transfer_date');
             $table->integer('amount');
             $table->string('bukti')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

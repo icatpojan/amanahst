@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('alamat')->nullable();
             $table->string('image')->nullable();
             $table->string('kode')->nullable();
+            $table->string('role')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

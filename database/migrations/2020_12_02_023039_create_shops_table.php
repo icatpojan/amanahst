@@ -21,6 +21,8 @@ class CreateShopsTable extends Migration
             $table->string('image')->nullable();
             $table->string('alamat');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
