@@ -19,7 +19,7 @@
                             <h4 class="card-title">
                                 Detail pesanan
                             </h4>
-                            @forelse ($order_detais as $row)
+                            @forelse ($order_details as $row)
                             <tr>
                                 <b style="color: white">{{ $row->product_id }}</b>
                                 <td><strong>{{ $row->product_id }}</strong><br>
