@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
 
             $table->bigIncrements('id');
             // $table->string('invoice')->unique();
-            $table->string('customer_id');
+            $table->unsignedBigInteger('customer_id');
             $table->date('tanggal');
             $table->string('status');
             // $table->unsignedBigInteger('district_id');

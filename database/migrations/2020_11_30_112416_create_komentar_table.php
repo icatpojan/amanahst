@@ -16,9 +16,9 @@ class CreateKomentarTable extends Migration
         Schema::create('komentar', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('customer_id');
             $table->string('komentar');
             $table->timestamps();
-            $table->unsignedBigInteger('customer_id');
             });
     }
 
