@@ -21,19 +21,22 @@
                                 </h4>
                                 <table class="table table-hover table-bordered">
                                     <tr>
+                                        <th>id order</th>
                                         <th>barang</th>
-                                        <th>ini</th>
-                                        <th>itu</th>
-                                        <th>ono</th>
+                                        <th>jumlah pesan</th>
+                                        <th>Harga total</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
+                                        <b style="color: white">{{ $order_detail->image }}</b>
                                         <tr>
-                                            <td>{{ $order_detail->product->name }}</td>
                                             <td>{{ $order_detail->order_id }}</td>
+                                            <td>{{ $order_detail->product->name }}</td>
+                                            <td>{{ $order_detail->product->image }}</td>
                                             <td>{{ $order_detail->jumlah }}</td>
                                             <td>{{ $order_detail->jumlah_harga }}</td>
                                         </tr>
                                     @endforeach</td>
+                                    <a class="btn btn-warning" href="{{ route('transaksi.index') }}">kembali</a>
                                 </table>
                             </div>
                         </div>
