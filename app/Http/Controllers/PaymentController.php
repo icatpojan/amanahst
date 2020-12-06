@@ -115,7 +115,7 @@ class PaymentController extends Controller
 
             ->get();
         $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
-        dd($Order_details);
+        // dd($Order_details);
         return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
 
     }
