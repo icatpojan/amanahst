@@ -128,7 +128,11 @@ class MessageController extends Controller
     }
     public function destroy($id)
     {
+        $user = Auth::id();
         $Message = Message::find($id);
+        if ($Message->from != $user) {
+            return $this->sendResponse('Success', 'bukan pesan anda', null, 500);
+        }
         if ($Message) {
             $Message->delete();
             // File::delete(public_path('product/' . $product->image));
