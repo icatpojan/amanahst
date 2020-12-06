@@ -113,9 +113,9 @@ class PaymentController extends Controller
             return $q->where('customer_id', $id);
         })
 
-            ->get();
-        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
-        // dd($Order_details);
+            ->get()->toArray();
+        $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
+        $Order_details = $Order_details->values()->all();
         return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
 
     }
