@@ -29,5 +29,6 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::resource('produk', 'ProdukController');
     Route::resource('transaksi', 'TransaksiController');
     Route::resource('pembeli', 'PembeliController');    
+Route::get('user/trash', 'UserController@trash');
 });
 Route::get('/', 'Web\FrontController@index')->name('home');

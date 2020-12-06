@@ -24,6 +24,23 @@ class PembeliController extends Controller
         }
         return $this->sendResponse('Error', 'Gagal menghapus data', null, 500);
     }
-    
-
+    public function trash()
+    {
+        // mengampil data guru yang sudah dihapus
+        $User = User::onlyTrashed()->get();
+        // return view('guru_trash', ['guru' => $guru]);
+    }
+    // restore data guru yang dihapus
+    public function kembalikan($id)
+    {
+        $User = User::onlyTrashed()->where('id', $id);
+        $User->restore();
+        // return redirect('/guru/trash');
+    }
+    public function hapus_permanen($id)
+    {
+        // hapus permanen data guru
+        $User = User::onlyTrashed()->where('id', $id);
+        $User->forceDelete();
+    }   
 }

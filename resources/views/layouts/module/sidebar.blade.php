@@ -34,7 +34,7 @@
             <ul class="nav-dropdown-items">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="nav-icon icon-puzzle"></i> Toko
+                        <i class="nav-icon icon-puzzle"></i>Black list
                     </a>
                 </li>
             </ul>
