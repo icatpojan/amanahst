@@ -107,7 +107,6 @@ class PaymentController extends Controller
     public function gasOrder()
     {
         $id = Auth::user()->id;
-        $Order_details = [];
         $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id);
         })
