@@ -107,11 +107,8 @@ class PaymentController extends Controller
     public function gasOrder()
     {
         $id = Auth::user()->id;
-        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
-            return $q->where('customer_id', $id);
-        })
-
-            ->get();
+        $Order_details = [];
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->where('product.customer_id', $id)->get();
         $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2);
         return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
     }
