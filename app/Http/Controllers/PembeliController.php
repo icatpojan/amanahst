@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderDetail;
 use App\User;
 use Illuminate\Http\Request;
 use File;
@@ -44,4 +45,14 @@ class PembeliController extends Controller
         $User->forceDelete();
         return $this->trash()->with(['success' => 'admin dikembalikan']);
     }   
+    public function pendapatan($id)
+    {
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+            return $q->where('customer_id', $id);
+        })->get()->toArray();
+        $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
+        $Order_details = $Order_details->values()->sum('jumlah_harga');
+        return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
+
+    }
 }
