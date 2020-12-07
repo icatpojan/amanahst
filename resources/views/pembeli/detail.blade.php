@@ -16,19 +16,14 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h1 class="card-title">
-                                    Data User
-                                </h1>
+                                <h4 class="card-title">
+                                    Daftar User
+                                </h4>
                             </div>
                             <div class="card-body">
-                                {{-- <img src="{{ $shop->image }}" alt="toko terlarang"> --}}
-                                <h3>Pemilik toko :{{ $shop->name }}</h3>
-                                <h5>{{ $shop->description }}</h5>
-                                <p>alamat{{ $shop->alamat }}</p>
-                                <p>dibuat pada{{ $shop->create_at }}</p>
-                                <P>jumlah produk:{{ $Product }}</P>
-                                <p>dengan penghasilan:Rp.{{ number_format($Order_details) }}</p>
-                            <a href="{{ route('pembeli.index') }}" class="btn btn-warning"></a>
+                                {{ $shop }}
+                                {{ $Product }}
+                                Rp.{{ number_format($Order_detail) }}
                             </div>
                         </div>
                     </div>
