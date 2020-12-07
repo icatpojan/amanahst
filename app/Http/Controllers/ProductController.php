@@ -32,7 +32,7 @@ class ProductController extends Controller
         }
         $product = $product->paginate(10);
         return response()->json([
-           'produck' => $product
+            $product
         ]);
     }
     public function kategori($id)
