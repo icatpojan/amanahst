@@ -32,10 +32,10 @@ class ShopController extends Controller
         $order = null;
         $Product = Product::where('shop_id' , Auth::id())->count();
         $Order_details = [];
-        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id,jumlah_harga'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id)->where('status' , 3);
         })->get();
-        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2)->sum('jumlah_harga');
+        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2)->sum('order.jumlah_harga');
         
         if (($shop)->isEmpty()) {
 
