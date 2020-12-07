@@ -38,6 +38,31 @@
                     </a>
                 </li>
             </ul>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('trash') }}">
+                        <i class="nav-icon icon-puzzle"></i>User black list
+                    </a>
+                </li>
+            </ul><ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('trash') }}">
+                        <i class="nav-icon icon-puzzle"></i>Black list
+                    </a>
+                </li>
+            </ul><ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('trash') }}">
+                        <i class="nav-icon icon-puzzle"></i>Black list
+                    </a>
+                </li>
+            </ul><ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('trash') }}">
+                        <i class="nav-icon icon-puzzle"></i>Black list
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>
