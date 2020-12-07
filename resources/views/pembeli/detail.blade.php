@@ -21,7 +21,7 @@
                                 </h1>
                             </div>
                             <div class="card-body">
-                                <img src="{{ $shop->image }}" alt="toko terlarang">
+                                {{-- <img src="{{ $shop->image }}" alt="toko terlarang"> --}}
                                 <h3>Pemilik toko :{{ $shop->name }}</h3>
                                 <h5>{{ $shop->description }}</h5>
                                 <p>alamat{{ $shop->alamat }}</p>
