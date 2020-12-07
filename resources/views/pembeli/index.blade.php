@@ -83,11 +83,6 @@
                                                             @method('DELETE')
                                                             <button class="btn btn-danger btn-sm">black list</button>
                                                         </form>
-                                                        <form action="{{ route('pendapatan', $row->id) }}" method="get">
-                                                            @csrf
-                                                            @method('GET')
-                                                            <button class="btn btn-danger btn-sm">pendapatan</button>
-                                                        </form>
                                                         
 
 
@@ -110,31 +105,41 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-    lihat
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+                                                        <!-- Button trigger modal -->
+                                                        <form action="{{ route('pendapatan', $row->id) }}" method="get">
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#staticBackdrop">
+                                                            lihat
+                                                        </button>
+                                                        
+                                                    </form>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+                                                            data-keyboard="false" tabindex="-1"
+                                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">Modal
+                                                                            title</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        ...
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-primary">Understood</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
 
