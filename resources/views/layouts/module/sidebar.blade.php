@@ -22,17 +22,10 @@
                 <i class="nav-icon icon-user"></i> Customer
             </a>
         </li>
-        <li class="nav-item nav-dropdown">
-            <a class="nav-link nav-dropdown-toggle" href="{{ route('produk.index') }}">
-                <i class="nav-icon icon-settings"></i>produk
+        <li class="nav-item">
+            <a class="nav-link" href={{ route('produk.index') }}>
+                <i class="nav-icon icon-basket"></i> produk
             </a>
-            <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('produk.create') }}">
-                        <i class="nav-icon icon-puzzle"></i>tambah produk
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" href="#">
@@ -42,13 +35,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('trash') }}">
                         <i class="nav-icon icon-puzzle"></i>User black list
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('trash') }}">
-                        <i class="nav-icon icon-puzzle"></i>Product black list
                     </a>
                 </li>
             </ul>
