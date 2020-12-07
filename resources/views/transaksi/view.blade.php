@@ -32,7 +32,7 @@
                                         <tr>
                                             <td>{{ $order_detail->order_id }}</td>
                                             <td>{{ $order_detail->product->name }}</td>
-                                            <td>{{ $order_detail->product->image }}</td>
+                                            <td><img src="{{ $order_detail->product->image }}" alt="barang ilegal"></td>
                                             <td>{{ $order_detail->jumlah }}</td>
                                             <td>{{ $order_detail->jumlah_harga }}</td>
                                         </tr>
