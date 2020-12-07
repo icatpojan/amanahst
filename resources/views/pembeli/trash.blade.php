@@ -79,13 +79,9 @@
                                                     <td>{{ $row->kode }}</td>
                                                     <td>
                                                         <form action="{{ route('permanen', $row->id) }}" method="get">
-                                                            @csrf
-                                                            @method('GET')
                                                             <button class="btn btn-danger btn-sm">hapus</button>
                                                         </form>
                                                         <form action="{{ route('restore', $row->id) }}" method="get">
-                                                            @csrf
-                                                            @method('GET')
                                                             <button class="btn btn-warning btn-sm">restore</button>
                                                         </form>
                                                     </td>

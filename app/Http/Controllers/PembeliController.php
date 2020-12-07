@@ -35,13 +35,13 @@ class PembeliController extends Controller
     {
         $User = User::onlyTrashed()->where('id', $id);
         $User->restore();
-        return view('pembeli.trash');
+        return $this->trash()->with(['success' => 'admin dikembalikan']);
     }
     public function hapus_permanen($id)
     {
         // hapus permanen data guru
         $User = User::onlyTrashed()->where('id', $id);
         $User->forceDelete();
-        return view('pembeli.trash');
+        return $this->trash()->with(['success' => 'admin dikembalikan']);
     }   
 }
