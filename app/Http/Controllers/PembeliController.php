@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OrderDetail;
+use App\Product;
+use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
 use File;
@@ -47,12 +49,16 @@ class PembeliController extends Controller
     }   
     public function pendapatan($id)
     {
+        $shop = Shop::where('customer_id', $id)->get();
+        $product = null;
+        $order = null;
+        $Product = Product::where('shop_id', Auth::id())->count();
+        $Order_details = [];
         $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id);
         })->get()->toArray();
         $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
         $Order_details = $Order_details->values()->sum('jumlah_harga');
-        return $this->sendResponse('success', 'daftar pemesan barang', $Order_details, 200);
-
+        return compact('shop', 'Product', 'Order_details');        
     }
 }

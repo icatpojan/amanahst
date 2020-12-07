@@ -83,7 +83,7 @@
                                                             @method('DELETE')
                                                             <button class="btn btn-danger btn-sm">black list</button>
                                                         </form>
-                                                        
+
 
 
 
@@ -108,12 +108,12 @@
 
                                                         <!-- Button trigger modal -->
                                                         <form action="{{ route('pendapatan', $row->id) }}" method="get">
-                                                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#staticBackdrop">
-                                                            lihat
-                                                        </button>
-                                                        
-                                                    </form>
+                                                            <button type="button" class="btn btn-warning mt-2"
+                                                                data-toggle="modal" data-target="#staticBackdrop">
+                                                                lihat
+                                                            </button>
+
+                                                        </form>
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="staticBackdrop" data-backdrop="static"
                                                             data-keyboard="false" tabindex="-1"
@@ -129,7 +129,9 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        ...
+                                                                        {{ $shop }}
+                                                                        {{ $Product->name }}
+                                                                        Rp.{{ number_format($Order_details) }}
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
