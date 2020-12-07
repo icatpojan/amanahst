@@ -23,11 +23,12 @@
                                     <tr>
                                         <th>id order</th>
                                         <th>barang</th>
+                                        <th>foto</th>
                                         <th>jumlah pesan</th>
                                         <th>Harga total</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
-                                        <b style="color: white">{{ $order_detail->image }}</b>
+                                        <b style="color: white">{{ $order_detail->product->image }}</b>
                                         <tr>
                                             <td>{{ $order_detail->order_id }}</td>
                                             <td>{{ $order_detail->product->name }}</td>
