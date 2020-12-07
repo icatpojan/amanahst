@@ -28,7 +28,7 @@ class PembeliController extends Controller
     {
         // mengampil data guru yang sudah dihapus
         $User = User::onlyTrashed()->get();
-        // return view('guru_trash', ['guru' => $guru]);
+        return view('pembeli.trash', compact('User'));
     }
     // restore data guru yang dihapus
     public function kembalikan($id)

@@ -28,7 +28,8 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::resource('category', 'CategoryController')->except(['create', 'show']);
     Route::resource('produk', 'ProdukController');
     Route::resource('transaksi', 'TransaksiController');
-    Route::resource('pembeli', 'PembeliController');    
+    Route::resource('pembeli', 'PembeliController');
+    Route::get('trash', 'PembeliController@trash');    
 Route::get('user/trash', 'UserController@trash');
 });
 Route::get('/', 'Web\FrontController@index')->name('home');
