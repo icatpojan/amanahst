@@ -78,10 +78,15 @@
                                                     <td>{{ $row->created_at->format('d-m-Y') }}</td>
                                                     <td>{{ $row->kode }}</td>
                                                     <td>
-                                                        <form action="{{ route('pembeli.destroy', $row->id) }}" method="delete">
+                                                        <form action="{{ route('permanen', $row->id) }}" method="get">
                                                             @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger btn-sm">black list</button>
+                                                            @method('GET')
+                                                            <button class="btn btn-danger btn-sm">hapus</button>
+                                                        </form>
+                                                        <form action="{{ route('restore', $row->id) }}" method="get">
+                                                            @csrf
+                                                            @method('GET')
+                                                            <button class="btn btn-warning btn-sm">restore</button>
                                                         </form>
                                                     </td>
 

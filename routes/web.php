@@ -29,6 +29,8 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::resource('produk', 'ProdukController');
     Route::resource('transaksi', 'TransaksiController');
     Route::resource('pembeli', 'PembeliController');
-    Route::get('trash', 'PembeliController@trash')->name('trash');    
+    Route::get('trash', 'PembeliController@trash')->name('trash');
+    Route::get('trash/{id}', 'PembeliController@restore')->name('restore');
+    Route::get('permanen/{id}', 'PembeliController@hapus_permanen')->name('permanen');    
 });
 Route::get('/', 'Web\FrontController@index')->name('home');

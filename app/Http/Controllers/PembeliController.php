@@ -31,16 +31,17 @@ class PembeliController extends Controller
         return view('pembeli.trash', compact('User'));
     }
     // restore data guru yang dihapus
-    public function kembalikan($id)
+    public function restore($id)
     {
         $User = User::onlyTrashed()->where('id', $id);
         $User->restore();
-        // return redirect('/guru/trash');
+        return view('pembeli.trash');
     }
     public function hapus_permanen($id)
     {
         // hapus permanen data guru
         $User = User::onlyTrashed()->where('id', $id);
         $User->forceDelete();
+        return view('pembeli.trash');
     }   
 }
