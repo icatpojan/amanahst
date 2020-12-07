@@ -34,3 +34,5 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::get('permanen/{id}', 'PembeliController@hapus_permanen')->name('permanen');    
 });
 Route::get('/', 'Web\FrontController@index')->name('home');
+Route::get('prodak/{id}', 'Web\ProdakController@show')->name('prodak');
+Route::get('loginmember', 'Web\LoginMemberController@login')->name('loginmember');

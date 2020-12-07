@@ -26,7 +26,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $product = Product::with(['category','shop', 'user:id,name,alamat,image'])->where('stock', '>', 0)->orderBy('created_at', 'DESC');
+        $product = Product::with(['category', 'shop', 'user:id,name,alamat,image'])->where('stock', '>', 0)->orderBy('created_at', 'DESC');
         if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
         }
@@ -145,7 +145,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['user','shop'])->find($id);
+        $product = Product::with(['user', 'shop'])->find($id);
         $shop = Shop::where('customer_id',);
         $komentar = komentar::with(['user'])->where('product_id', $id);
         if (!$product) {

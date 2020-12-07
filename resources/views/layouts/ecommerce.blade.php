@@ -49,7 +49,7 @@
 				</div>
 				<div class="float-right">
 						<ul class="right_side">
-						<li><a href="#">Login/Register</a></li>
+						<li><a href="#">Login</a></li>
 						<li><a href="#">My Account</a></li>
 						<li><a href=#>Contact Us</a></li>
 					</ul>
