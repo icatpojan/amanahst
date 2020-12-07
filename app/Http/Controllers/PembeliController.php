@@ -50,9 +50,7 @@ class PembeliController extends Controller
     public function pendapatan($id)
     {
         $shop = Shop::where('customer_id', $id)->get();
-        $product = null;
-        $order = null;
-        $Product = Product::where('shop_id', Auth::id())->count();
+        $Product = Product::where('shop_id', $id)->count();
         $Order_details = [];
         $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
             return $q->where('customer_id', $id);
