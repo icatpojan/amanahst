@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 {{ $shop }}
                                 {{ $Product }}
-                                Rp.{{ number_format($Order_detail) }}
+                                Rp.{{ number_format($Order_details) }}
                             </div>
                         </div>
                     </div>
