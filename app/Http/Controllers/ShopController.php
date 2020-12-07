@@ -30,18 +30,18 @@ class ShopController extends Controller
         $shop = Shop::where('customer_id', $id)->get();
         $product = null;
         $order = null;
-        $Product = Product::where('shop_id' , Auth::id())->count();
+        $Product = Product::where('shop_id', Auth::id())->count();
         $Order_details = [];
-        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id,jumlah_harga'])->whereHas('product', function ($q) use ($id) {
-            return $q->where('customer_id', $id)->where('status' , 3);
-        })->get();
-        $Order_details = $Order->where('product.customer_id', $id)->where('order.status', 2)->sum('order.jumlah_harga');
-        
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+            return $q->where('customer_id', $id);
+        })->get()->toArray();
+        $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
+        $Order_details = $Order_details->values()->sum('jumlah_harga');
         if (($shop)->isEmpty()) {
 
             return $this->sendResponse('Error', 'tidak ada toko yang namanya kayak gitu', null, 500);
         }
-        return $this->sendResponse('Success', 'toko anda disini', compact('shop','Product','Order_details'), 200);
+        return $this->sendResponse('Success', 'toko anda disini', compact('shop', 'Product', 'Order_details'), 200);
     }
     public function search(Request $request)
     {
@@ -172,7 +172,7 @@ class ShopController extends Controller
     public function pemasukan()
     {
         $user = Auth::id();
-        $pemasukan = OrderDetail::where(['product.customer_id' , $user])->where('status' , 3)->get()->jumlah_harga;
+        $pemasukan = OrderDetail::where(['product.customer_id', $user])->where('status', 3)->get()->jumlah_harga;
         return $this->sendResponse('success', 'ini dia pemasukan toko anda', $pemasukan, 200);
     }
 }
