@@ -59,6 +59,6 @@ class PembeliController extends Controller
         })->get()->toArray();
         $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
         $Order_details = $Order_details->values()->sum('jumlah_harga');
-        return $this->index(compact('shop', 'Product', 'Order_details'));        
+        return view('pembeli.detail', compact('shop', 'Product', 'Order_details'));        
     }
 }

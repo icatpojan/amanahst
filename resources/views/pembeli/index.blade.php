@@ -86,7 +86,7 @@
                                                         <form action="{{ route('pendapatan', $row->id) }}" method="get">
                                                             @csrf
                                                             @method('GET')
-                                                            <button class="btn btn-danger btn-sm mt-2">lihat</button>
+                                                            <button class="btn btn-warning btn-sm mt-2">lihat</button>
                                                         </form>
                                                     </td>
 
