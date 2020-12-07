@@ -28,11 +28,11 @@
                                         <th>Harga total</th>
                                     </tr>
                                     @foreach ($order_details as $order_detail)
-                                        <b style="color: white">{{ $order_detail->product->image }}</b>
                                         <tr>
                                             <td>{{ $order_detail->order_id }}</td>
                                             <td>{{ $order_detail->product->name }}</td>
-                                            <td><img src="{{ $order_detail->product->image }}" alt="barang ilegal"></td>
+                                            <td><img src="{{ $order_detail->product->image }}" width="100px" height="100px"
+                                                    alt="barang ilegal"></td>
                                             <td>{{ $order_detail->jumlah }}</td>
                                             <td>{{ $order_detail->jumlah_harga }}</td>
                                         </tr>
