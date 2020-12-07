@@ -30,6 +30,6 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::resource('transaksi', 'TransaksiController');
     Route::resource('pembeli', 'PembeliController');
     Route::get('trash', 'PembeliController@trash');    
-Route::get('user/trash', 'UserController@trash');
+Route::get('user/trash', 'UserController@trash')->name('trash');
 });
 Route::get('/', 'Web\FrontController@index')->name('home');
