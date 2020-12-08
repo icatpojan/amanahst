@@ -21,7 +21,12 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                {{ $shop }}
+                                @forelse ($shop as $asus)
+                                    
+                                {{ $asus->name }}
+                                    
+                                @endforelse
+                                
                                 {{ $Product }}
                                 Rp.{{ number_format($Order_details) }}
                             </div>

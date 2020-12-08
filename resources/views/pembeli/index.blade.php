@@ -66,7 +66,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse ($User ?? '' as $row)
+                                            @forelse ($User as $row)
                                                 <b style="color: white">{{ $row->image }}</b>
                                                 <tr>
                                                     <td><strong>{{ $row->id }}</strong></td>
