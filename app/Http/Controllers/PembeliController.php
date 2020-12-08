@@ -61,7 +61,7 @@ class PembeliController extends Controller
     }
     public function persaingan()
     {
-        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q) use ($id) {
+        $Order = OrderDetail::with(['product:id,name,customer_id,image', 'order:id,status,customer_id'])->whereHas('product', function ($q){
             return $q;
         })->get()->toArray();
         $Order_details = collect($Order)->where('order.status', 2);
