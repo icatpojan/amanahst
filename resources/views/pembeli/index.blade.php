@@ -31,7 +31,7 @@
                                 <a href="{{ route('register') }}" class="btn btn-primary btn-sm float-right">Tambah
                                     Admin</a>
                                 <!-- FORM UNTUK FILTER DAN PENCARIAN -->
-                                <form action="{{ route('transaksi.index') }}" method="get">
+                                {{-- <form action="{{ route('transaksi.index') }}" method="get">
                                     <div class="input-group mb-3 col-md-6 float-right">
                                         <select name="status" class="form-control mr-3">
                                             <option value="">Pilih Status</option>
@@ -47,7 +47,7 @@
                                             <button class="btn btn-secondary" type="submit">Cari</button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                                 <!-- FORM UNTUK FILTER DAN PENCARIAN -->
 
                                 <!-- TABLE UNTUK MENAMPILKAN DATA ORDER -->
