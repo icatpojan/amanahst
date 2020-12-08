@@ -61,7 +61,7 @@ class PembeliController extends Controller
     }
     public function persaingan()
     {
-        $Order = OrderDetail::with('product')->groupBy('order_id')->get();
+        $Order = OrderDetail::with('product')->groupBy('order_id');
         return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order, 200);
     }
 }
