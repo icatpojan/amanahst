@@ -43,6 +43,7 @@ class ShopController extends Controller
         }
         return $this->sendResponse('Success', 'toko anda disini', compact('shop', 'Product', 'Order_details'), 200);
     }
+    
     public function search(Request $request)
     {
 

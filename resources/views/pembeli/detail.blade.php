@@ -22,7 +22,7 @@
                             </div>
                             <div class="card-body">
                                 @forelse ($shop as $asus)
-                                <img src="{{$asus->image}}" alt="toko ini ditutup pemerintah zimbabwe">
+                                <img src="{{$asus->image}}" alt="toko ini ditutup pemerintah zimbabwe" width="200" height="300">
                                 <h2>{{$asus->name}}</h2>
                                 <h3>
                                     {{$asus->description}}
