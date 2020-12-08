@@ -46,7 +46,7 @@ class PembeliController extends Controller
         $User = User::onlyTrashed()->where('id', $id);
         $User->forceDelete();
         return $this->trash()->with(['success' => 'admin dikembalikan']);
-    }
+    }   
     public function pendapatan($id)
     {
         $shop = Shop::where('customer_id', $id)->get();
@@ -57,11 +57,10 @@ class PembeliController extends Controller
         })->get()->toArray();
         $Order_details = collect($Order)->where('product.customer_id', $id)->where('order.status', 2);
         $Order_details = $Order_details->values()->sum('jumlah_harga');
-        return view('pembeli.detail', compact('shop', 'Product', 'Order_details'));
+        return view('pembeli.detail', compact('shop', 'Product', 'Order_details'));        
     }
     public function persaingan()
-    {
-        $Order = OrderDetail::with('product')->groupBy('order_id')->get()->toArray();
-        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order, 200);
+    {$Order = OrderDetail::all('jumlah_harga');
+        return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order, 200);        
     }
 }
