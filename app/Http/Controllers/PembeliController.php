@@ -60,7 +60,7 @@ class PembeliController extends Controller
         return view('pembeli.detail', compact('shop', 'Product', 'Order_details'));        
     }
     public function persaingan()
-    {$Order = OrderDetail::all('jumlah_harga');
+    {$Order = OrderDetail::all('jumlah_harga')->with('product');
         return $this->sendResponse('Success', 'pesanan anda dikonpirmasi pak eko', $Order, 200);        
     }
 }
