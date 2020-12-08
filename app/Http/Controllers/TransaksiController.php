@@ -87,4 +87,5 @@ class TransaksiController extends Controller
 
         return view('transaksi.view', compact('order_details'));;
     }
+
 }

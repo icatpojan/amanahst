@@ -37,3 +37,4 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
 Route::get('/', 'Web\FrontController@index')->name('home');
 Route::get('prodak/{id}', 'Web\ProdakController@show')->name('prodak');
 Route::get('loginmember', 'Web\LoginMemberController@login')->name('loginmember');
+Route::get('persaingan', 'PembeliController@persaingan');
