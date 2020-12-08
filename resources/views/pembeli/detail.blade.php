@@ -16,19 +16,27 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">
-                                    Daftar User
-                                </h4>
+                                <h1 class="card-title">
+                                    Detail User
+                                </h1>
                             </div>
                             <div class="card-body">
                                 @forelse ($shop as $asus)
-                                {{$asus->name}}
+                                <img src="{{$asus->image}}" alt="toko ini ditutup pemerintah zimbabwe">
+                                <h2>{{$asus->name}}</h2>
+                                <h3>
+                                    {{$asus->description}}
+                                    <br>
+                                    Alamat:{{$asus->alamat}}
+                                </h3>
                                 @empty
-                                    
                                 @endforelse
+                                <h3>
+                                    Jumlah produk:{{ $Product }}
+                                    <br>
+                                    Penghasilan:Rp.{{ number_format($Order_details) }}
+                                </h3>
                                 
-                                {{ $Product }}
-                                Rp.{{ number_format($Order_details) }}
                             </div>
                         </div>
                     </div>
