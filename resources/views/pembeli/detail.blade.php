@@ -22,8 +22,8 @@
                             </div>
                             <div class="card-body">
                                 @forelse ($shop as $asus)
-                                    
-                                {{ $asus->name }}
+                                {{$asus->name}}
+                                @empty
                                     
                                 @endforelse
                                 
