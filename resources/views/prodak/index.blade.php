@@ -45,7 +45,6 @@
                                     <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
                                         class="input-text qty">
 
-                                    <!-- BUAT INPUTAN HIDDEN YANG BERISI ID PRODUK -->
                                     <input type="hidden" name="product_id" value="{{ $product->id }}" class="form-control">
 
                                     <button
