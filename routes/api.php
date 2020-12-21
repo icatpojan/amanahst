@@ -17,27 +17,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::post('register', 'UserController@register');
-// // Route::post('login', 'UserController@login');
-// Route::get('redirect/{driver}', 'UserController@redirectToProvider');
-// // buat ngehandle redirect ke platform yang di tuju
-// Route::get('{driver}/callback', 'UserController@handleProviderCallback');
-// // mengambil email, id dan foto dari akun google
-// Route::resource('product', 'ProductController')->middleware('jwt.verify');
+Route::post('register', 'UserController@register');
+// Route::post('login', 'UserController@login');
+Route::get('redirect/{driver}', 'UserController@redirectToProvider');
+// buat ngehandle redirect ke platform yang di tuju
+Route::get('{driver}/callback', 'UserController@handleProviderCallback');
+// mengambil email, id dan foto dari akun google
+Route::resource('product', 'ProductController')->middleware('jwt.verify');
 
-// // ini buat public
-// Route::get('product', 'ProductController@index');
-// // ini buat ngambil semua
-// Route::get('kategori/{product}', 'ProductController@kategori');
-// //ini buat ambil data berdasar kategori
-// Route::get('product/{product} ', 'ProductController@show');
-// //ambil 1 data berdasarkan id
-// Route::post('product/search', 'ProductController@search');
-// //nyari berdasarkan nama
-// Route::get('category', 'ProductController@category');
-// //ngambil category
-// // ini buat customer
-// Route::get('user', 'UserController@indexes');
+// ini buat public
+Route::get('product', 'ProductController@index');
+// ini buat ngambil semua
+Route::get('kategori/{product}', 'ProductController@kategori');
+//ini buat ambil data berdasar kategori
+Route::get('product/{product} ', 'ProductController@show');
+//ambil 1 data berdasarkan id
+Route::post('product/search', 'ProductController@search');
+//nyari berdasarkan nama
+Route::get('category', 'ProductController@category');
+//ngambil category
+// ini buat customer
+Route::get('user', 'UserController@indexes');
 
 
 //ini buat penjual
