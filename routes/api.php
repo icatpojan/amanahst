@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('register', 'UserController@register');
-// Route::post('login', 'UserController@login');
+Route::post('login', 'UserController@login');
 Route::get('redirect/{driver}', 'UserController@redirectToProvider');
 // buat ngehandle redirect ke platform yang di tuju
 Route::get('{driver}/callback', 'UserController@handleProviderCallback');
