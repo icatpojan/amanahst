@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::with(['category', 'shop', 'user:id,name,alamat,image'])->where('stock', '>', 0)->orderBy('created_at', 'DESC');
-        if (request()->q != '') {
+            if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
         }
         $product = $product->paginate(10);
